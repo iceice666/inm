@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <title>inm palette icon</title>
+  <g stroke="#5D555E" stroke-opacity="0.18" stroke-width="1.5">
+    <ellipse cx="18.5" cy="19" rx="11.5" ry="10.5" transform="rotate(-12 18.5 19)" fill="#979F9B" />
+    <ellipse cx="45.5" cy="19" rx="11.5" ry="10.5" transform="rotate(12 45.5 19)" fill="#C9BFB6" />
+    <ellipse cx="31.5" cy="46" rx="13" ry="12" fill="#3E343F" />
+    <circle cx="32" cy="31" r="14" fill="#A1736B" />
+  </g>
+</svg>
