@@ -1,4 +1,6 @@
-# inm
+<h1>
+  <img src="./assets/icon.svg" alt="inm icon" width="40" align="absmiddle" /> inm
+</h1>
 
 A warm editorial color palette and UI theme built around four anchor colors: **Clay**, **Plum**, **Sage**, and **Bone**.
 
