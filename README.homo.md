@@ -18,10 +18,10 @@
 
 > *要 素 察 覺*
 
-- `#3E343F` plum black：深色背景與結構色。
-- `#A1736B` clay rose：品牌重點、按鈕、互動狀態。
-- `#979F9B` mist gray：冷調支援色，適合狀態、輔助資訊。
-- `#C9BFB6` warm stone：亮色模式畫布。
+- <img src="./assets/hex-3E343F.svg" alt="#3E343F" height="22" align="absmiddle" /> plum black：深色背景與結構色。
+- <img src="./assets/hex-A1736B.svg" alt="#A1736B" height="22" align="absmiddle" /> clay rose：品牌重點、按鈕、互動狀態。
+- <img src="./assets/hex-979F9B.svg" alt="#979F9B" height="22" align="absmiddle" /> mist gray：冷調支援色，適合狀態、輔助資訊。
+- <img src="./assets/hex-C9BFB6.svg" alt="#C9BFB6" height="22" align="absmiddle" /> warm stone：亮色模式畫布。
 
 使用 OKLCH 做感知一致的色彩調整，並參考 APCA 對比目標，讓亮暗模式都能正常閱讀。  
 十分甚至九分的可讀（確信

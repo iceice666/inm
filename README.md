@@ -4,10 +4,10 @@
 
 `inm` is a warm, low-chroma color palette built from four anchor colors:
 
-- `#3E343F` plum black
-- `#A1736B` clay rose
-- `#979F9B` mist gray
-- `#C9BFB6` warm stone
+- <img src="./assets/hex-3E343F.svg" alt="#3E343F" height="22" align="absmiddle" /> plum black
+- <img src="./assets/hex-A1736B.svg" alt="#A1736B" height="22" align="absmiddle" /> clay rose
+- <img src="./assets/hex-979F9B.svg" alt="#979F9B" height="22" align="absmiddle" /> mist gray
+- <img src="./assets/hex-C9BFB6.svg" alt="#C9BFB6" height="22" align="absmiddle" /> warm stone
 
 The system uses OKLCH for perceptual color tuning and APCA-informed contrast targets for readable light and dark modes.
 
