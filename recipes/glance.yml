@@ -1,0 +1,17 @@
+theme:
+  background-color: 295 10 23
+  primary-color: 10 45 71
+  positive-color: 156 6 69
+  negative-color: 11 37 64
+  contrast-multiplier: 1.1
+  text-saturation-multiplier: 0.95
+
+  presets:
+    inm-light:
+      light: true
+      background-color: 28 15 75
+      primary-color: 7 27 39
+      positive-color: 156 4 49
+      negative-color: 9 22 53
+      contrast-multiplier: 1.08
+      text-saturation-multiplier: 0.95
