@@ -1,241 +1,1043 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>inm Theme Demo</title>
-		<meta
-			name="description"
-			content="A responsive demo site built from the inm palette, anchored by clay, plum, sage, and bone."
-		/>
-		<link rel="icon" type="image/svg+xml" href="./assets/icon.svg" />
-		<link rel="stylesheet" href="./assets/css/theme.css" />
-		<link rel="stylesheet" href="./assets/css/demo.css" />
-	</head>
-	<body>
-		<div class="site-shell">
-			<header class="site-header">
-				<a class="inm-lockup" href="#top">
-					<img class="inm-mark" src="./assets/icon.svg" alt="" width="44" height="44" />
-					<span>
-						<strong>inm</strong>
-						<small>Warm editorial theme demo</small>
-					</span>
-				</a>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>inm Demo</title>
+        <style>
+            :root {
+                color-scheme: light;
+                --bg: oklch(81% 0.017 64.6);
+                --surface: oklch(86.8% 0.013 63.9);
+                --raised: oklch(91.4% 0.011 63.4);
+                --text: oklch(28.5% 0.02 322.5);
+                --text-muted: oklch(47.9% 0.01 349.6);
+                --border: oklch(73.6% 0.011 58.2);
+                --accent: oklch(47.9% 0.065 27.6);
+                --accent-soft: oklch(60% 0.06 30);
+                --cool: oklch(60% 0.013 170);
+                --on-accent: oklch(91.4% 0.011 63.4);
+                --shadow: 0 20px 50px oklch(28.5% 0.02 322.5 / 0.15);
+                --focus: 0 0 0 3px oklch(60% 0.06 30 / 0.32);
+            }
 
-				<nav class="site-nav" aria-label="Primary navigation">
-					<a href="#spaces">Spaces</a>
-					<a href="#palette">Palette</a>
-					<a href="#components">Components</a>
-				</nav>
-			</header>
+            :root[data-theme="dark"] {
+                color-scheme: dark;
+                --bg: oklch(34% 0.023 323.2);
+                --surface: oklch(38% 0.025 323.4);
+                --raised: oklch(43.1% 0.028 323.8);
+                --text: oklch(91.4% 0.011 63.4);
+                --text-muted: oklch(75.9% 0.009 36.5);
+                --border: oklch(50.3% 0.02 331.9);
+                --accent: oklch(75.5% 0.068 31.5);
+                --accent-soft: oklch(69.7% 0.07 32.7);
+                --cool: oklch(76.1% 0.013 170.1);
+                --on-accent: oklch(34% 0.023 323.2);
+                --shadow: 0 20px 50px oklch(18% 0.02 323.2 / 0.38);
+                --focus: 0 0 0 3px oklch(75.5% 0.068 31.5 / 0.34);
+            }
 
-			<main id="top">
-				<section class="hero">
-					<div class="hero-copy">
-						<p class="eyebrow">Clay. Plum. Sage. Bone.</p>
-						<h1>A quiet palette for tactile, story-first interfaces.</h1>
-						<p class="lead">
-							This theme leans warm and grounded: deep plum for ink, clay for emphasis,
-							sage for supporting accents, and bone for the canvas. The result feels calm,
-							editorial, and still practical for product surfaces.
-						</p>
+            * {
+                box-sizing: border-box;
+            }
 
-						<div class="hero-actions">
-							<a class="button button-primary" href="#palette">View the palette</a>
-							<a class="button button-secondary" href="#components">See components</a>
-						</div>
+            html {
+                background: var(--bg);
+            }
 
-						<dl class="hero-metrics">
-							<div>
-								<dt>4</dt>
-								<dd>anchor colors</dd>
-							</div>
-							<div>
-								<dt>60+</dt>
-								<dd>APCA on primary</dd>
-							</div>
-							<div>
-								<dt>Responsive</dt>
-								<dd>desktop to mobile</dd>
-							</div>
-						</dl>
-					</div>
+            body {
+                margin: 0;
+                min-width: 320px;
+                background:
+                    linear-gradient(
+                        180deg,
+                        oklch(from var(--raised) l c h / 0.55),
+                        transparent 30rem
+                    ),
+                    var(--bg);
+                color: var(--text);
+                font-family:
+                    Inter,
+                    ui-sans-serif,
+                    system-ui,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    sans-serif;
+                letter-spacing: 0;
+            }
 
-					<div class="hero-art" aria-label="Theme composition preview">
-						<article class="feature-panel panel-primary">
-							<p class="panel-label">Featured treatment</p>
-							<h2>The palette reads premium without turning precious.</h2>
-							<p>
-								Use the clay tone for action, let plum carry typography, and save sage for
-								filters, tags, and low-pressure accents.
-							</p>
-						</article>
+            button,
+            input,
+            select {
+                font: inherit;
+            }
 
-						<div class="art-grid">
-							<article class="feature-panel panel-surface">
-								<p class="panel-label">Materials</p>
-								<ul class="token-list">
-									<li><span class="token-swatch swatch-clay"></span> Clay accent</li>
-									<li><span class="token-swatch swatch-plum"></span> Plum text</li>
-									<li><span class="token-swatch swatch-sage"></span> Sage support</li>
-									<li><span class="token-swatch swatch-bone"></span> Bone canvas</li>
-								</ul>
-							</article>
+            button,
+            a,
+            input,
+            select {
+                outline: none;
+            }
 
-							<article class="feature-panel panel-note">
-								<p class="panel-label">Best for</p>
-								<p class="note-copy">
-									Editorial shops, hospitality brands, premium catalogs, design systems,
-									and slower-paced dashboards.
-								</p>
-							</article>
-						</div>
-					</div>
-				</section>
+            button:focus-visible,
+            a:focus-visible,
+            input:focus-visible,
+            select:focus-visible {
+                box-shadow: var(--focus);
+            }
 
-				<section class="section-grid" id="spaces">
-					<div class="section-heading">
-						<p class="eyebrow">Spaces</p>
-						<h2>Three ways the theme can live on a page.</h2>
-					</div>
+            a {
+                color: var(--accent);
+                text-decoration-thickness: 0.08em;
+                text-underline-offset: 0.22em;
+            }
 
-					<div class="spaces-grid">
-						<article class="story-card story-card-featured">
-							<p class="card-kicker">Reading room</p>
-							<h3>Long-form layouts stay soft and readable.</h3>
-							<p>
-								Bone keeps the page open, plum holds the copy with high contrast, and clay
-								can punctuate quotes, links, and margin details without overpowering text.
-							</p>
-							<blockquote>
-								“Warm palettes often drift muddy. This one stays clean because the contrast
-								roles are disciplined.”
-							</blockquote>
-						</article>
+            .page {
+                min-height: 100vh;
+            }
 
-						<article class="story-card">
-							<p class="card-kicker">Product detail</p>
-							<h3>Clay makes restrained calls to action.</h3>
-							<p>
-								Primary buttons feel tactile, not electric. That works well for premium
-								commerce, bookings, and collection pages.
-							</p>
-						</article>
+            .shell {
+                width: min(1160px, calc(100% - 32px));
+                margin: 0 auto;
+            }
 
-						<article class="story-card">
-							<p class="card-kicker">Quiet dashboard</p>
-							<h3>Sage keeps utility surfaces calm.</h3>
-							<p>
-								Use sage for tags, filters, selection states, and background highlights where
-								you want guidance without urgency.
-							</p>
-						</article>
-					</div>
-				</section>
+            .topbar {
+                position: sticky;
+                top: 0;
+                z-index: 5;
+                border-bottom: 1px solid oklch(from var(--border) l c h / 0.72);
+                background: oklch(from var(--bg) l c h / 0.86);
+                backdrop-filter: blur(18px);
+            }
 
-				<section class="section-grid" id="palette">
-					<div class="section-heading">
-						<p class="eyebrow">Palette</p>
-						<h2>The anchors and the roles they play.</h2>
-					</div>
+            .nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                min-height: 72px;
+                gap: 18px;
+            }
 
-					<div class="swatch-grid">
-						<article class="swatch-card swatch-card-plum">
-							<p class="swatch-name">Plum</p>
-							<p class="swatch-hex">#3E343F</p>
-							<p class="swatch-role">Primary text, headings, strong borders</p>
-						</article>
+            .brand {
+                display: flex;
+                align-items: center;
+                min-width: 0;
+                gap: 12px;
+                color: var(--text);
+                text-decoration: none;
+            }
 
-						<article class="swatch-card swatch-card-clay">
-							<p class="swatch-name">Clay</p>
-							<p class="swatch-hex">#A1736B</p>
-							<p class="swatch-role">Calls to action, links, focus states</p>
-						</article>
+            .brand-mark {
+                position: relative;
+                display: block;
+                width: 38px;
+                height: 38px;
+                flex: 0 0 auto;
+                overflow: hidden;
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                background: color-mix(in oklab, var(--raised) 82%, white);
+                box-shadow: inset 0 0 0 1px
+                    oklch(from var(--raised) l c h / 0.45);
+            }
 
-						<article class="swatch-card swatch-card-sage">
-							<p class="swatch-name">Sage</p>
-							<p class="swatch-hex">#979F9B</p>
-							<p class="swatch-role">Support accents, chips, filters, metadata</p>
-						</article>
+            .brand-mark img {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
 
-						<article class="swatch-card swatch-card-bone">
-							<p class="swatch-name">Bone</p>
-							<p class="swatch-hex">#C9BFB6</p>
-							<p class="swatch-role">Surface depth, cards, subtle layering</p>
-						</article>
-					</div>
+            .brand-copy {
+                display: grid;
+                min-width: 0;
+                gap: 1px;
+            }
 
-					<div class="palette-callout">
-						<div>
-							<p class="card-kicker">System note</p>
-							<h3>Bone is not just a background.</h3>
-							<p>
-								Using a lighter bone derivative for the page and a deeper bone tone for cards
-								gives the theme dimension without introducing extra families.
-							</p>
-						</div>
+            .brand-title {
+                overflow: hidden;
+                font-size: 0.96rem;
+                font-weight: 760;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
 
-						<div class="mini-specs">
-							<p><strong>Text on background</strong><span>92.95 APCA</span></p>
-							<p><strong>Muted on surface</strong><span>73.26 APCA</span></p>
-							<p><strong>On primary</strong><span>60.58 APCA</span></p>
-						</div>
-					</div>
-				</section>
+            .brand-subtitle {
+                color: var(--text-muted);
+                font-size: 0.78rem;
+                font-weight: 620;
+            }
 
-				<section class="section-grid" id="components">
-					<div class="section-heading">
-						<p class="eyebrow">Components</p>
-						<h2>UI pieces styled with the same palette discipline.</h2>
-					</div>
+            .nav-actions {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 10px;
+            }
 
-					<div class="component-grid">
-						<article class="component-card">
-							<p class="card-kicker">Actions</p>
-							<h3>Buttons, tags, and form controls</h3>
+            .icon-button,
+            .button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                cursor: pointer;
+                transition:
+                    transform 160ms ease,
+                    border-color 160ms ease,
+                    background 160ms ease,
+                    color 160ms ease;
+            }
 
-							<div class="button-row">
-								<a class="button button-primary" href="#top">Primary action</a>
-								<a class="button button-secondary" href="#palette">Secondary action</a>
-							</div>
+            .icon-button {
+                width: 42px;
+                height: 42px;
+                background: var(--surface);
+                color: var(--text);
+                font-size: 1rem;
+            }
 
-							<div class="tag-row" aria-label="Example tags">
-								<span class="tag tag-primary">Featured</span>
-								<span class="tag tag-secondary">Quiet accent</span>
-								<span class="tag tag-neutral">Editorial</span>
-							</div>
+            .icon-button:hover,
+            .button:hover {
+                transform: translateY(-1px);
+                border-color: var(--accent-soft);
+            }
 
-							<form class="sample-form">
-								<label>
-									<span>Email for launch notes</span>
-									<input type="email" placeholder="studio@example.com" />
-								</label>
-								<button class="button button-primary" type="button">Subscribe</button>
-							</form>
-						</article>
+            .button {
+                min-height: 42px;
+                padding: 0 16px;
+                gap: 8px;
+                background: var(--surface);
+                color: var(--text);
+                font-weight: 720;
+                text-decoration: none;
+                white-space: nowrap;
+            }
 
-						<article class="component-card quote-card">
-							<p class="card-kicker">Sample module</p>
-							<h3>Autumn issue preview</h3>
-							<p>
-								The same system can support feature modules, collection notes, or quieter
-								marketing surfaces with only token changes.
-							</p>
-							<div class="quote-meta">
-								<span>Edition 03</span>
-								<span>20 pages</span>
-								<span>Warm editorial</span>
-							</div>
-						</article>
-					</div>
-				</section>
-			</main>
+            .button.primary {
+                border-color: transparent;
+                background: var(--accent);
+                color: var(--on-accent);
+            }
 
-			<footer class="site-footer">
-				<p>Built from four anchors: plum, clay, sage, and bone.</p>
-				<a href="#top">Back to top</a>
-			</footer>
-		</div>
-	</body>
+            .hero {
+                display: grid;
+                min-height: clamp(560px, 82vh, 760px);
+                align-items: center;
+                padding: 64px 0 44px;
+            }
+
+            .hero-grid {
+                display: grid;
+                grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.98fr);
+                align-items: center;
+                gap: clamp(32px, 5vw, 72px);
+            }
+
+            .eyebrow {
+                display: inline-flex;
+                width: fit-content;
+                align-items: center;
+                gap: 8px;
+                margin: 0 0 18px;
+                color: var(--accent);
+                font-size: 0.78rem;
+                font-weight: 820;
+                text-transform: uppercase;
+            }
+
+            .eyebrow::before {
+                width: 28px;
+                height: 2px;
+                background: currentColor;
+                content: "";
+            }
+
+            h1,
+            h2,
+            h3,
+            p {
+                margin-top: 0;
+            }
+
+            h1 {
+                max-width: 11ch;
+                margin-bottom: 20px;
+                font-size: clamp(3.1rem, 8.2vw, 7.4rem);
+                line-height: 0.9;
+                letter-spacing: 0;
+            }
+
+            .hero-copy {
+                max-width: 620px;
+                margin-bottom: 30px;
+                color: var(--text-muted);
+                font-size: clamp(1.05rem, 2vw, 1.28rem);
+                line-height: 1.55;
+            }
+
+            .hero-actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .palette-stage {
+                position: relative;
+                min-height: 480px;
+            }
+
+            .chip-orbit {
+                position: absolute;
+                inset: 0;
+                display: grid;
+                place-items: center;
+            }
+
+            .tone-ring {
+                position: absolute;
+                width: min(100%, 500px);
+                aspect-ratio: 1;
+                border: 1px solid oklch(from var(--border) l c h / 0.75);
+                border-radius: 50%;
+                background: conic-gradient(
+                    from 210deg,
+                    #3e343f,
+                    #a1736b,
+                    #c9bfb6,
+                    #979f9b,
+                    #3e343f
+                );
+                box-shadow: var(--shadow);
+                opacity: 0.98;
+            }
+
+            .tone-ring::after {
+                position: absolute;
+                inset: 15%;
+                border: 1px solid oklch(from var(--border) l c h / 0.82);
+                border-radius: 50%;
+                background: var(--bg);
+                content: "";
+            }
+
+            .swatch-stack {
+                position: relative;
+                z-index: 1;
+                display: grid;
+                width: min(82%, 390px);
+                gap: 10px;
+            }
+
+            .swatch {
+                display: grid;
+                grid-template-columns: 58px minmax(0, 1fr) auto;
+                align-items: center;
+                min-height: 70px;
+                gap: 14px;
+                padding: 10px 12px;
+                border: 1px solid oklch(from var(--border) l c h / 0.9);
+                border-radius: 8px;
+                background: oklch(from var(--surface) l c h / 0.92);
+                box-shadow: 0 10px 24px oklch(20% 0.02 320 / 0.12);
+                backdrop-filter: blur(16px);
+            }
+
+            .swatch-color {
+                width: 58px;
+                height: 48px;
+                border: 1px solid oklch(100% 0 0 / 0.18);
+                border-radius: 7px;
+            }
+
+            .swatch strong {
+                display: block;
+                overflow-wrap: anywhere;
+                font-size: 0.9rem;
+            }
+
+            .swatch code {
+                color: var(--text-muted);
+                font-size: 0.76rem;
+                white-space: normal;
+            }
+
+            .lc {
+                color: var(--accent);
+                font-size: 0.82rem;
+                font-weight: 820;
+            }
+
+            section {
+                padding: 54px 0;
+            }
+
+            .section-head {
+                display: flex;
+                align-items: end;
+                justify-content: space-between;
+                margin-bottom: 24px;
+                gap: 20px;
+            }
+
+            .section-head h2 {
+                margin-bottom: 0;
+                font-size: clamp(1.8rem, 4vw, 3.1rem);
+                line-height: 1;
+            }
+
+            .section-head p {
+                max-width: 460px;
+                margin-bottom: 0;
+                color: var(--text-muted);
+                line-height: 1.5;
+            }
+
+            .token-grid {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .token-card,
+            .metric,
+            .control-panel,
+            .sample-row {
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                background: var(--surface);
+            }
+
+            .token-card {
+                display: grid;
+                min-height: 168px;
+                align-content: space-between;
+                overflow: hidden;
+            }
+
+            .token-fill {
+                min-height: 84px;
+                border-bottom: 1px solid oklch(0% 0 0 / 0.12);
+            }
+
+            .token-info {
+                display: grid;
+                gap: 4px;
+                padding: 13px;
+            }
+
+            .token-info strong,
+            .metric strong,
+            .row-title {
+                font-size: 0.9rem;
+            }
+
+            .token-info code,
+            .row-meta,
+            .metric span {
+                color: var(--text-muted);
+                font-size: 0.78rem;
+                line-height: 1.35;
+            }
+
+            .showcase {
+                display: grid;
+                grid-template-columns: 0.88fr 1.12fr;
+                gap: 18px;
+                align-items: start;
+            }
+
+            .control-panel {
+                padding: 18px;
+            }
+
+            .control-panel h3 {
+                margin-bottom: 16px;
+                font-size: 1.05rem;
+            }
+
+            .field {
+                display: grid;
+                gap: 7px;
+                margin-bottom: 16px;
+            }
+
+            label {
+                color: var(--text-muted);
+                font-size: 0.78rem;
+                font-weight: 760;
+                text-transform: uppercase;
+            }
+
+            input,
+            select {
+                width: 100%;
+                min-height: 42px;
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                background: var(--raised);
+                color: var(--text);
+                padding: 0 12px;
+            }
+
+            input[type="range"] {
+                accent-color: var(--accent);
+                padding: 0;
+            }
+
+            .segmented {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                padding: 3px;
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                background: var(--raised);
+                gap: 3px;
+            }
+
+            .segmented button {
+                min-height: 36px;
+                border: 0;
+                border-radius: 6px;
+                background: transparent;
+                color: var(--text-muted);
+                cursor: pointer;
+                font-weight: 740;
+            }
+
+            .segmented button.active {
+                background: var(--accent);
+                color: var(--on-accent);
+            }
+
+            .metrics {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 12px;
+                margin-bottom: 14px;
+            }
+
+            .metric {
+                display: grid;
+                gap: 6px;
+                padding: 16px;
+            }
+
+            .metric strong,
+            .metric span {
+                display: block;
+            }
+
+            .metric b {
+                display: block;
+                margin-top: 10px;
+                color: var(--accent);
+                font-size: clamp(1.8rem, 4vw, 2.8rem);
+                line-height: 1;
+            }
+
+            .sample-list {
+                display: grid;
+                gap: 10px;
+            }
+
+            .sample-row {
+                display: grid;
+                grid-template-columns: 42px minmax(0, 1fr) auto;
+                align-items: start;
+                min-height: 72px;
+                gap: 12px;
+                padding: 12px;
+            }
+
+            .row-icon {
+                display: grid;
+                width: 42px;
+                height: 42px;
+                place-items: center;
+                border-radius: 8px;
+                background: var(--raised);
+                color: var(--accent);
+                font-weight: 900;
+            }
+
+            .row-copy {
+                display: grid;
+                gap: 4px;
+                min-width: 0;
+            }
+
+            .row-title,
+            .row-meta {
+                display: block;
+                white-space: normal;
+                overflow-wrap: anywhere;
+            }
+
+            .status {
+                align-self: center;
+                justify-self: end;
+                padding: 6px 9px;
+                border: 1px solid oklch(from var(--cool) l c h / 0.6);
+                border-radius: 999px;
+                color: var(--cool);
+                font-size: 0.75rem;
+                font-weight: 820;
+                white-space: nowrap;
+            }
+
+            .footer {
+                padding: 34px 0 48px;
+                color: var(--text-muted);
+                font-size: 0.86rem;
+            }
+
+            @media (max-width: 920px) {
+                .hero-grid,
+                .showcase {
+                    grid-template-columns: 1fr;
+                }
+
+                .palette-stage {
+                    min-height: 420px;
+                }
+
+                .token-grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+            }
+
+            @media (max-width: 620px) {
+                .shell {
+                    width: min(100% - 22px, 1160px);
+                }
+
+                .nav {
+                    min-height: 64px;
+                }
+
+                .brand-subtitle,
+                .button.secondary {
+                    display: none;
+                }
+
+                .hero {
+                    min-height: auto;
+                    padding-top: 46px;
+                }
+
+                h1 {
+                    font-size: clamp(3rem, 17vw, 4.6rem);
+                }
+
+                .palette-stage {
+                    min-height: 390px;
+                }
+
+                .swatch {
+                    grid-template-columns: 48px minmax(0, 1fr);
+                }
+
+                .swatch-color {
+                    width: 48px;
+                }
+
+                .lc {
+                    grid-column: 2;
+                }
+
+                .section-head,
+                .metrics {
+                    grid-template-columns: 1fr;
+                }
+
+                .section-head {
+                    display: grid;
+                }
+
+                .token-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .sample-row {
+                    grid-template-columns: 38px minmax(0, 1fr);
+                }
+
+                .status {
+                    grid-column: 2;
+                    justify-self: start;
+                    width: fit-content;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page">
+            <header class="topbar">
+                <nav class="shell nav" aria-label="Main navigation">
+                    <a class="brand" href="#top" aria-label="inm demo home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <img src="assets/icon.svg" alt="" />
+                        </span>
+                        <span class="brand-copy">
+                            <span class="brand-title">inm</span>
+                            <span class="brand-subtitle"
+                                >OKLCH tokens with APCA contrast</span
+                            >
+                        </span>
+                    </a>
+                    <div class="nav-actions">
+                        <a class="button secondary" href="#tokens">Tokens</a>
+                        <button
+                            class="icon-button"
+                            id="themeButton"
+                            type="button"
+                            aria-label="Toggle dark mode"
+                            title="Toggle theme"
+                        >
+                            ◐
+                        </button>
+                    </div>
+                </nav>
+            </header>
+
+            <main id="top">
+                <section class="hero">
+                    <div class="shell hero-grid">
+                        <div>
+                            <p class="eyebrow">
+                                #3E343F / #A1736B / #979F9B / #C9BFB6
+                            </p>
+                            <h1>Soft contrast, exact color.</h1>
+                            <p class="hero-copy">
+                                A warm stone interface with plum structure, clay
+                                action color, and cool mist support tones. The
+                                pairings are chosen for readable APCA contrast
+                                while staying close to the four anchor colors.
+                            </p>
+                            <div class="hero-actions">
+                                <a class="button primary" href="#showcase"
+                                    >View UI</a
+                                >
+                                <a class="button" href="#tokens">See Tokens</a>
+                            </div>
+                        </div>
+
+                        <div class="palette-stage" aria-label="Palette preview">
+                            <div class="chip-orbit">
+                                <div class="tone-ring" aria-hidden="true"></div>
+                                <div class="swatch-stack">
+                                    <div class="swatch">
+                                        <span
+                                            class="swatch-color"
+                                            style="background: #3e343f"
+                                        ></span>
+                                        <span
+                                            ><strong>Plum Black</strong
+                                            ><code
+                                                >oklch(34.0% 0.023 323.2)</code
+                                            ></span
+                                        >
+                                        <span class="lc">bg dark</span>
+                                    </div>
+                                    <div class="swatch">
+                                        <span
+                                            class="swatch-color"
+                                            style="background: #a1736b"
+                                        ></span>
+                                        <span
+                                            ><strong>Clay Rose</strong
+                                            ><code
+                                                >oklch(60.0% 0.060 30.0)</code
+                                            ></span
+                                        >
+                                        <span class="lc">accent</span>
+                                    </div>
+                                    <div class="swatch">
+                                        <span
+                                            class="swatch-color"
+                                            style="background: #979f9b"
+                                        ></span>
+                                        <span
+                                            ><strong>Mist Gray</strong
+                                            ><code
+                                                >oklch(69.5% 0.011 164.7)</code
+                                            ></span
+                                        >
+                                        <span class="lc">support</span>
+                                    </div>
+                                    <div class="swatch">
+                                        <span
+                                            class="swatch-color"
+                                            style="background: #c9bfb6"
+                                        ></span>
+                                        <span
+                                            ><strong>Warm Stone</strong
+                                            ><code
+                                                >oklch(81.0% 0.017 64.6)</code
+                                            ></span
+                                        >
+                                        <span class="lc">bg light</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="tokens">
+                    <div class="shell">
+                        <div class="section-head">
+                            <h2>System Tokens</h2>
+                            <p>
+                                These are the practical roles: enough tonal
+                                steps for an app without drifting away from the
+                                original anchors.
+                            </p>
+                        </div>
+                        <div class="token-grid" aria-label="Color token grid">
+                            <article class="token-card">
+                                <div
+                                    class="token-fill"
+                                    style="background: var(--bg)"
+                                ></div>
+                                <div class="token-info">
+                                    <strong>Background</strong
+                                    ><code>var(--bg)</code>
+                                </div>
+                            </article>
+                            <article class="token-card">
+                                <div
+                                    class="token-fill"
+                                    style="background: var(--surface)"
+                                ></div>
+                                <div class="token-info">
+                                    <strong>Surface</strong
+                                    ><code>var(--surface)</code>
+                                </div>
+                            </article>
+                            <article class="token-card">
+                                <div
+                                    class="token-fill"
+                                    style="background: var(--text)"
+                                ></div>
+                                <div class="token-info">
+                                    <strong>Text</strong
+                                    ><code>APCA body-safe</code>
+                                </div>
+                            </article>
+                            <article class="token-card">
+                                <div
+                                    class="token-fill"
+                                    style="background: var(--accent)"
+                                ></div>
+                                <div class="token-info">
+                                    <strong>Accent</strong
+                                    ><code>clay adjusted</code>
+                                </div>
+                            </article>
+                            <article class="token-card">
+                                <div
+                                    class="token-fill"
+                                    style="background: var(--cool)"
+                                ></div>
+                                <div class="token-info">
+                                    <strong>Cool Support</strong
+                                    ><code>mist adjusted</code>
+                                </div>
+                            </article>
+                            <article class="token-card">
+                                <div
+                                    class="token-fill"
+                                    style="background: var(--border)"
+                                ></div>
+                                <div class="token-info">
+                                    <strong>Border</strong
+                                    ><code>low contrast</code>
+                                </div>
+                            </article>
+                            <article class="token-card">
+                                <div
+                                    class="token-fill"
+                                    style="background: var(--raised)"
+                                ></div>
+                                <div class="token-info">
+                                    <strong>Raised</strong
+                                    ><code>higher plane</code>
+                                </div>
+                            </article>
+                            <article class="token-card">
+                                <div
+                                    class="token-fill"
+                                    style="background: var(--accent-soft)"
+                                ></div>
+                                <div class="token-info">
+                                    <strong>Soft Accent</strong
+                                    ><code>anchor friendly</code>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="showcase">
+                    <div class="shell">
+                        <div class="section-head">
+                            <h2>Interface Sample</h2>
+                            <p>
+                                A compact app surface to show text weight,
+                                controls, lists, badges, focus, and contrast in
+                                both modes.
+                            </p>
+                        </div>
+                        <div class="showcase">
+                            <aside class="control-panel" aria-label="Controls">
+                                <h3>Project Settings</h3>
+                                <div class="field">
+                                    <label for="name">Palette name</label>
+                                    <input id="name" value="Stone Plum" />
+                                </div>
+                                <div class="field">
+                                    <label for="intent">Intent</label>
+                                    <select id="intent">
+                                        <option>Editorial dashboard</option>
+                                        <option>Portfolio system</option>
+                                        <option>Product UI</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label for="density">Surface density</label>
+                                    <input
+                                        id="density"
+                                        type="range"
+                                        min="1"
+                                        max="9"
+                                        value="6"
+                                    />
+                                </div>
+                                <div class="field">
+                                    <label>Mode</label>
+                                    <div class="segmented">
+                                        <button class="active" type="button">
+                                            Calm
+                                        </button>
+                                        <button type="button">Dense</button>
+                                        <button type="button">Bold</button>
+                                    </div>
+                                </div>
+                                <button class="button primary" type="button">
+                                    Apply Palette
+                                </button>
+                            </aside>
+
+                            <div>
+                                <div
+                                    class="metrics"
+                                    aria-label="APCA contrast examples"
+                                >
+                                    <div class="metric">
+                                        <strong>Body text</strong
+                                        ><span>target Lc 60+</span><b>65</b>
+                                    </div>
+                                    <div class="metric">
+                                        <strong>Muted text</strong
+                                        ><span>target Lc 45+</span><b>47</b>
+                                    </div>
+                                    <div class="metric">
+                                        <strong>Dark body</strong
+                                        ><span>target Lc -60</span><b>-82</b>
+                                    </div>
+                                </div>
+                                <div class="sample-list">
+                                    <article class="sample-row">
+                                        <span class="row-icon">A</span>
+                                        <span class="row-copy"
+                                            ><strong class="row-title"
+                                                >Accent color stays
+                                                usable</strong
+                                            ><span class="row-meta"
+                                                >Darker clay for light mode,
+                                                brighter rose for dark
+                                                mode.</span
+                                            ></span
+                                        >
+                                        <span class="status">Ready</span>
+                                    </article>
+                                    <article class="sample-row">
+                                        <span class="row-icon">O</span>
+                                        <span class="row-copy"
+                                            ><strong class="row-title"
+                                                >OKLCH keeps tone
+                                                predictable</strong
+                                            ><span class="row-meta"
+                                                >Surface steps change lightness
+                                                without losing the family
+                                                feel.</span
+                                            ></span
+                                        >
+                                        <span class="status">Stable</span>
+                                    </article>
+                                    <article class="sample-row">
+                                        <span class="row-icon">L</span>
+                                        <span class="row-copy"
+                                            ><strong class="row-title"
+                                                >Low-chroma support
+                                                colors</strong
+                                            ><span class="row-meta"
+                                                >The mist channel adds
+                                                temperature contrast without
+                                                shouting.</span
+                                            ></span
+                                        >
+                                        <span class="status">Soft</span>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="shell footer">
+                Built from the four anchors with OKLCH roles and APCA-informed
+                contrast targets.
+            </footer>
+        </div>
+
+        <script>
+            const root = document.documentElement;
+            const themeButton = document.querySelector("#themeButton");
+            const storedTheme = localStorage.getItem("inm-theme");
+            const prefersDark = window.matchMedia(
+                "(prefers-color-scheme: dark)",
+            ).matches;
+
+            function setTheme(theme) {
+                root.dataset.theme = theme;
+                localStorage.setItem("inm-theme", theme);
+                themeButton.setAttribute(
+                    "aria-label",
+                    theme === "dark"
+                        ? "Switch to light mode"
+                        : "Switch to dark mode",
+                );
+            }
+
+            setTheme(storedTheme || (prefersDark ? "dark" : "light"));
+
+            themeButton.addEventListener("click", () => {
+                setTheme(root.dataset.theme === "dark" ? "light" : "dark");
+            });
+
+            document.querySelectorAll(".segmented button").forEach((button) => {
+                button.addEventListener("click", () => {
+                    button.parentElement
+                        .querySelectorAll("button")
+                        .forEach((item) => item.classList.remove("active"));
+                    button.classList.add("active");
+                });
+            });
+        </script>
+    </body>
 </html>

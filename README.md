@@ -2,118 +2,69 @@
   <img src="./assets/icon.svg" alt="inm icon" width="40" align="absmiddle" /> inm
 </h1>
 
-A warm editorial color palette and UI theme built around four anchor colors: **Clay**, **Plum**, **Sage**, and **Bone**.
+`inm` is a warm, low-chroma color palette built from four anchor colors:
 
-The visual tone is calm, tactile, and story-first — suited for editorial products, hospitality interfaces, premium commerce, quiet dashboards, and portfolios.
+- `#3E343F` plum black
+- `#A1736B` clay rose
+- `#979F9B` mist gray
+- `#C9BFB6` warm stone
 
+The system uses OKLCH for perceptual color tuning and APCA-informed contrast targets for readable light and dark modes.
 
-## Anchor Colors
+## Files
 
-| Name  | Hex       | Role                                          |
-|-------|-----------|-----------------------------------------------|
-| Plum  | `#3E343F` | Primary text, headings, strong borders        |
-| Clay  | `#A1736B` | Calls to action, links, focus states          |
-| Sage  | `#979F9B` | Support accents, chips, filters, metadata     |
-| Bone  | `#C9BFB6` | Surface depth, cards, subtle layering         |
+- [index.html](index.html): static demo site with light/dark mode and UI examples.
+- [DESIGN.md](DESIGN.md): portable design-system documentation for AI-assisted UI work.
+- [tailwind-theme.css](assets/tailwind-theme.css): Tailwind CSS v4 `@theme` tokens.
+- [tailwind.config.js](assets/tailwind.config.js): Tailwind CSS v3-compatible theme extension.
 
+## Palette Intent
 
-## Token Palette
+Light mode uses warm stone as the canvas. Dark mode uses plum black as the canvas. Clay carries action and brand emphasis, while mist adds a cool support tone for statuses, metadata, and secondary visuals.
 
-<details>
-<summary>Show all tokens</summary>
+## Quick Use
 
-### Plum
-
-| Token        | Value     |
-|--------------|-----------|
-| `--plum-900` | `#3E343F` |
-| `--plum-700` | `#5D555E` |
-| `--plum-500` | `#7F787F` |
-
-### Clay
-
-| Token        | Value     |
-|--------------|-----------|
-| `--clay-700` | `#8E625A` |
-| `--clay-600` | `#A1736B` |
-| `--clay-100` | `#E8D2CE` |
-
-### Sage
-
-| Token        | Value     |
-|--------------|-----------|
-| `--sage-600` | `#808884` |
-| `--sage-500` | `#979F9B` |
-| `--sage-100` | `#D7E1DC` |
-
-### Bone
-
-| Token        | Value     |
-|--------------|-----------|
-| `--bone-500` | `#C9BFB6` |
-| `--bone-300` | `#DAD1C8` |
-| `--bone-200` | `#EDE4DD` |
-| `--bone-100` | `#F9F2EB` |
-
-</details>
-
-
-## Semantic Tokens
-
-| Token                    | Value         | Description                              |
-|--------------------------|---------------|------------------------------------------|
-| `--color-bg`             | `--bone-100`  | Page background                          |
-| `--color-surface`        | `--bone-200`  | Card and panel surfaces                  |
-| `--color-surface-strong` | `--bone-300`  | Elevated or bordered surfaces            |
-| `--color-border`         | `#B8AFA7`     | Default border                           |
-| `--color-text`           | `--plum-900`  | Body copy and headings                   |
-| `--color-text-muted`     | `--plum-700`  | Secondary text                           |
-| `--color-text-soft`      | `--plum-500`  | Metadata, labels, placeholders           |
-| `--color-primary`        | `--clay-600`  | Primary action color                     |
-| `--color-primary-hover`  | `--clay-700`  | Primary hover state                      |
-| `--color-primary-soft`   | `--clay-100`  | Soft primary fill (tags, highlights)     |
-| `--color-on-primary`     | `--bone-100`  | Text on primary-filled surfaces          |
-| `--color-secondary`      | `--sage-500`  | Accent color for chips and filters       |
-| `--color-secondary-hover`| `--sage-600`  | Secondary hover state                    |
-| `--color-secondary-soft` | `--sage-100`  | Soft secondary fill                      |
-| `--color-focus-ring`     | `--clay-700`  | Keyboard focus ring                      |
-| `--color-selection`      | `#DDC8C5`     | Text selection highlight                 |
-
-
-## Contrast
-
-| Pairing                  | APCA   |
-|--------------------------|--------|
-| Text on background       | 92.95  |
-| Muted text on surface    | 73.26  |
-| On primary               | 60.58  |
-
-
-## Usage
-
-Copy `assets/css/theme.css` into your project and reference the semantic tokens in your stylesheets. Prefer semantic tokens over hardcoded hex values so changes stay consistent across the system.
-
-```html
-<link rel="stylesheet" href="theme.css" />
-```
+For Tailwind CSS v4, import the theme file:
 
 ```css
-body {
-  background: var(--color-bg);
-  color: var(--color-text);
-}
-
-.button-primary {
-  background: var(--color-primary);
-  color: var(--color-on-primary);
-}
-
-.button-primary:hover {
-  background: var(--color-primary-hover);
-}
+@import "./tailwind-theme.css";
 ```
 
-Open `index.html` in a browser to see the full live demo, including the hero, palette swatches, and component examples.
+Then use semantic utilities:
 
-## License
-MIT
+```html
+<main class="bg-bg text-text font-sans">
+  <section class="bg-surface border border-border rounded-control shadow-panel">
+    <button class="bg-accent text-on-accent rounded-control">
+      Apply Palette
+    </button>
+  </section>
+</main>
+```
+
+For Tailwind CSS v3, use `tailwind.config.js` and define the matching CSS custom properties in your app root.
+
+## Core Tokens
+
+```css
+--color-bg: oklch(81.0% 0.017 64.6);
+--color-surface: oklch(86.8% 0.013 63.9);
+--color-raised: oklch(91.4% 0.011 63.4);
+--color-text: oklch(28.5% 0.020 322.5);
+--color-muted: oklch(47.9% 0.010 349.6);
+--color-border: oklch(73.6% 0.011 58.2);
+--color-accent: oklch(47.9% 0.065 27.6);
+--color-accent-soft: oklch(60.0% 0.060 30.0);
+--color-cool: oklch(60.0% 0.013 170.0);
+--color-on-accent: oklch(91.4% 0.011 63.4);
+```
+
+Dark mode overrides are included in `tailwind-theme.css` and documented in `DESIGN.md`.
+
+## Contrast Notes
+
+- Use `--color-text` for body text.
+- Use `--color-muted` for secondary text.
+- Use `--color-accent` for buttons, links, and active states.
+- Avoid using the original `#A1736B` as small body text on `#C9BFB6`.
+- Treat `#979F9B` as a support color rather than a primary text color.
