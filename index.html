@@ -1,23 +1,34 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>inm — Theme Demo</title>
-        <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
-
-        <!-- Inter font -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-            rel="stylesheet"
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="inm is a warm, low-chroma interface palette with OKLCH tokens for readable light and dark modes."
         />
-
+        <title>inm color palette</title>
+        <script>
+            (() => {
+                try {
+                    const storedTheme = localStorage.getItem("inm-theme");
+                    const prefersDark = window.matchMedia(
+                        "(prefers-color-scheme: dark)",
+                    ).matches;
+                    document.documentElement.dataset.theme =
+                        storedTheme || (prefersDark ? "dark" : "light");
+                } catch {
+                    document.documentElement.dataset.theme = "light";
+                }
+            })();
+        </script>
         <style>
-            /* ─── Token Layer ──────────────────────────────────────── */
             :root {
                 color-scheme: light;
+                --color-plum-900: oklch(34% 0.023 323.2);
+                --color-clay-500: oklch(60% 0.06 30);
+                --color-mist-500: oklch(69.5% 0.011 164.7);
+                --color-stone-300: oklch(81% 0.017 64.6);
                 --color-bg: oklch(81% 0.017 64.6);
                 --color-surface: oklch(86.8% 0.013 63.9);
                 --color-raised: oklch(91.4% 0.011 63.4);
@@ -30,15 +41,9 @@
                 --color-on-accent: oklch(91.4% 0.011 63.4);
                 --shadow-panel: 0 20px 50px oklch(28.5% 0.02 322.5 / 0.15);
                 --shadow-item: 0 10px 24px oklch(20% 0.02 320 / 0.12);
-
-                --font-sans:
-                    Inter, ui-sans-serif, system-ui, -apple-system,
-                    BlinkMacSystemFont, "Segoe UI", sans-serif;
-                --radius: 8px;
-                --radius-sm: 6px;
             }
 
-            :root.dark {
+            :root[data-theme="dark"] {
                 color-scheme: dark;
                 --color-bg: oklch(34% 0.023 323.2);
                 --color-surface: oklch(38% 0.025 323.4);
@@ -51,1248 +56,1322 @@
                 --color-cool: oklch(76.1% 0.013 170.1);
                 --color-on-accent: oklch(34% 0.023 323.2);
                 --shadow-panel: 0 20px 50px oklch(18% 0.02 323.2 / 0.38);
-                --shadow-item: 0 10px 24px oklch(12% 0.02 320 / 0.3);
             }
 
-            /* ─── Reset & Base ─────────────────────────────────────── */
-            *,
-            *::before,
-            *::after {
+            * {
                 box-sizing: border-box;
-                margin: 0;
-                padding: 0;
             }
+
             html {
                 scroll-behavior: smooth;
             }
+
             body {
-                font-family: var(--font-sans);
-                font-size: 16px;
-                line-height: 1.6;
-                color: var(--color-text);
+                min-width: 320px;
+                margin: 0;
                 background: var(--color-bg);
-                -webkit-font-smoothing: antialiased;
-                transition:
-                    background 0.3s ease,
-                    color 0.3s ease;
+                color: var(--color-text);
+                font-family:
+                    Inter,
+                    ui-sans-serif,
+                    system-ui,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    sans-serif;
+                font-size: 16px;
+                line-height: 1.55;
             }
 
-            /* ─── Utilities ────────────────────────────────────────── */
-            .wrapper {
-                max-width: 1160px;
-                margin: 0 auto;
-                padding: 0 32px;
-            }
-            @media (max-width: 640px) {
-                .wrapper {
-                    padding: 0 16px;
-                }
+            a {
+                color: inherit;
+                text-decoration: none;
             }
 
-            /* ─── Header / Nav ─────────────────────────────────────── */
+            button,
+            input {
+                font: inherit;
+            }
+
+            button {
+                cursor: pointer;
+            }
+
             .site-header {
                 position: sticky;
                 top: 0;
-                z-index: 100;
-                background: oklch(from var(--color-surface) l c h / 0.85);
-                backdrop-filter: blur(16px) saturate(1.4);
+                z-index: 10;
                 border-bottom: 1px solid var(--color-border);
+                background: color-mix(
+                    in oklch,
+                    var(--color-bg) 88%,
+                    transparent
+                );
+                backdrop-filter: blur(18px);
             }
-            .site-header .wrapper {
+
+            .nav {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                height: 56px;
+                width: min(1160px, calc(100% - 32px));
+                min-height: 68px;
+                margin: 0 auto;
+                gap: 16px;
             }
-            .logo {
-                display: flex;
+
+            .brand {
+                display: inline-flex;
                 align-items: center;
                 gap: 10px;
-                font-weight: 800;
+                min-width: 0;
+                font-weight: 820;
+            }
+
+            .brand img {
+                width: 36px;
+                height: 36px;
+                flex: 0 0 auto;
+                padding: 4px;
+                border: 1px solid var(--color-border);
+                border-radius: 8px;
+                background: var(--color-raised);
+            }
+
+            .brand span {
                 font-size: 20px;
-                text-decoration: none;
-                color: var(--color-text);
             }
-            .logo img {
-                width: 28px;
-                height: 28px;
-            }
+
             .nav-links {
                 display: flex;
                 align-items: center;
-                gap: 8px;
-                list-style: none;
-            }
-            .nav-links a {
-                font-size: 14px;
-                font-weight: 600;
-                color: var(--color-muted);
-                text-decoration: none;
-                padding: 6px 12px;
-                border-radius: var(--radius-sm);
-                transition:
-                    color 0.15s,
-                    background 0.15s;
-            }
-            .nav-links a:hover {
-                color: var(--color-text);
-                background: var(--color-raised);
+                gap: 6px;
             }
 
-            /* Theme toggle */
-            .theme-toggle {
+            .nav-link {
+                min-height: 38px;
+                padding: 8px 12px;
+                border-radius: 8px;
+                color: var(--color-muted);
+                font-size: 14px;
+                font-weight: 700;
+            }
+
+            .nav-link:hover,
+            .nav-link:focus-visible {
+                background: var(--color-surface);
+                color: var(--color-text);
+                outline: none;
+            }
+
+            .icon-button {
+                display: inline-grid;
                 width: 42px;
                 height: 42px;
-                display: grid;
                 place-items: center;
-                background: var(--color-surface);
                 border: 1px solid var(--color-border);
-                border-radius: var(--radius);
-                cursor: pointer;
-                color: var(--color-muted);
-                font-size: 18px;
+                border-radius: 8px;
+                background: var(--color-surface);
+                color: var(--color-text);
                 transition:
-                    border-color 0.15s,
-                    transform 0.15s;
+                    transform 160ms ease,
+                    border-color 160ms ease,
+                    background 160ms ease;
             }
-            .theme-toggle:hover {
+
+            .icon-button:hover {
+                transform: translateY(-1px);
                 border-color: var(--color-accent-soft);
-                transform: translateY(-1px);
-            }
-            .theme-toggle .icon-sun {
-                display: inline;
-            }
-            .theme-toggle .icon-moon {
-                display: none;
-            }
-            .dark .theme-toggle .icon-sun {
-                display: none;
-            }
-            .dark .theme-toggle .icon-moon {
-                display: inline;
             }
 
-            /* ─── Hero ─────────────────────────────────────────────── */
-            .hero {
-                padding: 72px 0 56px;
-                text-align: center;
-            }
-            .hero h1 {
-                font-size: clamp(40px, 7vw, 80px);
-                font-weight: 900;
-                line-height: 0.95;
-                letter-spacing: -0.02em;
-            }
-            .hero h1 .accent {
-                color: var(--color-accent);
-            }
-            .hero p {
-                margin-top: 16px;
-                font-size: 18px;
-                color: var(--color-muted);
-                max-width: 560px;
-                margin-inline: auto;
-                line-height: 1.6;
-            }
-            .hero-actions {
-                margin-top: 32px;
-                display: flex;
-                gap: 12px;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            /* ─── Buttons ──────────────────────────────────────────── */
-            .btn {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                height: 42px;
-                padding: 0 20px;
-                font-size: 14px;
-                font-weight: 650;
-                border-radius: var(--radius);
-                border: 1px solid transparent;
-                cursor: pointer;
-                text-decoration: none;
-                transition:
-                    transform 0.15s,
-                    border-color 0.15s,
-                    background 0.15s,
-                    box-shadow 0.15s;
-            }
-            .btn:hover {
-                transform: translateY(-1px);
-            }
-            .btn:focus-visible {
-                outline: 3px solid oklch(from var(--color-accent) l c h / 0.35);
+            .icon-button:focus-visible,
+            .button:focus-visible,
+            .copy-button:focus-visible {
+                outline: 3px solid
+                    color-mix(in oklch, var(--color-accent) 34%, transparent);
                 outline-offset: 2px;
             }
 
-            .btn-primary {
-                background: var(--color-accent);
-                color: var(--color-on-accent);
-                border-color: transparent;
-            }
-            .btn-primary:hover {
-                background: var(--color-accent-soft);
+            .icon {
+                width: 19px;
+                height: 19px;
+                fill: none;
+                stroke: currentColor;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2;
             }
 
-            .btn-secondary {
+            [data-theme="dark"] .sun-icon,
+            [data-theme="light"] .moon-icon {
+                display: none;
+            }
+
+            .hero {
+                position: relative;
+                isolation: isolate;
+                overflow: hidden;
+                min-height: min(760px, 78svh);
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .hero-block {
+                position: absolute;
+                z-index: -1;
+                border: 1px solid
+                    color-mix(in oklch, var(--color-border) 70%, transparent);
+                box-shadow: var(--shadow-item);
+            }
+
+            .hero-block.plum {
+                right: clamp(-210px, -11vw, -70px);
+                top: clamp(40px, 9vw, 96px);
+                width: min(560px, 45vw);
+                height: min(560px, 48vw);
+                background: var(--color-plum-900);
+            }
+
+            .hero-block.clay {
+                right: clamp(-30px, 8vw, 118px);
+                bottom: clamp(44px, 8vw, 96px);
+                width: min(340px, 24vw);
+                height: min(340px, 24vw);
+                background: var(--color-clay-500);
+            }
+
+            .hero-block.mist {
+                left: clamp(-140px, -6vw, -44px);
+                bottom: clamp(26px, 7vw, 84px);
+                width: min(340px, 32vw);
+                height: min(220px, 24vw);
+                background: var(--color-mist-500);
+            }
+
+            .hero-block.stone {
+                right: 10vw;
+                top: clamp(-108px, -6vw, -42px);
+                width: min(360px, 32vw);
+                height: min(190px, 18vw);
+                background: var(--color-stone-300);
+            }
+
+            .hero-grid {
+                width: min(1160px, calc(100% - 32px));
+                margin: 0 auto;
+                padding: clamp(56px, 10vw, 104px) 0 clamp(44px, 7vw, 72px);
+            }
+
+            .eyebrow {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                margin: 0 0 18px;
+                color: var(--color-muted);
+                font-size: 13px;
+                font-weight: 780;
+            }
+
+            .eyebrow::before {
+                width: 28px;
+                height: 10px;
+                border-radius: 999px;
+                background: var(--color-cool);
+                content: "";
+            }
+
+            h1,
+            h2,
+            h3,
+            p {
+                margin-top: 0;
+            }
+
+            h1 {
+                max-width: 680px;
+                margin-bottom: 24px;
+                font-size: 96px;
+                font-weight: 900;
+                letter-spacing: 0;
+                line-height: 0.92;
+            }
+
+            .hero-text {
+                max-width: 610px;
+                margin-bottom: 28px;
+                color: var(--color-muted);
+                font-size: 18px;
+                line-height: 1.62;
+            }
+
+            .hero-actions,
+            .section-actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .button,
+            .copy-button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 42px;
+                gap: 8px;
+                border: 1px solid transparent;
+                border-radius: 8px;
+                padding: 9px 16px;
+                font-size: 14px;
+                font-weight: 780;
+                transition:
+                    transform 160ms ease,
+                    border-color 160ms ease,
+                    background 160ms ease;
+            }
+
+            .button.primary,
+            .copy-button {
+                background: var(--color-accent);
+                color: var(--color-on-accent);
+            }
+
+            .button.secondary {
+                border-color: var(--color-border);
                 background: var(--color-surface);
                 color: var(--color-text);
-                border-color: var(--color-border);
             }
-            .btn-secondary:hover {
+
+            .button:hover,
+            .copy-button:hover {
+                transform: translateY(-1px);
                 border-color: var(--color-accent-soft);
             }
 
-            .btn-ghost {
-                background: transparent;
-                color: var(--color-muted);
-                border-color: transparent;
-            }
-            .btn-ghost:hover {
-                color: var(--color-text);
-                background: var(--color-surface);
-            }
-
-            .btn-sm {
-                height: 34px;
-                padding: 0 14px;
-                font-size: 13px;
-                border-radius: var(--radius-sm);
-            }
-
-            /* ─── Section Headings ─────────────────────────────────── */
-            .section {
-                padding: 64px 0;
-            }
-            .section + .section {
-                border-top: 1px solid var(--color-border);
-            }
-            .section-title {
-                font-size: 13px;
-                font-weight: 760;
-                text-transform: uppercase;
-                color: var(--color-cool);
-                letter-spacing: 0.04em;
-                margin-bottom: 8px;
-            }
-            .section-heading {
-                font-size: clamp(24px, 3.5vw, 40px);
-                font-weight: 800;
-                line-height: 1.05;
-            }
-            .section-desc {
-                color: var(--color-muted);
-                margin-top: 8px;
-                max-width: 540px;
-            }
-
-            /* ─── Swatch Grid ──────────────────────────────────────── */
-            .swatch-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 12px;
-                margin-top: 32px;
-            }
-            .swatch {
-                border-radius: var(--radius);
-                overflow: hidden;
-                border: 1px solid var(--color-border);
-                background: var(--color-surface);
-            }
-            .swatch-color {
-                height: 72px;
-            }
-            .swatch-info {
-                padding: 10px 12px;
-            }
-            .swatch-name {
-                font-size: 13px;
-                font-weight: 700;
-            }
-            .swatch-value {
-                font-size: 12px;
-                color: var(--color-muted);
-                font-family: monospace;
-            }
-
-            /* ─── Widget Demo Area ─────────────────────────────────── */
-            .widget-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-                gap: 24px;
-                margin-top: 32px;
-            }
-            .widget-card {
-                background: var(--color-surface);
-                border: 1px solid var(--color-border);
-                border-radius: var(--radius);
-                padding: 24px;
-                box-shadow: var(--shadow-item);
-            }
-            .widget-card h3 {
-                font-size: 17px;
-                font-weight: 760;
-                margin-bottom: 18px;
-            }
-
-            /* Badges */
-            .badge {
-                display: inline-flex;
-                align-items: center;
-                gap: 4px;
-                font-size: 12px;
-                font-weight: 680;
-                padding: 3px 10px;
-                border-radius: 999px;
-            }
-            .badge-cool {
-                background: oklch(from var(--color-cool) l c h / 0.15);
-                color: var(--color-cool);
-            }
-            .badge-accent {
-                background: oklch(from var(--color-accent) l c h / 0.15);
-                color: var(--color-accent);
-            }
-            .badge-muted {
-                background: oklch(from var(--color-muted) l c h / 0.1);
-                color: var(--color-muted);
-            }
-            .badge-row {
+            .hero-note {
                 display: flex;
                 flex-wrap: wrap;
+                max-width: 760px;
+                margin-top: clamp(44px, 9vw, 80px);
                 gap: 8px;
             }
 
-            /* Inputs */
-            .form-group {
-                margin-bottom: 16px;
-            }
-            .form-label {
-                display: block;
-                font-size: 12px;
-                font-weight: 680;
-                text-transform: uppercase;
-                color: var(--color-muted);
-                margin-bottom: 6px;
-                letter-spacing: 0.03em;
-            }
-            .form-input {
-                width: 100%;
-                height: 42px;
-                padding: 0 12px;
-                background: var(--color-raised);
-                color: var(--color-text);
-                border: 1px solid var(--color-border);
-                border-radius: var(--radius);
-                font-family: var(--font-sans);
-                font-size: 15px;
-                transition: border-color 0.15s;
-            }
-            .form-input::placeholder {
-                color: var(--color-muted);
-                opacity: 0.65;
-            }
-            .form-input:focus {
-                outline: none;
-                border-color: var(--color-accent-soft);
-                box-shadow: 0 0 0 3px
-                    oklch(from var(--color-accent) l c h / 0.15);
-            }
-
-            .form-textarea {
-                width: 100%;
-                min-height: 80px;
-                padding: 10px 12px;
-                background: var(--color-raised);
-                color: var(--color-text);
-                border: 1px solid var(--color-border);
-                border-radius: var(--radius);
-                font-family: var(--font-sans);
-                font-size: 15px;
-                resize: vertical;
-                transition: border-color 0.15s;
-            }
-            .form-textarea:focus {
-                outline: none;
-                border-color: var(--color-accent-soft);
-                box-shadow: 0 0 0 3px
-                    oklch(from var(--color-accent) l c h / 0.15);
-            }
-
-            /* Segmented Control */
-            .segmented {
+            .token-chip {
                 display: inline-flex;
-                gap: 3px;
-                background: var(--color-raised);
+                align-items: center;
+                min-height: 32px;
+                gap: 8px;
                 border: 1px solid var(--color-border);
-                border-radius: var(--radius);
-                padding: 3px;
-            }
-            .segmented button {
-                font-family: var(--font-sans);
-                font-size: 13px;
-                font-weight: 620;
-                padding: 6px 16px;
-                border: none;
-                border-radius: var(--radius-sm);
-                cursor: pointer;
-                background: transparent;
-                color: var(--color-muted);
-                transition:
-                    background 0.15s,
-                    color 0.15s;
-            }
-            .segmented button:hover {
-                color: var(--color-text);
-            }
-            .segmented button.active {
-                background: var(--color-accent);
-                color: var(--color-on-accent);
-            }
-
-            /* Toggle */
-            .toggle-track {
-                width: 44px;
-                height: 24px;
                 border-radius: 999px;
-                background: var(--color-border);
-                position: relative;
-                cursor: pointer;
-                transition: background 0.2s;
-                border: none;
-            }
-            .toggle-track.on {
-                background: var(--color-accent);
-            }
-            .toggle-thumb {
-                width: 18px;
-                height: 18px;
-                border-radius: 50%;
-                background: var(--color-on-accent);
-                position: absolute;
-                top: 3px;
-                left: 3px;
-                transition: transform 0.2s;
-                pointer-events: none;
-            }
-            .toggle-track.on .toggle-thumb {
-                transform: translateX(20px);
+                padding: 5px 11px;
+                background: color-mix(
+                    in oklch,
+                    var(--color-surface) 82%,
+                    transparent
+                );
+                color: var(--color-muted);
+                font-size: 13px;
+                font-weight: 740;
             }
 
-            .toggle-row {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 10px 0;
+            .token-dot {
+                width: 12px;
+                height: 12px;
+                border: 1px solid
+                    color-mix(in oklch, var(--color-text) 24%, transparent);
+                border-radius: 999px;
             }
-            .toggle-row + .toggle-row {
-                border-top: 1px solid var(--color-border);
+
+            .section {
+                border-bottom: 1px solid var(--color-border);
+                padding: clamp(56px, 9vw, 88px) 0;
             }
-            .toggle-label {
-                font-size: 14px;
-                font-weight: 550;
+
+            .section-inner {
+                width: min(1160px, calc(100% - 32px));
+                margin: 0 auto;
             }
-            .toggle-desc {
-                font-size: 13px;
+
+            .section-heading {
+                display: grid;
+                grid-template-columns: minmax(0, 0.92fr) minmax(280px, 0.68fr);
+                gap: 32px;
+                align-items: end;
+                margin-bottom: 32px;
+            }
+
+            h2 {
+                margin-bottom: 0;
+                font-size: 58px;
+                font-weight: 860;
+                letter-spacing: 0;
+                line-height: 0.98;
+            }
+
+            .section-heading p,
+            .copy-panel p {
+                margin-bottom: 0;
                 color: var(--color-muted);
             }
 
-            /* List Rows */
-            .list-row {
+            .palette-grid {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .swatch-card {
+                min-height: 280px;
+                overflow: hidden;
+                border: 1px solid var(--color-border);
+                border-radius: 8px;
+                background: var(--color-surface);
+                box-shadow: var(--shadow-item);
+            }
+
+            .swatch-fill {
+                height: 170px;
+                border-bottom: 1px solid
+                    color-mix(in oklch, var(--color-border) 70%, transparent);
+            }
+
+            .swatch-body {
+                padding: 16px;
+            }
+
+            .swatch-body h3 {
+                margin-bottom: 6px;
+                font-size: 18px;
+                font-weight: 780;
+            }
+
+            .swatch-body p {
+                margin-bottom: 12px;
+                color: var(--color-muted);
+                font-size: 14px;
+            }
+
+            .hex {
+                display: inline-flex;
+                align-items: center;
+                color: var(--color-muted);
+                font-family:
+                    "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
+                    monospace;
+                font-size: 13px;
+                font-weight: 700;
+            }
+
+            .hex img {
+                width: 96px;
+                height: 22px;
+            }
+
+            .preview-grid {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 16px;
+            }
+
+            .preview {
+                min-height: 390px;
+                border: 1px solid var(--preview-border);
+                border-radius: 8px;
+                background: var(--preview-bg);
+                color: var(--preview-text);
+                box-shadow: var(--shadow-panel);
+            }
+
+            .preview.light {
+                --preview-bg: oklch(81% 0.017 64.6);
+                --preview-surface: oklch(86.8% 0.013 63.9);
+                --preview-raised: oklch(91.4% 0.011 63.4);
+                --preview-text: oklch(28.5% 0.02 322.5);
+                --preview-muted: oklch(47.9% 0.01 349.6);
+                --preview-border: oklch(73.6% 0.011 58.2);
+                --preview-accent: oklch(47.9% 0.065 27.6);
+                --preview-on-accent: oklch(91.4% 0.011 63.4);
+                --preview-cool: oklch(60% 0.013 170);
+            }
+
+            .preview.dark {
+                --preview-bg: oklch(34% 0.023 323.2);
+                --preview-surface: oklch(38% 0.025 323.4);
+                --preview-raised: oklch(43.1% 0.028 323.8);
+                --preview-text: oklch(91.4% 0.011 63.4);
+                --preview-muted: oklch(75.9% 0.009 36.5);
+                --preview-border: oklch(50.3% 0.02 331.9);
+                --preview-accent: oklch(75.5% 0.068 31.5);
+                --preview-on-accent: oklch(34% 0.023 323.2);
+                --preview-cool: oklch(76.1% 0.013 170.1);
+            }
+
+            .preview-bar {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                padding: 12px 0;
-                gap: 12px;
+                min-height: 58px;
+                padding: 0 16px;
+                border-bottom: 1px solid var(--preview-border);
             }
-            .list-row + .list-row {
-                border-top: 1px solid var(--color-border);
-            }
-            .list-row-left {
+
+            .window-controls {
                 display: flex;
+                gap: 7px;
+            }
+
+            .window-controls span {
+                width: 10px;
+                height: 10px;
+                border-radius: 999px;
+                background: var(--preview-muted);
+            }
+
+            .window-controls span:nth-child(2) {
+                background: var(--preview-cool);
+            }
+
+            .window-controls span:nth-child(3) {
+                background: var(--preview-accent);
+            }
+
+            .preview-title {
+                color: var(--preview-muted);
+                font-size: 13px;
+                font-weight: 760;
+            }
+
+            .preview-content {
+                display: grid;
+                gap: 12px;
+                padding: 16px;
+            }
+
+            .metric-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 10px;
+            }
+
+            .metric {
+                min-height: 82px;
+                border: 1px solid var(--preview-border);
+                border-radius: 8px;
+                background: var(--preview-surface);
+                padding: 12px;
+            }
+
+            .metric span {
+                color: var(--preview-muted);
+                font-size: 12px;
+                font-weight: 740;
+            }
+
+            .metric strong {
+                display: block;
+                margin-top: 8px;
+                font-size: 26px;
+                line-height: 1;
+            }
+
+            .preview-list {
+                display: grid;
+                border: 1px solid var(--preview-border);
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
+            .preview-row {
+                display: grid;
+                grid-template-columns: 12px minmax(0, 1fr) auto;
                 align-items: center;
                 gap: 12px;
-                min-width: 0;
+                min-height: 54px;
+                padding: 10px 12px;
+                background: var(--preview-surface);
             }
-            .list-avatar {
-                width: 36px;
-                height: 36px;
-                border-radius: 50%;
-                flex-shrink: 0;
+
+            .preview-row + .preview-row {
+                border-top: 1px solid var(--preview-border);
+            }
+
+            .status-dot {
+                width: 12px;
+                height: 12px;
+                border-radius: 999px;
+                background: var(--preview-cool);
+            }
+
+            .preview-row:nth-child(2) .status-dot {
+                background: var(--preview-accent);
+            }
+
+            .row-title,
+            .row-meta {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .row-title {
+                font-weight: 760;
+            }
+
+            .row-meta,
+            .row-action {
+                color: var(--preview-muted);
+                font-size: 13px;
+                font-weight: 700;
+            }
+
+            .row-action {
+                min-height: 30px;
+                border-radius: 6px;
+                padding: 5px 8px;
+                background: var(--preview-raised);
+            }
+
+            .preview-command {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                align-items: center;
+                justify-content: space-between;
+                min-height: 54px;
+                border: 1px solid var(--preview-border);
+                border-radius: 8px;
+                background: var(--preview-raised);
+                padding: 10px 12px;
+            }
+
+            .preview-command span {
+                color: var(--preview-muted);
+                font-size: 13px;
+                font-weight: 720;
+            }
+
+            .preview-command strong {
+                display: inline-flex;
+                min-height: 32px;
+                align-items: center;
+                border-radius: 8px;
+                background: var(--preview-accent);
+                color: var(--preview-on-accent);
+                padding: 6px 10px;
+                font-size: 13px;
+            }
+
+            .usage-grid {
                 display: grid;
-                place-items: center;
+                grid-template-columns: minmax(0, 0.92fr) minmax(280px, 0.68fr);
+                gap: 16px;
+                align-items: stretch;
+            }
+
+            .code-panel,
+            .copy-panel {
+                border: 1px solid var(--color-border);
+                border-radius: 8px;
+                background: var(--color-surface);
+                box-shadow: var(--shadow-item);
+            }
+
+            .code-panel {
+                overflow: hidden;
+            }
+
+            .code-toolbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                min-height: 56px;
+                padding: 8px 12px 8px 16px;
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .code-toolbar span {
+                color: var(--color-muted);
+                font-size: 13px;
+                font-weight: 760;
+            }
+
+            pre {
+                margin: 0;
+                overflow-x: auto;
+                padding: 18px;
+                background: var(--color-raised);
+            }
+
+            code {
+                font-family:
+                    "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
+                    monospace;
+                font-size: 13px;
+            }
+
+            .copy-panel {
+                display: grid;
+                align-content: space-between;
+                gap: 22px;
+                padding: 20px;
+            }
+
+            .copy-panel h3 {
+                margin-bottom: 10px;
+                font-size: 22px;
+                line-height: 1.15;
+            }
+
+            .file-list {
+                display: grid;
+                gap: 8px;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            .file-list a {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                min-height: 42px;
+                gap: 12px;
+                border: 1px solid var(--color-border);
+                border-radius: 8px;
+                background: var(--color-raised);
+                padding: 9px 12px;
+                color: var(--color-muted);
+                font-size: 14px;
+                font-weight: 740;
+            }
+
+            .file-list a:hover,
+            .file-list a:focus-visible {
+                border-color: var(--color-accent-soft);
+                color: var(--color-text);
+                outline: none;
+            }
+
+            .site-footer {
+                padding: 28px 0;
+            }
+
+            .footer-inner {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+                width: min(1160px, calc(100% - 32px));
+                margin: 0 auto;
+                gap: 12px;
+                color: var(--color-muted);
                 font-size: 14px;
                 font-weight: 700;
             }
-            .list-row-name {
-                font-size: 14px;
-                font-weight: 620;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .list-row-meta {
-                font-size: 13px;
-                color: var(--color-muted);
-            }
 
-            /* Progress Bar */
-            .progress-track {
-                width: 100%;
-                height: 8px;
-                border-radius: 999px;
-                background: var(--color-raised);
-            }
-            .progress-fill {
-                height: 100%;
-                border-radius: 999px;
-                background: var(--color-accent);
-                transition: width 0.4s ease;
-            }
-            .progress-label {
-                display: flex;
-                justify-content: space-between;
-                font-size: 13px;
-                font-weight: 600;
-                margin-bottom: 6px;
-            }
-            .progress-label span:last-child {
-                color: var(--color-muted);
-            }
-
-            /* Stat Card */
-            .stat-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 12px;
-            }
-            .stat-item {
-                text-align: center;
-                padding: 16px 8px;
-                background: var(--color-raised);
-                border-radius: var(--radius-sm);
-            }
-            .stat-value {
-                font-size: 24px;
-                font-weight: 800;
-                color: var(--color-accent);
-            }
-            .stat-label {
-                font-size: 12px;
-                font-weight: 620;
-                color: var(--color-muted);
-                margin-top: 2px;
-            }
-
-            /* Toast */
-            .toast {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                padding: 12px 16px;
-                border-radius: var(--radius);
-                border: 1px solid var(--color-border);
-                background: var(--color-surface);
-                box-shadow: var(--shadow-item);
-                font-size: 14px;
-                font-weight: 550;
-            }
-            .toast-icon {
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                display: grid;
-                place-items: center;
-                flex-shrink: 0;
-                font-size: 13px;
-                font-weight: 800;
-            }
-            .toast-success .toast-icon {
-                background: oklch(from var(--color-cool) l c h / 0.18);
-                color: var(--color-cool);
-            }
-            .toast-warning .toast-icon {
-                background: oklch(from var(--color-accent) l c h / 0.18);
-                color: var(--color-accent);
-            }
-
-            /* ─── Typography Demo ──────────────────────────────────── */
-            .type-sample {
-                margin-top: 24px;
-            }
-            .type-sample > * + * {
-                margin-top: 16px;
-            }
-            .type-display {
-                font-size: clamp(48px, 8vw, 80px);
-                font-weight: 900;
-                line-height: 0.95;
-            }
-            .type-h1 {
-                font-size: clamp(36px, 5vw, 56px);
-                font-weight: 800;
-                line-height: 1;
-            }
-            .type-h2 {
-                font-size: clamp(24px, 3vw, 36px);
-                font-weight: 780;
-                line-height: 1.05;
-            }
-            .type-h3 {
-                font-size: 20px;
-                font-weight: 740;
-                line-height: 1.2;
-            }
-            .type-body {
-                font-size: 16px;
-                font-weight: 440;
-                line-height: 1.6;
-                color: var(--color-muted);
-                max-width: 60ch;
-            }
-            .type-small {
-                font-size: 13px;
-                font-weight: 640;
-                color: var(--color-muted);
-            }
-
-            /* ─── Footer ───────────────────────────────────────────── */
-            .site-footer {
-                padding: 32px 0;
-                border-top: 1px solid var(--color-border);
-                text-align: center;
-                font-size: 13px;
-                color: var(--color-muted);
-            }
-            .site-footer a {
-                color: var(--color-accent);
-                text-decoration: none;
-            }
-            .site-footer a:hover {
-                text-decoration: underline;
-            }
-
-            /* ─── Mini Animations ──────────────────────────────────── */
-            @media (prefers-reduced-motion: no-preference) {
-                .hero h1,
-                .hero p,
-                .hero-actions {
-                    animation: fadeUp 0.6s ease both;
-                }
-                .hero p {
-                    animation-delay: 0.08s;
-                }
-                .hero-actions {
-                    animation-delay: 0.16s;
+            @media (max-width: 1100px) {
+                .hero-block.plum {
+                    right: -260px;
+                    width: 420px;
+                    height: 520px;
+                    opacity: 0.86;
                 }
             }
-            @keyframes fadeUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(12px);
+
+            @media (max-width: 900px) {
+                .nav-links {
+                    display: none;
                 }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
+
+                .hero {
+                    min-height: auto;
+                }
+
+                .hero-block.plum {
+                    right: -270px;
+                    width: 320px;
+                    height: 360px;
+                    opacity: 0.72;
+                }
+
+                .hero-block.clay {
+                    width: 190px;
+                    height: 190px;
+                    right: -26px;
+                    bottom: 42px;
+                }
+
+                h1 {
+                    font-size: 76px;
+                }
+
+                h2 {
+                    font-size: 44px;
+                }
+
+                .hero-block.mist,
+                .hero-block.stone {
+                    display: none;
+                }
+
+                .section-heading,
+                .usage-grid,
+                .preview-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .palette-grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+            }
+
+            @media (max-width: 720px) {
+                .hero-block.plum,
+                .hero-block.clay {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 620px) {
+                .hero-grid,
+                .section-inner,
+                .nav,
+                .footer-inner {
+                    width: min(100% - 24px, 1160px);
+                }
+
+                .site-header {
+                    position: static;
+                }
+
+                h1 {
+                    font-size: 54px;
+                }
+
+                h2 {
+                    font-size: 34px;
+                }
+
+                .palette-grid,
+                .metric-row {
+                    grid-template-columns: 1fr;
+                }
+
+                .swatch-card {
+                    min-height: 230px;
+                }
+
+                .swatch-fill {
+                    height: 124px;
+                }
+
+                .preview-row {
+                    grid-template-columns: 12px minmax(0, 1fr);
+                }
+
+                .row-action {
+                    grid-column: 2;
+                    width: max-content;
                 }
             }
         </style>
     </head>
     <body>
-        <!-- ─── Header ──────────────────────────────────────────── -->
         <header class="site-header">
-            <div class="wrapper">
-                <a href="#" class="logo">
-                    <img src="./assets/icon.svg" alt="inm" /> inm
+            <nav class="nav" aria-label="Main navigation">
+                <a class="brand" href="#top" aria-label="inm home">
+                    <img src="./assets/icon.svg" alt="" />
+                    <span>inm</span>
                 </a>
-                <nav>
-                    <ul class="nav-links">
-                        <li><a href="#palette">Palette</a></li>
-                        <li><a href="#typography">Type</a></li>
-                        <li><a href="#widgets">Widgets</a></li>
-                        <li>
-                            <button
-                                class="theme-toggle"
-                                onclick="toggleTheme()"
-                                aria-label="Toggle dark mode"
-                            >
-                                <span class="icon-sun">☀</span>
-                                <span class="icon-moon">☾</span>
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+                <div class="nav-links" aria-label="Sections">
+                    <a class="nav-link" href="#palette">Palette</a>
+                    <a class="nav-link" href="#modes">Modes</a>
+                    <a class="nav-link" href="#usage">Usage</a>
+                    <a
+                        class="nav-link"
+                        href="https://github.com/iceice666/inm/blob/main/DESIGN.md"
+                    >
+                        Design.md
+                    </a>
+                </div>
+                <button
+                    class="icon-button"
+                    type="button"
+                    id="theme-toggle"
+                    title="Toggle color mode"
+                    aria-label="Toggle color mode"
+                >
+                    <svg
+                        class="icon sun-icon"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <circle cx="12" cy="12" r="4" />
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+                        />
+                    </svg>
+                    <svg
+                        class="icon moon-icon"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M20.99 12.43A8.5 8.5 0 1 1 11.57 3a6.5 6.5 0 0 0 9.42 9.43Z"
+                        />
+                    </svg>
+                </button>
+            </nav>
         </header>
 
-        <!-- ─── Hero ────────────────────────────────────────────── -->
-        <section class="hero wrapper">
-            <h1>Warm. Calm.<br /><span class="accent">Intentional.</span></h1>
-            <p>
-                A low-chroma palette built from plum, clay, mist &amp; stone —
-                tuned in OKLCH with APCA-informed contrast for light &amp; dark
-                modes.
-            </p>
-            <div class="hero-actions">
-                <a href="#widgets" class="btn btn-primary">Explore Widgets</a>
-                <a href="#palette" class="btn btn-secondary">View Palette</a>
-                <a href="https://github.com/iceice666/inm" class="btn btn-ghost"
-                    >GitHub ↗</a
-                >
-            </div>
-        </section>
-
-        <!-- ─── Palette ─────────────────────────────────────────── -->
-        <section class="section" id="palette">
-            <div class="wrapper">
-                <p class="section-title">Colors</p>
-                <h2 class="section-heading">Palette &amp; Tokens</h2>
-                <p class="section-desc">
-                    Semantic tokens adapt automatically between light and dark
-                    modes. Every swatch below reflects the current theme.
-                </p>
-
-                <div class="swatch-grid">
-                    <div class="swatch">
-                        <div
-                            class="swatch-color"
-                            style="background: var(--color-bg)"
-                        ></div>
-                        <div class="swatch-info">
-                            <div class="swatch-name">Background</div>
-                            <div class="swatch-value">--color-bg</div>
-                        </div>
-                    </div>
-                    <div class="swatch">
-                        <div
-                            class="swatch-color"
-                            style="background: var(--color-surface)"
-                        ></div>
-                        <div class="swatch-info">
-                            <div class="swatch-name">Surface</div>
-                            <div class="swatch-value">--color-surface</div>
-                        </div>
-                    </div>
-                    <div class="swatch">
-                        <div
-                            class="swatch-color"
-                            style="background: var(--color-raised)"
-                        ></div>
-                        <div class="swatch-info">
-                            <div class="swatch-name">Raised</div>
-                            <div class="swatch-value">--color-raised</div>
-                        </div>
-                    </div>
-                    <div class="swatch">
-                        <div
-                            class="swatch-color"
-                            style="background: var(--color-text)"
-                        ></div>
-                        <div class="swatch-info">
-                            <div class="swatch-name">Text</div>
-                            <div class="swatch-value">--color-text</div>
-                        </div>
-                    </div>
-                    <div class="swatch">
-                        <div
-                            class="swatch-color"
-                            style="background: var(--color-muted)"
-                        ></div>
-                        <div class="swatch-info">
-                            <div class="swatch-name">Muted</div>
-                            <div class="swatch-value">--color-muted</div>
-                        </div>
-                    </div>
-                    <div class="swatch">
-                        <div
-                            class="swatch-color"
-                            style="background: var(--color-border)"
-                        ></div>
-                        <div class="swatch-info">
-                            <div class="swatch-name">Border</div>
-                            <div class="swatch-value">--color-border</div>
-                        </div>
-                    </div>
-                    <div class="swatch">
-                        <div
-                            class="swatch-color"
-                            style="background: var(--color-accent)"
-                        ></div>
-                        <div class="swatch-info">
-                            <div class="swatch-name">Accent</div>
-                            <div class="swatch-value">--color-accent</div>
-                        </div>
-                    </div>
-                    <div class="swatch">
-                        <div
-                            class="swatch-color"
-                            style="background: var(--color-accent-soft)"
-                        ></div>
-                        <div class="swatch-info">
-                            <div class="swatch-name">Accent Soft</div>
-                            <div class="swatch-value">--color-accent-soft</div>
-                        </div>
-                    </div>
-                    <div class="swatch">
-                        <div
-                            class="swatch-color"
-                            style="background: var(--color-cool)"
-                        ></div>
-                        <div class="swatch-info">
-                            <div class="swatch-name">Cool</div>
-                            <div class="swatch-value">--color-cool</div>
-                        </div>
-                    </div>
-                    <div class="swatch">
-                        <div
-                            class="swatch-color"
-                            style="background: var(--color-on-accent)"
-                        ></div>
-                        <div class="swatch-info">
-                            <div class="swatch-name">On Accent</div>
-                            <div class="swatch-value">--color-on-accent</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ─── Typography ──────────────────────────────────────── -->
-        <section class="section" id="typography">
-            <div class="wrapper">
-                <p class="section-title">Typography</p>
-                <h2 class="section-heading">Type Scale</h2>
-                <p class="section-desc">
-                    Inter across the full weight range, from display headlines
-                    to compact meta labels.
-                </p>
-
-                <div class="type-sample">
-                    <div class="type-display">Display</div>
-                    <div class="type-h1">Heading One</div>
-                    <div class="type-h2">Heading Two</div>
-                    <div class="type-h3">Heading Three</div>
-                    <p class="type-body">
-                        Body text — designed for comfortable long-form reading.
-                        The warm stone canvas keeps the eye relaxed while
-                        plum-tinted text maintains a calm, readable rhythm
-                        across paragraphs.
+        <main id="top">
+            <section class="hero" aria-labelledby="hero-title">
+                <div class="hero-block plum" aria-hidden="true"></div>
+                <div class="hero-block clay" aria-hidden="true"></div>
+                <div class="hero-block mist" aria-hidden="true"></div>
+                <div class="hero-block stone" aria-hidden="true"></div>
+                <div class="hero-grid">
+                    <p class="eyebrow">OKLCH palette for quiet interfaces</p>
+                    <h1 id="hero-title">
+                        Warm stone,<br />soft clay,<br />deep plum.
+                    </h1>
+                    <p class="hero-text">
+                        <strong>inm</strong> is a low-chroma color system for
+                        editorial tools, portfolios, dashboards, and creative
+                        product UI. It ships with semantic tokens, light and
+                        dark modes, and APCA-informed contrast guidance.
                     </p>
-                    <p class="type-small">
-                        Small / Meta · 13px · Strong weight for compact labels
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ─── Widget Demo ─────────────────────────────────────── -->
-        <section class="section" id="widgets">
-            <div class="wrapper">
-                <p class="section-title">Components</p>
-                <h2 class="section-heading">Widget Playground</h2>
-                <p class="section-desc">
-                    Interactive UI elements using the inm palette. Toggle dark
-                    mode to see adaptive tokens in action.
-                </p>
-
-                <div class="widget-grid">
-                    <!-- Buttons & Badges -->
-                    <div class="widget-card">
-                        <h3>Buttons</h3>
-                        <div
-                            style="
-                                display: flex;
-                                flex-wrap: wrap;
-                                gap: 10px;
-                                margin-bottom: 20px;
-                            "
-                        >
-                            <button class="btn btn-primary">Primary</button>
-                            <button class="btn btn-secondary">Secondary</button>
-                            <button class="btn btn-ghost">Ghost</button>
-                            <button class="btn btn-primary btn-sm">
-                                Small
-                            </button>
-                        </div>
-                        <h3>Badges</h3>
-                        <div class="badge-row">
-                            <span class="badge badge-accent">Active</span>
-                            <span class="badge badge-cool">Stable</span>
-                            <span class="badge badge-muted">Draft</span>
-                            <span class="badge badge-accent">v2.4</span>
-                            <span class="badge badge-cool">OKLCH</span>
-                        </div>
-                    </div>
-
-                    <!-- Form Controls -->
-                    <div class="widget-card">
-                        <h3>Form Controls</h3>
-                        <div class="form-group">
-                            <label class="form-label">Username</label>
-                            <input
-                                class="form-input"
-                                type="text"
-                                placeholder="e.g. iceice666"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Bio</label>
-                            <textarea
-                                class="form-textarea"
-                                placeholder="Tell us about yourself…"
-                            ></textarea>
-                        </div>
-                        <div style="display: flex; gap: 10px">
-                            <button class="btn btn-primary btn-sm">Save</button>
-                            <button class="btn btn-ghost btn-sm">Cancel</button>
-                        </div>
-                    </div>
-
-                    <!-- Segmented + Toggles -->
-                    <div class="widget-card">
-                        <h3>Segmented Control</h3>
-                        <div class="segmented" style="margin-bottom: 20px">
-                            <button
-                                class="active"
-                                onclick="activateSegment(this)"
-                            >
-                                Day
-                            </button>
-                            <button onclick="activateSegment(this)">
-                                Week
-                            </button>
-                            <button onclick="activateSegment(this)">
-                                Month
-                            </button>
-                            <button onclick="activateSegment(this)">
-                                Year
-                            </button>
-                        </div>
-
-                        <h3>Toggles</h3>
-                        <div class="toggle-row">
-                            <div>
-                                <div class="toggle-label">Notifications</div>
-                                <div class="toggle-desc">
-                                    Receive email alerts
-                                </div>
-                            </div>
-                            <button
-                                class="toggle-track on"
-                                onclick="this.classList.toggle('on')"
-                            >
-                                <div class="toggle-thumb"></div>
-                            </button>
-                        </div>
-                        <div class="toggle-row">
-                            <div>
-                                <div class="toggle-label">Analytics</div>
-                                <div class="toggle-desc">Share usage data</div>
-                            </div>
-                            <button
-                                class="toggle-track"
-                                onclick="this.classList.toggle('on')"
-                            >
-                                <div class="toggle-thumb"></div>
-                            </button>
-                        </div>
-                        <div class="toggle-row">
-                            <div>
-                                <div class="toggle-label">Auto-save</div>
-                                <div class="toggle-desc">
-                                    Save every 30 seconds
-                                </div>
-                            </div>
-                            <button
-                                class="toggle-track on"
-                                onclick="this.classList.toggle('on')"
-                            >
-                                <div class="toggle-thumb"></div>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Stats + Progress -->
-                    <div class="widget-card">
-                        <h3>Statistics</h3>
-                        <div class="stat-grid" style="margin-bottom: 20px">
-                            <div class="stat-item">
-                                <div class="stat-value">12k</div>
-                                <div class="stat-label">Users</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">94%</div>
-                                <div class="stat-label">Uptime</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">3.2s</div>
-                                <div class="stat-label">Avg Load</div>
-                            </div>
-                        </div>
-
-                        <h3>Progress</h3>
-                        <div
-                            style="
-                                display: flex;
-                                flex-direction: column;
-                                gap: 14px;
-                            "
-                        >
-                            <div>
-                                <div class="progress-label">
-                                    <span>Design Tokens</span><span>100%</span>
-                                </div>
-                                <div class="progress-track">
-                                    <div
-                                        class="progress-fill"
-                                        style="width: 100%"
-                                    ></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="progress-label">
-                                    <span>Component Library</span
-                                    ><span>72%</span>
-                                </div>
-                                <div class="progress-track">
-                                    <div
-                                        class="progress-fill"
-                                        style="width: 72%"
-                                    ></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="progress-label">
-                                    <span>Documentation</span><span>45%</span>
-                                </div>
-                                <div class="progress-track">
-                                    <div
-                                        class="progress-fill"
-                                        style="
-                                            width: 45%;
-                                            background: var(--color-cool);
-                                        "
-                                    ></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- List Rows -->
-                    <div class="widget-card">
-                        <h3>Team Members</h3>
-                        <div class="list-row">
-                            <div class="list-row-left">
-                                <div
-                                    class="list-avatar"
-                                    style="
-                                        background: var(--color-accent);
-                                        color: var(--color-on-accent);
-                                    "
-                                >
-                                    S
-                                </div>
-                                <div>
-                                    <div class="list-row-name">su2u4</div>
-                                    <div class="list-row-meta">
-                                        Compiler Expert
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="badge badge-accent">Owner</span>
-                        </div>
-                        <div class="list-row">
-                            <div class="list-row-left">
-                                <div
-                                    class="list-avatar"
-                                    style="
-                                        background: var(--color-cool);
-                                        color: var(--color-on-accent);
-                                    "
-                                >
-                                    Y
-                                </div>
-                                <div>
-                                    <div class="list-row-name">
-                                        YuevUwU
-                                    </div>
-                                    <div class="list-row-meta">
-                                        MEOW
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="badge badge-cool">Member</span>
-                        </div>
-                        <div class="list-row">
-                            <div class="list-row-left">
-                                <div
-                                    class="list-avatar"
-                                    style="
-                                        background: var(--color-cool);
-                                        color: var(--color-on-accent);
-                                    "
-                                >
-                                    G
-                                </div>
-                                <div>
-                                    <div class="list-row-name">
-                                        Gua
-                                    </div>
-                                    <div class="list-row-meta">
-                                        Youtuber
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="badge badge-cool">Member</span>
-                        </div>
-                        <div class="list-row">
-                            <div class="list-row-left">
-                                <div
-                                    class="list-avatar"
-                                    style="
-                                        background: var(--color-muted);
-                                        color: var(--color-on-accent);
-                                    "
-                                >
-                                    J
-                                </div>
-                                <div>
-                                    <div class="list-row-name">
-                                        JustASlime
-                                    </div>
-                                    <div class="list-row-meta">
-                                        Touching Grass
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="badge badge-muted">Viewer</span>
-                        </div>
-                    </div>
-
-                    <!-- Toasts + Misc -->
-                    <div class="widget-card">
-                        <h3>Toasts</h3>
-                        <div
-                            style="
-                                display: flex;
-                                flex-direction: column;
-                                gap: 10px;
-                                margin-bottom: 20px;
-                            "
-                        >
-                            <div class="toast toast-success">
-                                <div class="toast-icon">✓</div>
-                                <span>Changes saved successfully.</span>
-                            </div>
-                            <div class="toast toast-warning">
-                                <div class="toast-icon">!</div>
-                                <span>API rate limit approaching.</span>
-                            </div>
-                        </div>
-
-                        <h3>Elevation</h3>
-                        <div style="display: flex; gap: 16px; margin-top: 8px">
-                            <div
-                                style="
-                                    width: 80px;
-                                    height: 80px;
-                                    border-radius: var(--radius);
-                                    background: var(--color-surface);
-                                    border: 1px solid var(--color-border);
-                                    display: grid;
-                                    place-items: center;
-                                    font-size: 12px;
-                                    font-weight: 600;
-                                    color: var(--color-muted);
-                                "
-                            >
-                                Flat
-                            </div>
-                            <div
-                                style="
-                                    width: 80px;
-                                    height: 80px;
-                                    border-radius: var(--radius);
-                                    background: var(--color-surface);
-                                    box-shadow: var(--shadow-item);
-                                    display: grid;
-                                    place-items: center;
-                                    font-size: 12px;
-                                    font-weight: 600;
-                                    color: var(--color-muted);
-                                "
-                            >
-                                Item
-                            </div>
-                            <div
-                                style="
-                                    width: 80px;
-                                    height: 80px;
-                                    border-radius: var(--radius);
-                                    background: var(--color-surface);
-                                    box-shadow: var(--shadow-panel);
-                                    display: grid;
-                                    place-items: center;
-                                    font-size: 12px;
-                                    font-weight: 600;
-                                    color: var(--color-muted);
-                                "
-                            >
-                                Panel
-                            </div>
-                        </div>
+                    <div class="hero-note" aria-label="Core tokens">
+                        <span class="token-chip">
+                            <span
+                                class="token-dot"
+                                style="background: #3e343f"
+                            ></span>
+                            Plum Black
+                        </span>
+                        <span class="token-chip">
+                            <span
+                                class="token-dot"
+                                style="background: #a1736b"
+                            ></span>
+                            Clay Rose
+                        </span>
+                        <span class="token-chip">
+                            <span
+                                class="token-dot"
+                                style="background: #979f9b"
+                            ></span>
+                            Mist Gray
+                        </span>
+                        <span class="token-chip">
+                            <span
+                                class="token-dot"
+                                style="background: #c9bfb6"
+                            ></span>
+                            Warm Stone
+                        </span>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- ─── Footer ──────────────────────────────────────────── -->
+            <section
+                class="section"
+                id="palette"
+                aria-labelledby="palette-title"
+            >
+                <div class="section-inner">
+                    <div class="section-heading">
+                        <h2 id="palette-title">
+                            Four anchors, tuned into UI tokens.
+                        </h2>
+                        <p>
+                            The original anchors stay visible, while semantic
+                            tokens do the day-to-day work: canvas, surface,
+                            raised layers, text, borders, accent actions, and
+                            cool support states.
+                        </p>
+                    </div>
+                    <div class="palette-grid">
+                        <article class="swatch-card">
+                            <div
+                                class="swatch-fill"
+                                style="background: #3e343f"
+                            ></div>
+                            <div class="swatch-body">
+                                <h3>Plum Black</h3>
+                                <p>
+                                    Deep structure, dark canvas, and high-trust
+                                    framing.
+                                </p>
+                                <span class="hex">
+                                    <img
+                                        src="./assets/hex-3E343F.svg"
+                                        alt="#3E343F"
+                                    />
+                                </span>
+                            </div>
+                        </article>
+                        <article class="swatch-card">
+                            <div
+                                class="swatch-fill"
+                                style="background: #a1736b"
+                            ></div>
+                            <div class="swatch-body">
+                                <h3>Clay Rose</h3>
+                                <p>
+                                    Brand accent, active controls, and gentle
+                                    emphasis.
+                                </p>
+                                <span class="hex">
+                                    <img
+                                        src="./assets/hex-A1736B.svg"
+                                        alt="#A1736B"
+                                    />
+                                </span>
+                            </div>
+                        </article>
+                        <article class="swatch-card">
+                            <div
+                                class="swatch-fill"
+                                style="background: #979f9b"
+                            ></div>
+                            <div class="swatch-body">
+                                <h3>Mist Gray</h3>
+                                <p>
+                                    Cool support tone for statuses, metadata,
+                                    and balance.
+                                </p>
+                                <span class="hex">
+                                    <img
+                                        src="./assets/hex-979F9B.svg"
+                                        alt="#979F9B"
+                                    />
+                                </span>
+                            </div>
+                        </article>
+                        <article class="swatch-card">
+                            <div
+                                class="swatch-fill"
+                                style="background: #c9bfb6"
+                            ></div>
+                            <div class="swatch-body">
+                                <h3>Warm Stone</h3>
+                                <p>
+                                    The light canvas: calm, tactile, and easy to
+                                    scan.
+                                </p>
+                                <span class="hex">
+                                    <img
+                                        src="./assets/hex-C9BFB6.svg"
+                                        alt="#C9BFB6"
+                                    />
+                                </span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="modes" aria-labelledby="modes-title">
+                <div class="section-inner">
+                    <div class="section-heading">
+                        <h2 id="modes-title">
+                            Light and dark share the same behavior.
+                        </h2>
+                        <p>
+                            Both modes keep the same semantic roles, so a
+                            product can switch mood without rewriting component
+                            logic or losing hierarchy.
+                        </p>
+                    </div>
+                    <div class="preview-grid">
+                        <article
+                            class="preview light"
+                            aria-label="Light mode preview"
+                        >
+                            <div class="preview-bar">
+                                <div class="window-controls" aria-hidden="true">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <span class="preview-title">Light mode</span>
+                            </div>
+                            <div class="preview-content">
+                                <div class="metric-row">
+                                    <div class="metric">
+                                        <span>Readability</span>
+                                        <strong>65</strong>
+                                    </div>
+                                    <div class="metric">
+                                        <span>Accent</span>
+                                        <strong>47</strong>
+                                    </div>
+                                    <div class="metric">
+                                        <span>Chroma</span>
+                                        <strong>Low</strong>
+                                    </div>
+                                </div>
+                                <div class="preview-list">
+                                    <div class="preview-row">
+                                        <span class="status-dot"></span>
+                                        <div>
+                                            <div class="row-title">
+                                                Editorial workspace
+                                            </div>
+                                            <div class="row-meta">
+                                                Muted surfaces, clear text
+                                            </div>
+                                        </div>
+                                        <span class="row-action">Active</span>
+                                    </div>
+                                    <div class="preview-row">
+                                        <span class="status-dot"></span>
+                                        <div>
+                                            <div class="row-title">
+                                                Dashboard controls
+                                            </div>
+                                            <div class="row-meta">
+                                                Clay for intent, mist for state
+                                            </div>
+                                        </div>
+                                        <span class="row-action">Review</span>
+                                    </div>
+                                    <div class="preview-row">
+                                        <span class="status-dot"></span>
+                                        <div>
+                                            <div class="row-title">
+                                                Portfolio index
+                                            </div>
+                                            <div class="row-meta">
+                                                Warm canvas, compact rhythm
+                                            </div>
+                                        </div>
+                                        <span class="row-action">Ready</span>
+                                    </div>
+                                </div>
+                                <div class="preview-command">
+                                    <span
+                                        >Primary action keeps APCA in
+                                        range</span
+                                    >
+                                    <strong>Apply Palette</strong>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article
+                            class="preview dark"
+                            aria-label="Dark mode preview"
+                        >
+                            <div class="preview-bar">
+                                <div class="window-controls" aria-hidden="true">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <span class="preview-title">Dark mode</span>
+                            </div>
+                            <div class="preview-content">
+                                <div class="metric-row">
+                                    <div class="metric">
+                                        <span>Readability</span>
+                                        <strong>-82</strong>
+                                    </div>
+                                    <div class="metric">
+                                        <span>Accent</span>
+                                        <strong>-51</strong>
+                                    </div>
+                                    <div class="metric">
+                                        <span>Canvas</span>
+                                        <strong>Plum</strong>
+                                    </div>
+                                </div>
+                                <div class="preview-list">
+                                    <div class="preview-row">
+                                        <span class="status-dot"></span>
+                                        <div>
+                                            <div class="row-title">
+                                                Creative console
+                                            </div>
+                                            <div class="row-meta">
+                                                Dark without pure black glare
+                                            </div>
+                                        </div>
+                                        <span class="row-action">Live</span>
+                                    </div>
+                                    <div class="preview-row">
+                                        <span class="status-dot"></span>
+                                        <div>
+                                            <div class="row-title">
+                                                Review queue
+                                            </div>
+                                            <div class="row-meta">
+                                                Soft accent, steady borders
+                                            </div>
+                                        </div>
+                                        <span class="row-action">Open</span>
+                                    </div>
+                                    <div class="preview-row">
+                                        <span class="status-dot"></span>
+                                        <div>
+                                            <div class="row-title">
+                                                Status stream
+                                            </div>
+                                            <div class="row-meta">
+                                                Cool support for quiet signals
+                                            </div>
+                                        </div>
+                                        <span class="row-action">Synced</span>
+                                    </div>
+                                </div>
+                                <div class="preview-command">
+                                    <span
+                                        >Dark tokens override at the root</span
+                                    >
+                                    <strong>data-theme</strong>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="usage" aria-labelledby="usage-title">
+                <div class="section-inner">
+                    <div class="section-heading">
+                        <h2 id="usage-title">Drop the tokens into Tailwind.</h2>
+                        <p>
+                            Use semantic classes in product code and let the
+                            palette files handle the exact OKLCH values, mode
+                            overrides, radius, font, and shadows.
+                        </p>
+                    </div>
+                    <div class="usage-grid">
+                        <div class="code-panel">
+                            <div class="code-toolbar">
+                                <span>Tailwind CSS v4</span>
+                                <button
+                                    class="copy-button"
+                                    type="button"
+                                    data-copy='@import "./assets/tailwind-theme.css";'
+                                >
+                                    <svg
+                                        class="icon"
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <rect
+                                            x="9"
+                                            y="9"
+                                            width="13"
+                                            height="13"
+                                            rx="2"
+                                        />
+                                        <path
+                                            d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                                        />
+                                    </svg>
+                                    Copy import
+                                </button>
+                            </div>
+                            <pre><code>@import "./assets/tailwind-theme.css";
+
+&lt;main class="bg-bg text-text font-sans"&gt;
+  &lt;section class="bg-surface border border-border rounded-control"&gt;
+    &lt;button class="bg-accent text-on-accent rounded-control"&gt;
+      Apply Palette
+    &lt;/button&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
+                        </div>
+                        <aside class="copy-panel">
+                            <div>
+                                <h3>Built for portable handoff.</h3>
+                                <p>
+                                    The package includes human-readable
+                                    guidance, Tailwind v4 tokens, and a Tailwind
+                                    v3 config for implementation handoff.
+                                </p>
+                            </div>
+                            <ul class="file-list">
+                                <li>
+                                    <a href="https://github.com/iceice666/inm/blob/main/DESIGN.md">
+                                        <span>DESIGN.md</span>
+                                        <span>spec</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/iceice666/inm/blob/main/assets/tailwind-theme.css">
+                                        <span>tailwind-theme.css</span>
+                                        <span>v4</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/iceice666/inm/blob/main/assets/tailwind.config.js">
+                                        <span>tailwind.config.js</span>
+                                        <span>v3</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </aside>
+                    </div>
+                </div>
+            </section>
+        </main>
+
         <footer class="site-footer">
-            <div class="wrapper">
-                <p>
-                    <strong>inm</strong> · A warm, calm palette for thoughtful
-                    interfaces ·
-                    <a href="https://github.com/iceice666/inm"
-                        >Source on GitHub</a
-                    >
-                </p>
+            <div class="footer-inner">
+                <span>inm palette</span>
+                <span>OKLCH tokens for calm, scannable UI.</span>
             </div>
         </footer>
 
-        <!-- ─── Scripts ─────────────────────────────────────────── -->
         <script>
-            // Theme toggle
-            function toggleTheme() {
-                document.documentElement.classList.toggle("dark");
-                const isDark =
-                    document.documentElement.classList.contains("dark");
-                localStorage.setItem("inm-theme", isDark ? "dark" : "light");
-            }
+            const root = document.documentElement;
+            const themeToggle = document.querySelector("#theme-toggle");
 
-            // Restore saved theme
-            (function () {
-                const saved = localStorage.getItem("inm-theme");
-                if (
-                    saved === "dark" ||
-                    (!saved &&
-                        window.matchMedia("(prefers-color-scheme: dark)")
-                            .matches)
-                ) {
-                    document.documentElement.classList.add("dark");
+            themeToggle.addEventListener("click", () => {
+                const nextTheme =
+                    root.dataset.theme === "dark" ? "light" : "dark";
+                root.dataset.theme = nextTheme;
+                try {
+                    localStorage.setItem("inm-theme", nextTheme);
+                } catch {
+                    /* Theme switching should still work without storage access. */
                 }
-            })();
+            });
 
-            // Segmented control
-            function activateSegment(btn) {
-                btn.parentElement
-                    .querySelectorAll("button")
-                    .forEach((b) => b.classList.remove("active"));
-                btn.classList.add("active");
-            }
+            const copyText = async (text) => {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                    return;
+                }
+
+                const textarea = document.createElement("textarea");
+                textarea.value = text;
+                textarea.setAttribute("readonly", "");
+                textarea.style.position = "fixed";
+                textarea.style.opacity = "0";
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand("copy");
+                textarea.remove();
+            };
+
+            document.querySelectorAll("[data-copy]").forEach((button) => {
+                button.addEventListener("click", async () => {
+                    const original = button.innerHTML;
+                    try {
+                        await copyText(button.dataset.copy);
+                        button.textContent = "Copied";
+                    } catch {
+                        button.textContent = "Copy failed";
+                    }
+                    setTimeout(() => {
+                        button.innerHTML = original;
+                    }, 1400);
+                });
+            });
         </script>
     </body>
 </html>
