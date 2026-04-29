@@ -4,6 +4,8 @@
 
 `inm` is a warm, low-chroma color palette built from four anchor colors:
 
+**[Live Demo](https://inm.justaslime.dev)**
+
 - <img src="./assets/hex-3E343F.svg" alt="#3E343F" height="22" align="absmiddle" /> plum black
 - <img src="./assets/hex-A1736B.svg" alt="#A1736B" height="22" align="absmiddle" /> clay rose
 - <img src="./assets/hex-979F9B.svg" alt="#979F9B" height="22" align="absmiddle" /> mist gray
