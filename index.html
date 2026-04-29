@@ -1,697 +1,1298 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>inm — Theme Demo</title>
-  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>inm — Theme Demo</title>
+        <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
 
-  <!-- Inter font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <!-- Inter font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
 
-  <style>
-    /* ─── Token Layer ──────────────────────────────────────── */
-    :root {
-      color-scheme: light;
-      --color-bg:          oklch(81.0% 0.017 64.6);
-      --color-surface:     oklch(86.8% 0.013 63.9);
-      --color-raised:      oklch(91.4% 0.011 63.4);
-      --color-text:        oklch(28.5% 0.020 322.5);
-      --color-muted:       oklch(47.9% 0.010 349.6);
-      --color-border:      oklch(73.6% 0.011 58.2);
-      --color-accent:      oklch(47.9% 0.065 27.6);
-      --color-accent-soft: oklch(60.0% 0.060 30.0);
-      --color-cool:        oklch(60.0% 0.013 170.0);
-      --color-on-accent:   oklch(91.4% 0.011 63.4);
-      --shadow-panel: 0 20px 50px oklch(28.5% 0.020 322.5 / 0.15);
-      --shadow-item:  0 10px 24px oklch(20% 0.02 320 / 0.12);
+        <style>
+            /* ─── Token Layer ──────────────────────────────────────── */
+            :root {
+                color-scheme: light;
+                --color-bg: oklch(81% 0.017 64.6);
+                --color-surface: oklch(86.8% 0.013 63.9);
+                --color-raised: oklch(91.4% 0.011 63.4);
+                --color-text: oklch(28.5% 0.02 322.5);
+                --color-muted: oklch(47.9% 0.01 349.6);
+                --color-border: oklch(73.6% 0.011 58.2);
+                --color-accent: oklch(47.9% 0.065 27.6);
+                --color-accent-soft: oklch(60% 0.06 30);
+                --color-cool: oklch(60% 0.013 170);
+                --color-on-accent: oklch(91.4% 0.011 63.4);
+                --shadow-panel: 0 20px 50px oklch(28.5% 0.02 322.5 / 0.15);
+                --shadow-item: 0 10px 24px oklch(20% 0.02 320 / 0.12);
 
-      --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --radius: 8px;
-      --radius-sm: 6px;
-    }
+                --font-sans:
+                    Inter, ui-sans-serif, system-ui, -apple-system,
+                    BlinkMacSystemFont, "Segoe UI", sans-serif;
+                --radius: 8px;
+                --radius-sm: 6px;
+            }
 
-    :root.dark {
-      color-scheme: dark;
-      --color-bg:          oklch(34.0% 0.023 323.2);
-      --color-surface:     oklch(38.0% 0.025 323.4);
-      --color-raised:      oklch(43.1% 0.028 323.8);
-      --color-text:        oklch(91.4% 0.011 63.4);
-      --color-muted:       oklch(75.9% 0.009 36.5);
-      --color-border:      oklch(50.3% 0.020 331.9);
-      --color-accent:      oklch(75.5% 0.068 31.5);
-      --color-accent-soft: oklch(69.7% 0.070 32.7);
-      --color-cool:        oklch(76.1% 0.013 170.1);
-      --color-on-accent:   oklch(34.0% 0.023 323.2);
-      --shadow-panel: 0 20px 50px oklch(18% 0.020 323.2 / 0.38);
-      --shadow-item:  0 10px 24px oklch(12% 0.02 320 / 0.30);
-    }
+            :root.dark {
+                color-scheme: dark;
+                --color-bg: oklch(34% 0.023 323.2);
+                --color-surface: oklch(38% 0.025 323.4);
+                --color-raised: oklch(43.1% 0.028 323.8);
+                --color-text: oklch(91.4% 0.011 63.4);
+                --color-muted: oklch(75.9% 0.009 36.5);
+                --color-border: oklch(50.3% 0.02 331.9);
+                --color-accent: oklch(75.5% 0.068 31.5);
+                --color-accent-soft: oklch(69.7% 0.07 32.7);
+                --color-cool: oklch(76.1% 0.013 170.1);
+                --color-on-accent: oklch(34% 0.023 323.2);
+                --shadow-panel: 0 20px 50px oklch(18% 0.02 323.2 / 0.38);
+                --shadow-item: 0 10px 24px oklch(12% 0.02 320 / 0.3);
+            }
 
-    /* ─── Reset & Base ─────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-sans);
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--color-text);
-      background: var(--color-bg);
-      -webkit-font-smoothing: antialiased;
-      transition: background .3s ease, color .3s ease;
-    }
+            /* ─── Reset & Base ─────────────────────────────────────── */
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                font-family: var(--font-sans);
+                font-size: 16px;
+                line-height: 1.6;
+                color: var(--color-text);
+                background: var(--color-bg);
+                -webkit-font-smoothing: antialiased;
+                transition:
+                    background 0.3s ease,
+                    color 0.3s ease;
+            }
 
-    /* ─── Utilities ────────────────────────────────────────── */
-    .wrapper { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
-    @media (max-width: 640px) { .wrapper { padding: 0 16px; } }
+            /* ─── Utilities ────────────────────────────────────────── */
+            .wrapper {
+                max-width: 1160px;
+                margin: 0 auto;
+                padding: 0 32px;
+            }
+            @media (max-width: 640px) {
+                .wrapper {
+                    padding: 0 16px;
+                }
+            }
 
-    /* ─── Header / Nav ─────────────────────────────────────── */
-    .site-header {
-      position: sticky; top: 0; z-index: 100;
-      background: oklch(from var(--color-surface) l c h / 0.85);
-      backdrop-filter: blur(16px) saturate(1.4);
-      border-bottom: 1px solid var(--color-border);
-    }
-    .site-header .wrapper {
-      display: flex; align-items: center; justify-content: space-between;
-      height: 56px;
-    }
-    .logo {
-      display: flex; align-items: center; gap: 10px;
-      font-weight: 800; font-size: 20px; text-decoration: none; color: var(--color-text);
-    }
-    .logo img { width: 28px; height: 28px; }
-    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
-    .nav-links a {
-      font-size: 14px; font-weight: 600; color: var(--color-muted);
-      text-decoration: none; padding: 6px 12px; border-radius: var(--radius-sm);
-      transition: color .15s, background .15s;
-    }
-    .nav-links a:hover { color: var(--color-text); background: var(--color-raised); }
+            /* ─── Header / Nav ─────────────────────────────────────── */
+            .site-header {
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                background: oklch(from var(--color-surface) l c h / 0.85);
+                backdrop-filter: blur(16px) saturate(1.4);
+                border-bottom: 1px solid var(--color-border);
+            }
+            .site-header .wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 56px;
+            }
+            .logo {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: 800;
+                font-size: 20px;
+                text-decoration: none;
+                color: var(--color-text);
+            }
+            .logo img {
+                width: 28px;
+                height: 28px;
+            }
+            .nav-links {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                list-style: none;
+            }
+            .nav-links a {
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--color-muted);
+                text-decoration: none;
+                padding: 6px 12px;
+                border-radius: var(--radius-sm);
+                transition:
+                    color 0.15s,
+                    background 0.15s;
+            }
+            .nav-links a:hover {
+                color: var(--color-text);
+                background: var(--color-raised);
+            }
 
-    /* Theme toggle */
-    .theme-toggle {
-      width: 42px; height: 42px; display: grid; place-items: center;
-      background: var(--color-surface); border: 1px solid var(--color-border);
-      border-radius: var(--radius); cursor: pointer;
-      color: var(--color-muted); font-size: 18px;
-      transition: border-color .15s, transform .15s;
-    }
-    .theme-toggle:hover { border-color: var(--color-accent-soft); transform: translateY(-1px); }
-    .theme-toggle .icon-sun  { display: inline; }
-    .theme-toggle .icon-moon { display: none; }
-    .dark .theme-toggle .icon-sun  { display: none; }
-    .dark .theme-toggle .icon-moon { display: inline; }
+            /* Theme toggle */
+            .theme-toggle {
+                width: 42px;
+                height: 42px;
+                display: grid;
+                place-items: center;
+                background: var(--color-surface);
+                border: 1px solid var(--color-border);
+                border-radius: var(--radius);
+                cursor: pointer;
+                color: var(--color-muted);
+                font-size: 18px;
+                transition:
+                    border-color 0.15s,
+                    transform 0.15s;
+            }
+            .theme-toggle:hover {
+                border-color: var(--color-accent-soft);
+                transform: translateY(-1px);
+            }
+            .theme-toggle .icon-sun {
+                display: inline;
+            }
+            .theme-toggle .icon-moon {
+                display: none;
+            }
+            .dark .theme-toggle .icon-sun {
+                display: none;
+            }
+            .dark .theme-toggle .icon-moon {
+                display: inline;
+            }
 
-    /* ─── Hero ─────────────────────────────────────────────── */
-    .hero {
-      padding: 72px 0 56px;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: clamp(40px, 7vw, 80px);
-      font-weight: 900; line-height: 0.95;
-      letter-spacing: -0.02em;
-    }
-    .hero h1 .accent { color: var(--color-accent); }
-    .hero p {
-      margin-top: 16px; font-size: 18px; color: var(--color-muted);
-      max-width: 560px; margin-inline: auto; line-height: 1.6;
-    }
-    .hero-actions {
-      margin-top: 32px; display: flex; gap: 12px;
-      justify-content: center; flex-wrap: wrap;
-    }
+            /* ─── Hero ─────────────────────────────────────────────── */
+            .hero {
+                padding: 72px 0 56px;
+                text-align: center;
+            }
+            .hero h1 {
+                font-size: clamp(40px, 7vw, 80px);
+                font-weight: 900;
+                line-height: 0.95;
+                letter-spacing: -0.02em;
+            }
+            .hero h1 .accent {
+                color: var(--color-accent);
+            }
+            .hero p {
+                margin-top: 16px;
+                font-size: 18px;
+                color: var(--color-muted);
+                max-width: 560px;
+                margin-inline: auto;
+                line-height: 1.6;
+            }
+            .hero-actions {
+                margin-top: 32px;
+                display: flex;
+                gap: 12px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
 
-    /* ─── Buttons ──────────────────────────────────────────── */
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      height: 42px; padding: 0 20px;
-      font-size: 14px; font-weight: 650; border-radius: var(--radius);
-      border: 1px solid transparent; cursor: pointer;
-      text-decoration: none;
-      transition: transform .15s, border-color .15s, background .15s, box-shadow .15s;
-    }
-    .btn:hover { transform: translateY(-1px); }
-    .btn:focus-visible { outline: 3px solid oklch(from var(--color-accent) l c h / 0.35); outline-offset: 2px; }
+            /* ─── Buttons ──────────────────────────────────────────── */
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                height: 42px;
+                padding: 0 20px;
+                font-size: 14px;
+                font-weight: 650;
+                border-radius: var(--radius);
+                border: 1px solid transparent;
+                cursor: pointer;
+                text-decoration: none;
+                transition:
+                    transform 0.15s,
+                    border-color 0.15s,
+                    background 0.15s,
+                    box-shadow 0.15s;
+            }
+            .btn:hover {
+                transform: translateY(-1px);
+            }
+            .btn:focus-visible {
+                outline: 3px solid oklch(from var(--color-accent) l c h / 0.35);
+                outline-offset: 2px;
+            }
 
-    .btn-primary {
-      background: var(--color-accent); color: var(--color-on-accent); border-color: transparent;
-    }
-    .btn-primary:hover { background: var(--color-accent-soft); }
+            .btn-primary {
+                background: var(--color-accent);
+                color: var(--color-on-accent);
+                border-color: transparent;
+            }
+            .btn-primary:hover {
+                background: var(--color-accent-soft);
+            }
 
-    .btn-secondary {
-      background: var(--color-surface); color: var(--color-text); border-color: var(--color-border);
-    }
-    .btn-secondary:hover { border-color: var(--color-accent-soft); }
+            .btn-secondary {
+                background: var(--color-surface);
+                color: var(--color-text);
+                border-color: var(--color-border);
+            }
+            .btn-secondary:hover {
+                border-color: var(--color-accent-soft);
+            }
 
-    .btn-ghost {
-      background: transparent; color: var(--color-muted); border-color: transparent;
-    }
-    .btn-ghost:hover { color: var(--color-text); background: var(--color-surface); }
+            .btn-ghost {
+                background: transparent;
+                color: var(--color-muted);
+                border-color: transparent;
+            }
+            .btn-ghost:hover {
+                color: var(--color-text);
+                background: var(--color-surface);
+            }
 
-    .btn-sm { height: 34px; padding: 0 14px; font-size: 13px; border-radius: var(--radius-sm); }
+            .btn-sm {
+                height: 34px;
+                padding: 0 14px;
+                font-size: 13px;
+                border-radius: var(--radius-sm);
+            }
 
-    /* ─── Section Headings ─────────────────────────────────── */
-    .section { padding: 64px 0; }
-    .section + .section { border-top: 1px solid var(--color-border); }
-    .section-title {
-      font-size: 13px; font-weight: 760; text-transform: uppercase;
-      color: var(--color-cool); letter-spacing: 0.04em; margin-bottom: 8px;
-    }
-    .section-heading {
-      font-size: clamp(24px, 3.5vw, 40px); font-weight: 800; line-height: 1.05;
-    }
-    .section-desc { color: var(--color-muted); margin-top: 8px; max-width: 540px; }
+            /* ─── Section Headings ─────────────────────────────────── */
+            .section {
+                padding: 64px 0;
+            }
+            .section + .section {
+                border-top: 1px solid var(--color-border);
+            }
+            .section-title {
+                font-size: 13px;
+                font-weight: 760;
+                text-transform: uppercase;
+                color: var(--color-cool);
+                letter-spacing: 0.04em;
+                margin-bottom: 8px;
+            }
+            .section-heading {
+                font-size: clamp(24px, 3.5vw, 40px);
+                font-weight: 800;
+                line-height: 1.05;
+            }
+            .section-desc {
+                color: var(--color-muted);
+                margin-top: 8px;
+                max-width: 540px;
+            }
 
-    /* ─── Swatch Grid ──────────────────────────────────────── */
-    .swatch-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 12px; margin-top: 32px;
-    }
-    .swatch {
-      border-radius: var(--radius); overflow: hidden;
-      border: 1px solid var(--color-border);
-      background: var(--color-surface);
-    }
-    .swatch-color { height: 72px; }
-    .swatch-info { padding: 10px 12px; }
-    .swatch-name { font-size: 13px; font-weight: 700; }
-    .swatch-value { font-size: 12px; color: var(--color-muted); font-family: monospace; }
+            /* ─── Swatch Grid ──────────────────────────────────────── */
+            .swatch-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 12px;
+                margin-top: 32px;
+            }
+            .swatch {
+                border-radius: var(--radius);
+                overflow: hidden;
+                border: 1px solid var(--color-border);
+                background: var(--color-surface);
+            }
+            .swatch-color {
+                height: 72px;
+            }
+            .swatch-info {
+                padding: 10px 12px;
+            }
+            .swatch-name {
+                font-size: 13px;
+                font-weight: 700;
+            }
+            .swatch-value {
+                font-size: 12px;
+                color: var(--color-muted);
+                font-family: monospace;
+            }
 
-    /* ─── Widget Demo Area ─────────────────────────────────── */
-    .widget-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px; margin-top: 32px;
-    }
-    .widget-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow-item);
-    }
-    .widget-card h3 {
-      font-size: 17px; font-weight: 760; margin-bottom: 18px;
-    }
+            /* ─── Widget Demo Area ─────────────────────────────────── */
+            .widget-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 24px;
+                margin-top: 32px;
+            }
+            .widget-card {
+                background: var(--color-surface);
+                border: 1px solid var(--color-border);
+                border-radius: var(--radius);
+                padding: 24px;
+                box-shadow: var(--shadow-item);
+            }
+            .widget-card h3 {
+                font-size: 17px;
+                font-weight: 760;
+                margin-bottom: 18px;
+            }
 
-    /* Badges */
-    .badge {
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: 12px; font-weight: 680; padding: 3px 10px;
-      border-radius: 999px;
-    }
-    .badge-cool { background: oklch(from var(--color-cool) l c h / 0.15); color: var(--color-cool); }
-    .badge-accent { background: oklch(from var(--color-accent) l c h / 0.15); color: var(--color-accent); }
-    .badge-muted { background: oklch(from var(--color-muted) l c h / 0.10); color: var(--color-muted); }
-    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
+            /* Badges */
+            .badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+                font-size: 12px;
+                font-weight: 680;
+                padding: 3px 10px;
+                border-radius: 999px;
+            }
+            .badge-cool {
+                background: oklch(from var(--color-cool) l c h / 0.15);
+                color: var(--color-cool);
+            }
+            .badge-accent {
+                background: oklch(from var(--color-accent) l c h / 0.15);
+                color: var(--color-accent);
+            }
+            .badge-muted {
+                background: oklch(from var(--color-muted) l c h / 0.1);
+                color: var(--color-muted);
+            }
+            .badge-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
 
-    /* Inputs */
-    .form-group { margin-bottom: 16px; }
-    .form-label {
-      display: block; font-size: 12px; font-weight: 680;
-      text-transform: uppercase; color: var(--color-muted);
-      margin-bottom: 6px; letter-spacing: 0.03em;
-    }
-    .form-input {
-      width: 100%; height: 42px; padding: 0 12px;
-      background: var(--color-raised); color: var(--color-text);
-      border: 1px solid var(--color-border); border-radius: var(--radius);
-      font-family: var(--font-sans); font-size: 15px;
-      transition: border-color .15s;
-    }
-    .form-input::placeholder { color: var(--color-muted); opacity: 0.65; }
-    .form-input:focus { outline: none; border-color: var(--color-accent-soft); box-shadow: 0 0 0 3px oklch(from var(--color-accent) l c h / 0.15); }
+            /* Inputs */
+            .form-group {
+                margin-bottom: 16px;
+            }
+            .form-label {
+                display: block;
+                font-size: 12px;
+                font-weight: 680;
+                text-transform: uppercase;
+                color: var(--color-muted);
+                margin-bottom: 6px;
+                letter-spacing: 0.03em;
+            }
+            .form-input {
+                width: 100%;
+                height: 42px;
+                padding: 0 12px;
+                background: var(--color-raised);
+                color: var(--color-text);
+                border: 1px solid var(--color-border);
+                border-radius: var(--radius);
+                font-family: var(--font-sans);
+                font-size: 15px;
+                transition: border-color 0.15s;
+            }
+            .form-input::placeholder {
+                color: var(--color-muted);
+                opacity: 0.65;
+            }
+            .form-input:focus {
+                outline: none;
+                border-color: var(--color-accent-soft);
+                box-shadow: 0 0 0 3px
+                    oklch(from var(--color-accent) l c h / 0.15);
+            }
 
-    .form-textarea {
-      width: 100%; min-height: 80px; padding: 10px 12px;
-      background: var(--color-raised); color: var(--color-text);
-      border: 1px solid var(--color-border); border-radius: var(--radius);
-      font-family: var(--font-sans); font-size: 15px; resize: vertical;
-      transition: border-color .15s;
-    }
-    .form-textarea:focus { outline: none; border-color: var(--color-accent-soft); box-shadow: 0 0 0 3px oklch(from var(--color-accent) l c h / 0.15); }
+            .form-textarea {
+                width: 100%;
+                min-height: 80px;
+                padding: 10px 12px;
+                background: var(--color-raised);
+                color: var(--color-text);
+                border: 1px solid var(--color-border);
+                border-radius: var(--radius);
+                font-family: var(--font-sans);
+                font-size: 15px;
+                resize: vertical;
+                transition: border-color 0.15s;
+            }
+            .form-textarea:focus {
+                outline: none;
+                border-color: var(--color-accent-soft);
+                box-shadow: 0 0 0 3px
+                    oklch(from var(--color-accent) l c h / 0.15);
+            }
 
-    /* Segmented Control */
-    .segmented {
-      display: inline-flex; gap: 3px;
-      background: var(--color-raised); border: 1px solid var(--color-border);
-      border-radius: var(--radius); padding: 3px;
-    }
-    .segmented button {
-      font-family: var(--font-sans); font-size: 13px; font-weight: 620;
-      padding: 6px 16px; border: none; border-radius: var(--radius-sm);
-      cursor: pointer; background: transparent; color: var(--color-muted);
-      transition: background .15s, color .15s;
-    }
-    .segmented button:hover { color: var(--color-text); }
-    .segmented button.active {
-      background: var(--color-accent); color: var(--color-on-accent);
-    }
+            /* Segmented Control */
+            .segmented {
+                display: inline-flex;
+                gap: 3px;
+                background: var(--color-raised);
+                border: 1px solid var(--color-border);
+                border-radius: var(--radius);
+                padding: 3px;
+            }
+            .segmented button {
+                font-family: var(--font-sans);
+                font-size: 13px;
+                font-weight: 620;
+                padding: 6px 16px;
+                border: none;
+                border-radius: var(--radius-sm);
+                cursor: pointer;
+                background: transparent;
+                color: var(--color-muted);
+                transition:
+                    background 0.15s,
+                    color 0.15s;
+            }
+            .segmented button:hover {
+                color: var(--color-text);
+            }
+            .segmented button.active {
+                background: var(--color-accent);
+                color: var(--color-on-accent);
+            }
 
-    /* Toggle */
-    .toggle-track {
-      width: 44px; height: 24px; border-radius: 999px;
-      background: var(--color-border); position: relative;
-      cursor: pointer; transition: background .2s;
-      border: none;
-    }
-    .toggle-track.on { background: var(--color-accent); }
-    .toggle-thumb {
-      width: 18px; height: 18px; border-radius: 50%;
-      background: var(--color-on-accent);
-      position: absolute; top: 3px; left: 3px;
-      transition: transform .2s;
-      pointer-events: none;
-    }
-    .toggle-track.on .toggle-thumb { transform: translateX(20px); }
+            /* Toggle */
+            .toggle-track {
+                width: 44px;
+                height: 24px;
+                border-radius: 999px;
+                background: var(--color-border);
+                position: relative;
+                cursor: pointer;
+                transition: background 0.2s;
+                border: none;
+            }
+            .toggle-track.on {
+                background: var(--color-accent);
+            }
+            .toggle-thumb {
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background: var(--color-on-accent);
+                position: absolute;
+                top: 3px;
+                left: 3px;
+                transition: transform 0.2s;
+                pointer-events: none;
+            }
+            .toggle-track.on .toggle-thumb {
+                transform: translateX(20px);
+            }
 
-    .toggle-row {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 0;
-    }
-    .toggle-row + .toggle-row { border-top: 1px solid var(--color-border); }
-    .toggle-label { font-size: 14px; font-weight: 550; }
-    .toggle-desc { font-size: 13px; color: var(--color-muted); }
+            .toggle-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px 0;
+            }
+            .toggle-row + .toggle-row {
+                border-top: 1px solid var(--color-border);
+            }
+            .toggle-label {
+                font-size: 14px;
+                font-weight: 550;
+            }
+            .toggle-desc {
+                font-size: 13px;
+                color: var(--color-muted);
+            }
 
-    /* List Rows */
-    .list-row {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 0; gap: 12px;
-    }
-    .list-row + .list-row { border-top: 1px solid var(--color-border); }
-    .list-row-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
-    .list-avatar {
-      width: 36px; height: 36px; border-radius: 50%;
-      flex-shrink: 0; display: grid; place-items: center;
-      font-size: 14px; font-weight: 700;
-    }
-    .list-row-name { font-size: 14px; font-weight: 620; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .list-row-meta { font-size: 13px; color: var(--color-muted); }
+            /* List Rows */
+            .list-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 12px 0;
+                gap: 12px;
+            }
+            .list-row + .list-row {
+                border-top: 1px solid var(--color-border);
+            }
+            .list-row-left {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                min-width: 0;
+            }
+            .list-avatar {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                flex-shrink: 0;
+                display: grid;
+                place-items: center;
+                font-size: 14px;
+                font-weight: 700;
+            }
+            .list-row-name {
+                font-size: 14px;
+                font-weight: 620;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .list-row-meta {
+                font-size: 13px;
+                color: var(--color-muted);
+            }
 
-    /* Progress Bar */
-    .progress-track {
-      width: 100%; height: 8px; border-radius: 999px;
-      background: var(--color-raised);
-    }
-    .progress-fill {
-      height: 100%; border-radius: 999px;
-      background: var(--color-accent);
-      transition: width .4s ease;
-    }
-    .progress-label {
-      display: flex; justify-content: space-between;
-      font-size: 13px; font-weight: 600; margin-bottom: 6px;
-    }
-    .progress-label span:last-child { color: var(--color-muted); }
+            /* Progress Bar */
+            .progress-track {
+                width: 100%;
+                height: 8px;
+                border-radius: 999px;
+                background: var(--color-raised);
+            }
+            .progress-fill {
+                height: 100%;
+                border-radius: 999px;
+                background: var(--color-accent);
+                transition: width 0.4s ease;
+            }
+            .progress-label {
+                display: flex;
+                justify-content: space-between;
+                font-size: 13px;
+                font-weight: 600;
+                margin-bottom: 6px;
+            }
+            .progress-label span:last-child {
+                color: var(--color-muted);
+            }
 
-    /* Stat Card */
-    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .stat-item {
-      text-align: center; padding: 16px 8px;
-      background: var(--color-raised); border-radius: var(--radius-sm);
-    }
-    .stat-value { font-size: 24px; font-weight: 800; color: var(--color-accent); }
-    .stat-label { font-size: 12px; font-weight: 620; color: var(--color-muted); margin-top: 2px; }
+            /* Stat Card */
+            .stat-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+            }
+            .stat-item {
+                text-align: center;
+                padding: 16px 8px;
+                background: var(--color-raised);
+                border-radius: var(--radius-sm);
+            }
+            .stat-value {
+                font-size: 24px;
+                font-weight: 800;
+                color: var(--color-accent);
+            }
+            .stat-label {
+                font-size: 12px;
+                font-weight: 620;
+                color: var(--color-muted);
+                margin-top: 2px;
+            }
 
-    /* Toast */
-    .toast {
-      display: flex; align-items: center; gap: 10px;
-      padding: 12px 16px; border-radius: var(--radius);
-      border: 1px solid var(--color-border);
-      background: var(--color-surface);
-      box-shadow: var(--shadow-item);
-      font-size: 14px; font-weight: 550;
-    }
-    .toast-icon {
-      width: 24px; height: 24px; border-radius: 50%;
-      display: grid; place-items: center; flex-shrink: 0;
-      font-size: 13px; font-weight: 800;
-    }
-    .toast-success .toast-icon { background: oklch(from var(--color-cool) l c h / 0.18); color: var(--color-cool); }
-    .toast-warning .toast-icon { background: oklch(from var(--color-accent) l c h / 0.18); color: var(--color-accent); }
+            /* Toast */
+            .toast {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 12px 16px;
+                border-radius: var(--radius);
+                border: 1px solid var(--color-border);
+                background: var(--color-surface);
+                box-shadow: var(--shadow-item);
+                font-size: 14px;
+                font-weight: 550;
+            }
+            .toast-icon {
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+                flex-shrink: 0;
+                font-size: 13px;
+                font-weight: 800;
+            }
+            .toast-success .toast-icon {
+                background: oklch(from var(--color-cool) l c h / 0.18);
+                color: var(--color-cool);
+            }
+            .toast-warning .toast-icon {
+                background: oklch(from var(--color-accent) l c h / 0.18);
+                color: var(--color-accent);
+            }
 
-    /* ─── Typography Demo ──────────────────────────────────── */
-    .type-sample { margin-top: 24px; }
-    .type-sample > * + * { margin-top: 16px; }
-    .type-display { font-size: clamp(48px, 8vw, 80px); font-weight: 900; line-height: 0.95; }
-    .type-h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 800; line-height: 1.0; }
-    .type-h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 780; line-height: 1.05; }
-    .type-h3 { font-size: 20px; font-weight: 740; line-height: 1.2; }
-    .type-body { font-size: 16px; font-weight: 440; line-height: 1.6; color: var(--color-muted); max-width: 60ch; }
-    .type-small { font-size: 13px; font-weight: 640; color: var(--color-muted); }
+            /* ─── Typography Demo ──────────────────────────────────── */
+            .type-sample {
+                margin-top: 24px;
+            }
+            .type-sample > * + * {
+                margin-top: 16px;
+            }
+            .type-display {
+                font-size: clamp(48px, 8vw, 80px);
+                font-weight: 900;
+                line-height: 0.95;
+            }
+            .type-h1 {
+                font-size: clamp(36px, 5vw, 56px);
+                font-weight: 800;
+                line-height: 1;
+            }
+            .type-h2 {
+                font-size: clamp(24px, 3vw, 36px);
+                font-weight: 780;
+                line-height: 1.05;
+            }
+            .type-h3 {
+                font-size: 20px;
+                font-weight: 740;
+                line-height: 1.2;
+            }
+            .type-body {
+                font-size: 16px;
+                font-weight: 440;
+                line-height: 1.6;
+                color: var(--color-muted);
+                max-width: 60ch;
+            }
+            .type-small {
+                font-size: 13px;
+                font-weight: 640;
+                color: var(--color-muted);
+            }
 
-    /* ─── Footer ───────────────────────────────────────────── */
-    .site-footer {
-      padding: 32px 0; border-top: 1px solid var(--color-border);
-      text-align: center; font-size: 13px; color: var(--color-muted);
-    }
-    .site-footer a { color: var(--color-accent); text-decoration: none; }
-    .site-footer a:hover { text-decoration: underline; }
+            /* ─── Footer ───────────────────────────────────────────── */
+            .site-footer {
+                padding: 32px 0;
+                border-top: 1px solid var(--color-border);
+                text-align: center;
+                font-size: 13px;
+                color: var(--color-muted);
+            }
+            .site-footer a {
+                color: var(--color-accent);
+                text-decoration: none;
+            }
+            .site-footer a:hover {
+                text-decoration: underline;
+            }
 
-    /* ─── Mini Animations ──────────────────────────────────── */
-    @media (prefers-reduced-motion: no-preference) {
-      .hero h1, .hero p, .hero-actions {
-        animation: fadeUp .6s ease both;
-      }
-      .hero p { animation-delay: .08s; }
-      .hero-actions { animation-delay: .16s; }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-</head>
-<body>
-
-<!-- ─── Header ──────────────────────────────────────────── -->
-<header class="site-header">
-  <div class="wrapper">
-    <a href="#" class="logo">
-      <img src="./assets/icon.svg" alt="inm" /> inm
-    </a>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#palette">Palette</a></li>
-        <li><a href="#typography">Type</a></li>
-        <li><a href="#widgets">Widgets</a></li>
-        <li>
-          <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-            <span class="icon-sun">☀</span>
-            <span class="icon-moon">☾</span>
-          </button>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-<!-- ─── Hero ────────────────────────────────────────────── -->
-<section class="hero wrapper">
-  <h1>Warm. Calm.<br><span class="accent">Intentional.</span></h1>
-  <p>A low-chroma palette built from plum, clay, mist &amp; stone — tuned in OKLCH with APCA-informed contrast for light &amp; dark modes.</p>
-  <div class="hero-actions">
-    <a href="#widgets" class="btn btn-primary">Explore Widgets</a>
-    <a href="#palette" class="btn btn-secondary">View Palette</a>
-    <a href="https://github.com/iceice666/inm" class="btn btn-ghost">GitHub ↗</a>
-  </div>
-</section>
-
-<!-- ─── Palette ─────────────────────────────────────────── -->
-<section class="section" id="palette">
-  <div class="wrapper">
-    <p class="section-title">Colors</p>
-    <h2 class="section-heading">Palette &amp; Tokens</h2>
-    <p class="section-desc">Semantic tokens adapt automatically between light and dark modes. Every swatch below reflects the current theme.</p>
-
-    <div class="swatch-grid">
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--color-bg);"></div>
-        <div class="swatch-info"><div class="swatch-name">Background</div><div class="swatch-value">--color-bg</div></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--color-surface);"></div>
-        <div class="swatch-info"><div class="swatch-name">Surface</div><div class="swatch-value">--color-surface</div></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--color-raised);"></div>
-        <div class="swatch-info"><div class="swatch-name">Raised</div><div class="swatch-value">--color-raised</div></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--color-text);"></div>
-        <div class="swatch-info"><div class="swatch-name">Text</div><div class="swatch-value">--color-text</div></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--color-muted);"></div>
-        <div class="swatch-info"><div class="swatch-name">Muted</div><div class="swatch-value">--color-muted</div></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--color-border);"></div>
-        <div class="swatch-info"><div class="swatch-name">Border</div><div class="swatch-value">--color-border</div></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--color-accent);"></div>
-        <div class="swatch-info"><div class="swatch-name">Accent</div><div class="swatch-value">--color-accent</div></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--color-accent-soft);"></div>
-        <div class="swatch-info"><div class="swatch-name">Accent Soft</div><div class="swatch-value">--color-accent-soft</div></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--color-cool);"></div>
-        <div class="swatch-info"><div class="swatch-name">Cool</div><div class="swatch-value">--color-cool</div></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--color-on-accent);"></div>
-        <div class="swatch-info"><div class="swatch-name">On Accent</div><div class="swatch-value">--color-on-accent</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── Typography ──────────────────────────────────────── -->
-<section class="section" id="typography">
-  <div class="wrapper">
-    <p class="section-title">Typography</p>
-    <h2 class="section-heading">Type Scale</h2>
-    <p class="section-desc">Inter across the full weight range, from display headlines to compact meta labels.</p>
-
-    <div class="type-sample">
-      <div class="type-display">Display</div>
-      <div class="type-h1">Heading One</div>
-      <div class="type-h2">Heading Two</div>
-      <div class="type-h3">Heading Three</div>
-      <p class="type-body">Body text — designed for comfortable long-form reading. The warm stone canvas keeps the eye relaxed while plum-tinted text maintains a calm, readable rhythm across paragraphs.</p>
-      <p class="type-small">Small / Meta · 13px · Strong weight for compact labels</p>
-    </div>
-  </div>
-</section>
-
-<!-- ─── Widget Demo ─────────────────────────────────────── -->
-<section class="section" id="widgets">
-  <div class="wrapper">
-    <p class="section-title">Components</p>
-    <h2 class="section-heading">Widget Playground</h2>
-    <p class="section-desc">Interactive UI elements using the inm palette. Toggle dark mode to see adaptive tokens in action.</p>
-
-    <div class="widget-grid">
-
-      <!-- Buttons & Badges -->
-      <div class="widget-card">
-        <h3>Buttons</h3>
-        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px;">
-          <button class="btn btn-primary">Primary</button>
-          <button class="btn btn-secondary">Secondary</button>
-          <button class="btn btn-ghost">Ghost</button>
-          <button class="btn btn-primary btn-sm">Small</button>
-        </div>
-        <h3>Badges</h3>
-        <div class="badge-row">
-          <span class="badge badge-accent">Active</span>
-          <span class="badge badge-cool">Stable</span>
-          <span class="badge badge-muted">Draft</span>
-          <span class="badge badge-accent">v2.4</span>
-          <span class="badge badge-cool">OKLCH</span>
-        </div>
-      </div>
-
-      <!-- Form Controls -->
-      <div class="widget-card">
-        <h3>Form Controls</h3>
-        <div class="form-group">
-          <label class="form-label">Username</label>
-          <input class="form-input" type="text" placeholder="e.g. iceice666" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Bio</label>
-          <textarea class="form-textarea" placeholder="Tell us about yourself…"></textarea>
-        </div>
-        <div style="display:flex; gap:10px;">
-          <button class="btn btn-primary btn-sm">Save</button>
-          <button class="btn btn-ghost btn-sm">Cancel</button>
-        </div>
-      </div>
-
-      <!-- Segmented + Toggles -->
-      <div class="widget-card">
-        <h3>Segmented Control</h3>
-        <div class="segmented" style="margin-bottom:20px;">
-          <button class="active" onclick="activateSegment(this)">Day</button>
-          <button onclick="activateSegment(this)">Week</button>
-          <button onclick="activateSegment(this)">Month</button>
-          <button onclick="activateSegment(this)">Year</button>
-        </div>
-
-        <h3>Toggles</h3>
-        <div class="toggle-row">
-          <div>
-            <div class="toggle-label">Notifications</div>
-            <div class="toggle-desc">Receive email alerts</div>
-          </div>
-          <button class="toggle-track on" onclick="this.classList.toggle('on')">
-            <div class="toggle-thumb"></div>
-          </button>
-        </div>
-        <div class="toggle-row">
-          <div>
-            <div class="toggle-label">Analytics</div>
-            <div class="toggle-desc">Share usage data</div>
-          </div>
-          <button class="toggle-track" onclick="this.classList.toggle('on')">
-            <div class="toggle-thumb"></div>
-          </button>
-        </div>
-        <div class="toggle-row">
-          <div>
-            <div class="toggle-label">Auto-save</div>
-            <div class="toggle-desc">Save every 30 seconds</div>
-          </div>
-          <button class="toggle-track on" onclick="this.classList.toggle('on')">
-            <div class="toggle-thumb"></div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Stats + Progress -->
-      <div class="widget-card">
-        <h3>Statistics</h3>
-        <div class="stat-grid" style="margin-bottom:20px;">
-          <div class="stat-item">
-            <div class="stat-value">12k</div>
-            <div class="stat-label">Users</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">94%</div>
-            <div class="stat-label">Uptime</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">3.2s</div>
-            <div class="stat-label">Avg Load</div>
-          </div>
-        </div>
-
-        <h3>Progress</h3>
-        <div style="display:flex; flex-direction:column; gap:14px;">
-          <div>
-            <div class="progress-label"><span>Design Tokens</span><span>100%</span></div>
-            <div class="progress-track"><div class="progress-fill" style="width:100%;"></div></div>
-          </div>
-          <div>
-            <div class="progress-label"><span>Component Library</span><span>72%</span></div>
-            <div class="progress-track"><div class="progress-fill" style="width:72%;"></div></div>
-          </div>
-          <div>
-            <div class="progress-label"><span>Documentation</span><span>45%</span></div>
-            <div class="progress-track"><div class="progress-fill" style="width:45%; background:var(--color-cool);"></div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- List Rows -->
-      <div class="widget-card">
-        <h3>Team Members</h3>
-        <div class="list-row">
-          <div class="list-row-left">
-            <div class="list-avatar" style="background:var(--color-accent); color:var(--color-on-accent);">A</div>
-            <div>
-              <div class="list-row-name">Alice Chen</div>
-              <div class="list-row-meta">Lead Designer</div>
+            /* ─── Mini Animations ──────────────────────────────────── */
+            @media (prefers-reduced-motion: no-preference) {
+                .hero h1,
+                .hero p,
+                .hero-actions {
+                    animation: fadeUp 0.6s ease both;
+                }
+                .hero p {
+                    animation-delay: 0.08s;
+                }
+                .hero-actions {
+                    animation-delay: 0.16s;
+                }
+            }
+            @keyframes fadeUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(12px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ─── Header ──────────────────────────────────────────── -->
+        <header class="site-header">
+            <div class="wrapper">
+                <a href="#" class="logo">
+                    <img src="./assets/icon.svg" alt="inm" /> inm
+                </a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#palette">Palette</a></li>
+                        <li><a href="#typography">Type</a></li>
+                        <li><a href="#widgets">Widgets</a></li>
+                        <li>
+                            <button
+                                class="theme-toggle"
+                                onclick="toggleTheme()"
+                                aria-label="Toggle dark mode"
+                            >
+                                <span class="icon-sun">☀</span>
+                                <span class="icon-moon">☾</span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-          </div>
-          <span class="badge badge-accent">Admin</span>
-        </div>
-        <div class="list-row">
-          <div class="list-row-left">
-            <div class="list-avatar" style="background:var(--color-cool); color:var(--color-on-accent);">B</div>
-            <div>
-              <div class="list-row-name">Bob Martinez</div>
-              <div class="list-row-meta">Frontend Engineer</div>
+        </header>
+
+        <!-- ─── Hero ────────────────────────────────────────────── -->
+        <section class="hero wrapper">
+            <h1>Warm. Calm.<br /><span class="accent">Intentional.</span></h1>
+            <p>
+                A low-chroma palette built from plum, clay, mist &amp; stone —
+                tuned in OKLCH with APCA-informed contrast for light &amp; dark
+                modes.
+            </p>
+            <div class="hero-actions">
+                <a href="#widgets" class="btn btn-primary">Explore Widgets</a>
+                <a href="#palette" class="btn btn-secondary">View Palette</a>
+                <a href="https://github.com/iceice666/inm" class="btn btn-ghost"
+                    >GitHub ↗</a
+                >
             </div>
-          </div>
-          <span class="badge badge-cool">Member</span>
-        </div>
-        <div class="list-row">
-          <div class="list-row-left">
-            <div class="list-avatar" style="background:var(--color-accent-soft); color:var(--color-on-accent);">C</div>
-            <div>
-              <div class="list-row-name">Cleo Nakamura</div>
-              <div class="list-row-meta">Product Manager</div>
+        </section>
+
+        <!-- ─── Palette ─────────────────────────────────────────── -->
+        <section class="section" id="palette">
+            <div class="wrapper">
+                <p class="section-title">Colors</p>
+                <h2 class="section-heading">Palette &amp; Tokens</h2>
+                <p class="section-desc">
+                    Semantic tokens adapt automatically between light and dark
+                    modes. Every swatch below reflects the current theme.
+                </p>
+
+                <div class="swatch-grid">
+                    <div class="swatch">
+                        <div
+                            class="swatch-color"
+                            style="background: var(--color-bg)"
+                        ></div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Background</div>
+                            <div class="swatch-value">--color-bg</div>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div
+                            class="swatch-color"
+                            style="background: var(--color-surface)"
+                        ></div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Surface</div>
+                            <div class="swatch-value">--color-surface</div>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div
+                            class="swatch-color"
+                            style="background: var(--color-raised)"
+                        ></div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Raised</div>
+                            <div class="swatch-value">--color-raised</div>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div
+                            class="swatch-color"
+                            style="background: var(--color-text)"
+                        ></div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Text</div>
+                            <div class="swatch-value">--color-text</div>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div
+                            class="swatch-color"
+                            style="background: var(--color-muted)"
+                        ></div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Muted</div>
+                            <div class="swatch-value">--color-muted</div>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div
+                            class="swatch-color"
+                            style="background: var(--color-border)"
+                        ></div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Border</div>
+                            <div class="swatch-value">--color-border</div>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div
+                            class="swatch-color"
+                            style="background: var(--color-accent)"
+                        ></div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Accent</div>
+                            <div class="swatch-value">--color-accent</div>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div
+                            class="swatch-color"
+                            style="background: var(--color-accent-soft)"
+                        ></div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Accent Soft</div>
+                            <div class="swatch-value">--color-accent-soft</div>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div
+                            class="swatch-color"
+                            style="background: var(--color-cool)"
+                        ></div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Cool</div>
+                            <div class="swatch-value">--color-cool</div>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div
+                            class="swatch-color"
+                            style="background: var(--color-on-accent)"
+                        ></div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">On Accent</div>
+                            <div class="swatch-value">--color-on-accent</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <span class="badge badge-accent">Admin</span>
-        </div>
-        <div class="list-row">
-          <div class="list-row-left">
-            <div class="list-avatar" style="background:var(--color-muted); color:var(--color-on-accent);">D</div>
-            <div>
-              <div class="list-row-name">David Okonkwo</div>
-              <div class="list-row-meta">Backend Engineer</div>
+        </section>
+
+        <!-- ─── Typography ──────────────────────────────────────── -->
+        <section class="section" id="typography">
+            <div class="wrapper">
+                <p class="section-title">Typography</p>
+                <h2 class="section-heading">Type Scale</h2>
+                <p class="section-desc">
+                    Inter across the full weight range, from display headlines
+                    to compact meta labels.
+                </p>
+
+                <div class="type-sample">
+                    <div class="type-display">Display</div>
+                    <div class="type-h1">Heading One</div>
+                    <div class="type-h2">Heading Two</div>
+                    <div class="type-h3">Heading Three</div>
+                    <p class="type-body">
+                        Body text — designed for comfortable long-form reading.
+                        The warm stone canvas keeps the eye relaxed while
+                        plum-tinted text maintains a calm, readable rhythm
+                        across paragraphs.
+                    </p>
+                    <p class="type-small">
+                        Small / Meta · 13px · Strong weight for compact labels
+                    </p>
+                </div>
             </div>
-          </div>
-          <span class="badge badge-muted">Viewer</span>
-        </div>
-      </div>
+        </section>
 
-      <!-- Toasts + Misc -->
-      <div class="widget-card">
-        <h3>Toasts</h3>
-        <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;">
-          <div class="toast toast-success">
-            <div class="toast-icon">✓</div>
-            <span>Changes saved successfully.</span>
-          </div>
-          <div class="toast toast-warning">
-            <div class="toast-icon">!</div>
-            <span>API rate limit approaching.</span>
-          </div>
-        </div>
+        <!-- ─── Widget Demo ─────────────────────────────────────── -->
+        <section class="section" id="widgets">
+            <div class="wrapper">
+                <p class="section-title">Components</p>
+                <h2 class="section-heading">Widget Playground</h2>
+                <p class="section-desc">
+                    Interactive UI elements using the inm palette. Toggle dark
+                    mode to see adaptive tokens in action.
+                </p>
 
-        <h3>Elevation</h3>
-        <div style="display:flex; gap:16px; margin-top:8px;">
-          <div style="width:80px; height:80px; border-radius:var(--radius); background:var(--color-surface); border:1px solid var(--color-border); display:grid; place-items:center; font-size:12px; font-weight:600; color:var(--color-muted);">Flat</div>
-          <div style="width:80px; height:80px; border-radius:var(--radius); background:var(--color-surface); box-shadow:var(--shadow-item); display:grid; place-items:center; font-size:12px; font-weight:600; color:var(--color-muted);">Item</div>
-          <div style="width:80px; height:80px; border-radius:var(--radius); background:var(--color-surface); box-shadow:var(--shadow-panel); display:grid; place-items:center; font-size:12px; font-weight:600; color:var(--color-muted);">Panel</div>
-        </div>
-      </div>
+                <div class="widget-grid">
+                    <!-- Buttons & Badges -->
+                    <div class="widget-card">
+                        <h3>Buttons</h3>
+                        <div
+                            style="
+                                display: flex;
+                                flex-wrap: wrap;
+                                gap: 10px;
+                                margin-bottom: 20px;
+                            "
+                        >
+                            <button class="btn btn-primary">Primary</button>
+                            <button class="btn btn-secondary">Secondary</button>
+                            <button class="btn btn-ghost">Ghost</button>
+                            <button class="btn btn-primary btn-sm">
+                                Small
+                            </button>
+                        </div>
+                        <h3>Badges</h3>
+                        <div class="badge-row">
+                            <span class="badge badge-accent">Active</span>
+                            <span class="badge badge-cool">Stable</span>
+                            <span class="badge badge-muted">Draft</span>
+                            <span class="badge badge-accent">v2.4</span>
+                            <span class="badge badge-cool">OKLCH</span>
+                        </div>
+                    </div>
 
-    </div>
-  </div>
-</section>
+                    <!-- Form Controls -->
+                    <div class="widget-card">
+                        <h3>Form Controls</h3>
+                        <div class="form-group">
+                            <label class="form-label">Username</label>
+                            <input
+                                class="form-input"
+                                type="text"
+                                placeholder="e.g. iceice666"
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Bio</label>
+                            <textarea
+                                class="form-textarea"
+                                placeholder="Tell us about yourself…"
+                            ></textarea>
+                        </div>
+                        <div style="display: flex; gap: 10px">
+                            <button class="btn btn-primary btn-sm">Save</button>
+                            <button class="btn btn-ghost btn-sm">Cancel</button>
+                        </div>
+                    </div>
 
-<!-- ─── Footer ──────────────────────────────────────────── -->
-<footer class="site-footer">
-  <div class="wrapper">
-    <p><strong>inm</strong> · A warm, calm palette for thoughtful interfaces · <a href="https://github.com/iceice666/inm">Source on GitHub</a></p>
-  </div>
-</footer>
+                    <!-- Segmented + Toggles -->
+                    <div class="widget-card">
+                        <h3>Segmented Control</h3>
+                        <div class="segmented" style="margin-bottom: 20px">
+                            <button
+                                class="active"
+                                onclick="activateSegment(this)"
+                            >
+                                Day
+                            </button>
+                            <button onclick="activateSegment(this)">
+                                Week
+                            </button>
+                            <button onclick="activateSegment(this)">
+                                Month
+                            </button>
+                            <button onclick="activateSegment(this)">
+                                Year
+                            </button>
+                        </div>
 
-<!-- ─── Scripts ─────────────────────────────────────────── -->
-<script>
-  // Theme toggle
-  function toggleTheme() {
-    document.documentElement.classList.toggle('dark');
-    const isDark = document.documentElement.classList.contains('dark');
-    localStorage.setItem('inm-theme', isDark ? 'dark' : 'light');
-  }
+                        <h3>Toggles</h3>
+                        <div class="toggle-row">
+                            <div>
+                                <div class="toggle-label">Notifications</div>
+                                <div class="toggle-desc">
+                                    Receive email alerts
+                                </div>
+                            </div>
+                            <button
+                                class="toggle-track on"
+                                onclick="this.classList.toggle('on')"
+                            >
+                                <div class="toggle-thumb"></div>
+                            </button>
+                        </div>
+                        <div class="toggle-row">
+                            <div>
+                                <div class="toggle-label">Analytics</div>
+                                <div class="toggle-desc">Share usage data</div>
+                            </div>
+                            <button
+                                class="toggle-track"
+                                onclick="this.classList.toggle('on')"
+                            >
+                                <div class="toggle-thumb"></div>
+                            </button>
+                        </div>
+                        <div class="toggle-row">
+                            <div>
+                                <div class="toggle-label">Auto-save</div>
+                                <div class="toggle-desc">
+                                    Save every 30 seconds
+                                </div>
+                            </div>
+                            <button
+                                class="toggle-track on"
+                                onclick="this.classList.toggle('on')"
+                            >
+                                <div class="toggle-thumb"></div>
+                            </button>
+                        </div>
+                    </div>
 
-  // Restore saved theme
-  (function () {
-    const saved = localStorage.getItem('inm-theme');
-    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    }
-  })();
+                    <!-- Stats + Progress -->
+                    <div class="widget-card">
+                        <h3>Statistics</h3>
+                        <div class="stat-grid" style="margin-bottom: 20px">
+                            <div class="stat-item">
+                                <div class="stat-value">12k</div>
+                                <div class="stat-label">Users</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">94%</div>
+                                <div class="stat-label">Uptime</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">3.2s</div>
+                                <div class="stat-label">Avg Load</div>
+                            </div>
+                        </div>
 
-  // Segmented control
-  function activateSegment(btn) {
-    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-</script>
+                        <h3>Progress</h3>
+                        <div
+                            style="
+                                display: flex;
+                                flex-direction: column;
+                                gap: 14px;
+                            "
+                        >
+                            <div>
+                                <div class="progress-label">
+                                    <span>Design Tokens</span><span>100%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div
+                                        class="progress-fill"
+                                        style="width: 100%"
+                                    ></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="progress-label">
+                                    <span>Component Library</span
+                                    ><span>72%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div
+                                        class="progress-fill"
+                                        style="width: 72%"
+                                    ></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="progress-label">
+                                    <span>Documentation</span><span>45%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div
+                                        class="progress-fill"
+                                        style="
+                                            width: 45%;
+                                            background: var(--color-cool);
+                                        "
+                                    ></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-</body>
+                    <!-- List Rows -->
+                    <div class="widget-card">
+                        <h3>Team Members</h3>
+                        <div class="list-row">
+                            <div class="list-row-left">
+                                <div
+                                    class="list-avatar"
+                                    style="
+                                        background: var(--color-accent);
+                                        color: var(--color-on-accent);
+                                    "
+                                >
+                                    S
+                                </div>
+                                <div>
+                                    <div class="list-row-name">su2u4</div>
+                                    <div class="list-row-meta">
+                                        Compiler Expert
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="badge badge-accent">Owner</span>
+                        </div>
+                        <div class="list-row">
+                            <div class="list-row-left">
+                                <div
+                                    class="list-avatar"
+                                    style="
+                                        background: var(--color-cool);
+                                        color: var(--color-on-accent);
+                                    "
+                                >
+                                    Y
+                                </div>
+                                <div>
+                                    <div class="list-row-name">
+                                        YuevUwU
+                                    </div>
+                                    <div class="list-row-meta">
+                                        MEOW
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="badge badge-cool">Member</span>
+                        </div>
+                        <div class="list-row">
+                            <div class="list-row-left">
+                                <div
+                                    class="list-avatar"
+                                    style="
+                                        background: var(--color-cool);
+                                        color: var(--color-on-accent);
+                                    "
+                                >
+                                    G
+                                </div>
+                                <div>
+                                    <div class="list-row-name">
+                                        Gua
+                                    </div>
+                                    <div class="list-row-meta">
+                                        Youtuber
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="badge badge-cool">Member</span>
+                        </div>
+                        <div class="list-row">
+                            <div class="list-row-left">
+                                <div
+                                    class="list-avatar"
+                                    style="
+                                        background: var(--color-muted);
+                                        color: var(--color-on-accent);
+                                    "
+                                >
+                                    J
+                                </div>
+                                <div>
+                                    <div class="list-row-name">
+                                        JustASlime
+                                    </div>
+                                    <div class="list-row-meta">
+                                        Touching Grass
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="badge badge-muted">Viewer</span>
+                        </div>
+                    </div>
+
+                    <!-- Toasts + Misc -->
+                    <div class="widget-card">
+                        <h3>Toasts</h3>
+                        <div
+                            style="
+                                display: flex;
+                                flex-direction: column;
+                                gap: 10px;
+                                margin-bottom: 20px;
+                            "
+                        >
+                            <div class="toast toast-success">
+                                <div class="toast-icon">✓</div>
+                                <span>Changes saved successfully.</span>
+                            </div>
+                            <div class="toast toast-warning">
+                                <div class="toast-icon">!</div>
+                                <span>API rate limit approaching.</span>
+                            </div>
+                        </div>
+
+                        <h3>Elevation</h3>
+                        <div style="display: flex; gap: 16px; margin-top: 8px">
+                            <div
+                                style="
+                                    width: 80px;
+                                    height: 80px;
+                                    border-radius: var(--radius);
+                                    background: var(--color-surface);
+                                    border: 1px solid var(--color-border);
+                                    display: grid;
+                                    place-items: center;
+                                    font-size: 12px;
+                                    font-weight: 600;
+                                    color: var(--color-muted);
+                                "
+                            >
+                                Flat
+                            </div>
+                            <div
+                                style="
+                                    width: 80px;
+                                    height: 80px;
+                                    border-radius: var(--radius);
+                                    background: var(--color-surface);
+                                    box-shadow: var(--shadow-item);
+                                    display: grid;
+                                    place-items: center;
+                                    font-size: 12px;
+                                    font-weight: 600;
+                                    color: var(--color-muted);
+                                "
+                            >
+                                Item
+                            </div>
+                            <div
+                                style="
+                                    width: 80px;
+                                    height: 80px;
+                                    border-radius: var(--radius);
+                                    background: var(--color-surface);
+                                    box-shadow: var(--shadow-panel);
+                                    display: grid;
+                                    place-items: center;
+                                    font-size: 12px;
+                                    font-weight: 600;
+                                    color: var(--color-muted);
+                                "
+                            >
+                                Panel
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── Footer ──────────────────────────────────────────── -->
+        <footer class="site-footer">
+            <div class="wrapper">
+                <p>
+                    <strong>inm</strong> · A warm, calm palette for thoughtful
+                    interfaces ·
+                    <a href="https://github.com/iceice666/inm"
+                        >Source on GitHub</a
+                    >
+                </p>
+            </div>
+        </footer>
+
+        <!-- ─── Scripts ─────────────────────────────────────────── -->
+        <script>
+            // Theme toggle
+            function toggleTheme() {
+                document.documentElement.classList.toggle("dark");
+                const isDark =
+                    document.documentElement.classList.contains("dark");
+                localStorage.setItem("inm-theme", isDark ? "dark" : "light");
+            }
+
+            // Restore saved theme
+            (function () {
+                const saved = localStorage.getItem("inm-theme");
+                if (
+                    saved === "dark" ||
+                    (!saved &&
+                        window.matchMedia("(prefers-color-scheme: dark)")
+                            .matches)
+                ) {
+                    document.documentElement.classList.add("dark");
+                }
+            })();
+
+            // Segmented control
+            function activateSegment(btn) {
+                btn.parentElement
+                    .querySelectorAll("button")
+                    .forEach((b) => b.classList.remove("active"));
+                btn.classList.add("active");
+            }
+        </script>
+    </body>
 </html>
