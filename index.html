@@ -1,1043 +1,697 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>inm Demo</title>
-        <style>
-            :root {
-                color-scheme: light;
-                --bg: oklch(81% 0.017 64.6);
-                --surface: oklch(86.8% 0.013 63.9);
-                --raised: oklch(91.4% 0.011 63.4);
-                --text: oklch(28.5% 0.02 322.5);
-                --text-muted: oklch(47.9% 0.01 349.6);
-                --border: oklch(73.6% 0.011 58.2);
-                --accent: oklch(47.9% 0.065 27.6);
-                --accent-soft: oklch(60% 0.06 30);
-                --cool: oklch(60% 0.013 170);
-                --on-accent: oklch(91.4% 0.011 63.4);
-                --shadow: 0 20px 50px oklch(28.5% 0.02 322.5 / 0.15);
-                --focus: 0 0 0 3px oklch(60% 0.06 30 / 0.32);
-            }
-
-            :root[data-theme="dark"] {
-                color-scheme: dark;
-                --bg: oklch(34% 0.023 323.2);
-                --surface: oklch(38% 0.025 323.4);
-                --raised: oklch(43.1% 0.028 323.8);
-                --text: oklch(91.4% 0.011 63.4);
-                --text-muted: oklch(75.9% 0.009 36.5);
-                --border: oklch(50.3% 0.02 331.9);
-                --accent: oklch(75.5% 0.068 31.5);
-                --accent-soft: oklch(69.7% 0.07 32.7);
-                --cool: oklch(76.1% 0.013 170.1);
-                --on-accent: oklch(34% 0.023 323.2);
-                --shadow: 0 20px 50px oklch(18% 0.02 323.2 / 0.38);
-                --focus: 0 0 0 3px oklch(75.5% 0.068 31.5 / 0.34);
-            }
-
-            * {
-                box-sizing: border-box;
-            }
-
-            html {
-                background: var(--bg);
-            }
-
-            body {
-                margin: 0;
-                min-width: 320px;
-                background:
-                    linear-gradient(
-                        180deg,
-                        oklch(from var(--raised) l c h / 0.55),
-                        transparent 30rem
-                    ),
-                    var(--bg);
-                color: var(--text);
-                font-family:
-                    Inter,
-                    ui-sans-serif,
-                    system-ui,
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    "Segoe UI",
-                    sans-serif;
-                letter-spacing: 0;
-            }
-
-            button,
-            input,
-            select {
-                font: inherit;
-            }
-
-            button,
-            a,
-            input,
-            select {
-                outline: none;
-            }
-
-            button:focus-visible,
-            a:focus-visible,
-            input:focus-visible,
-            select:focus-visible {
-                box-shadow: var(--focus);
-            }
-
-            a {
-                color: var(--accent);
-                text-decoration-thickness: 0.08em;
-                text-underline-offset: 0.22em;
-            }
-
-            .page {
-                min-height: 100vh;
-            }
-
-            .shell {
-                width: min(1160px, calc(100% - 32px));
-                margin: 0 auto;
-            }
-
-            .topbar {
-                position: sticky;
-                top: 0;
-                z-index: 5;
-                border-bottom: 1px solid oklch(from var(--border) l c h / 0.72);
-                background: oklch(from var(--bg) l c h / 0.86);
-                backdrop-filter: blur(18px);
-            }
-
-            .nav {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                min-height: 72px;
-                gap: 18px;
-            }
-
-            .brand {
-                display: flex;
-                align-items: center;
-                min-width: 0;
-                gap: 12px;
-                color: var(--text);
-                text-decoration: none;
-            }
-
-            .brand-mark {
-                position: relative;
-                display: block;
-                width: 38px;
-                height: 38px;
-                flex: 0 0 auto;
-                overflow: hidden;
-                border: 1px solid var(--border);
-                border-radius: 8px;
-                background: color-mix(in oklab, var(--raised) 82%, white);
-                box-shadow: inset 0 0 0 1px
-                    oklch(from var(--raised) l c h / 0.45);
-            }
-
-            .brand-mark img {
-                display: block;
-                width: 100%;
-                height: 100%;
-            }
-
-            .brand-copy {
-                display: grid;
-                min-width: 0;
-                gap: 1px;
-            }
-
-            .brand-title {
-                overflow: hidden;
-                font-size: 0.96rem;
-                font-weight: 760;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-
-            .brand-subtitle {
-                color: var(--text-muted);
-                font-size: 0.78rem;
-                font-weight: 620;
-            }
-
-            .nav-actions {
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
-                gap: 10px;
-            }
-
-            .icon-button,
-            .button {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                border: 1px solid var(--border);
-                border-radius: 8px;
-                cursor: pointer;
-                transition:
-                    transform 160ms ease,
-                    border-color 160ms ease,
-                    background 160ms ease,
-                    color 160ms ease;
-            }
-
-            .icon-button {
-                width: 42px;
-                height: 42px;
-                background: var(--surface);
-                color: var(--text);
-                font-size: 1rem;
-            }
-
-            .icon-button:hover,
-            .button:hover {
-                transform: translateY(-1px);
-                border-color: var(--accent-soft);
-            }
-
-            .button {
-                min-height: 42px;
-                padding: 0 16px;
-                gap: 8px;
-                background: var(--surface);
-                color: var(--text);
-                font-weight: 720;
-                text-decoration: none;
-                white-space: nowrap;
-            }
-
-            .button.primary {
-                border-color: transparent;
-                background: var(--accent);
-                color: var(--on-accent);
-            }
-
-            .hero {
-                display: grid;
-                min-height: clamp(560px, 82vh, 760px);
-                align-items: center;
-                padding: 64px 0 44px;
-            }
-
-            .hero-grid {
-                display: grid;
-                grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.98fr);
-                align-items: center;
-                gap: clamp(32px, 5vw, 72px);
-            }
-
-            .eyebrow {
-                display: inline-flex;
-                width: fit-content;
-                align-items: center;
-                gap: 8px;
-                margin: 0 0 18px;
-                color: var(--accent);
-                font-size: 0.78rem;
-                font-weight: 820;
-                text-transform: uppercase;
-            }
-
-            .eyebrow::before {
-                width: 28px;
-                height: 2px;
-                background: currentColor;
-                content: "";
-            }
-
-            h1,
-            h2,
-            h3,
-            p {
-                margin-top: 0;
-            }
-
-            h1 {
-                max-width: 11ch;
-                margin-bottom: 20px;
-                font-size: clamp(3.1rem, 8.2vw, 7.4rem);
-                line-height: 0.9;
-                letter-spacing: 0;
-            }
-
-            .hero-copy {
-                max-width: 620px;
-                margin-bottom: 30px;
-                color: var(--text-muted);
-                font-size: clamp(1.05rem, 2vw, 1.28rem);
-                line-height: 1.55;
-            }
-
-            .hero-actions {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-
-            .palette-stage {
-                position: relative;
-                min-height: 480px;
-            }
-
-            .chip-orbit {
-                position: absolute;
-                inset: 0;
-                display: grid;
-                place-items: center;
-            }
-
-            .tone-ring {
-                position: absolute;
-                width: min(100%, 500px);
-                aspect-ratio: 1;
-                border: 1px solid oklch(from var(--border) l c h / 0.75);
-                border-radius: 50%;
-                background: conic-gradient(
-                    from 210deg,
-                    #3e343f,
-                    #a1736b,
-                    #c9bfb6,
-                    #979f9b,
-                    #3e343f
-                );
-                box-shadow: var(--shadow);
-                opacity: 0.98;
-            }
-
-            .tone-ring::after {
-                position: absolute;
-                inset: 15%;
-                border: 1px solid oklch(from var(--border) l c h / 0.82);
-                border-radius: 50%;
-                background: var(--bg);
-                content: "";
-            }
-
-            .swatch-stack {
-                position: relative;
-                z-index: 1;
-                display: grid;
-                width: min(82%, 390px);
-                gap: 10px;
-            }
-
-            .swatch {
-                display: grid;
-                grid-template-columns: 58px minmax(0, 1fr) auto;
-                align-items: center;
-                min-height: 70px;
-                gap: 14px;
-                padding: 10px 12px;
-                border: 1px solid oklch(from var(--border) l c h / 0.9);
-                border-radius: 8px;
-                background: oklch(from var(--surface) l c h / 0.92);
-                box-shadow: 0 10px 24px oklch(20% 0.02 320 / 0.12);
-                backdrop-filter: blur(16px);
-            }
-
-            .swatch-color {
-                width: 58px;
-                height: 48px;
-                border: 1px solid oklch(100% 0 0 / 0.18);
-                border-radius: 7px;
-            }
-
-            .swatch strong {
-                display: block;
-                overflow-wrap: anywhere;
-                font-size: 0.9rem;
-            }
-
-            .swatch code {
-                color: var(--text-muted);
-                font-size: 0.76rem;
-                white-space: normal;
-            }
-
-            .lc {
-                color: var(--accent);
-                font-size: 0.82rem;
-                font-weight: 820;
-            }
-
-            section {
-                padding: 54px 0;
-            }
-
-            .section-head {
-                display: flex;
-                align-items: end;
-                justify-content: space-between;
-                margin-bottom: 24px;
-                gap: 20px;
-            }
-
-            .section-head h2 {
-                margin-bottom: 0;
-                font-size: clamp(1.8rem, 4vw, 3.1rem);
-                line-height: 1;
-            }
-
-            .section-head p {
-                max-width: 460px;
-                margin-bottom: 0;
-                color: var(--text-muted);
-                line-height: 1.5;
-            }
-
-            .token-grid {
-                display: grid;
-                grid-template-columns: repeat(4, minmax(0, 1fr));
-                gap: 12px;
-            }
-
-            .token-card,
-            .metric,
-            .control-panel,
-            .sample-row {
-                border: 1px solid var(--border);
-                border-radius: 8px;
-                background: var(--surface);
-            }
-
-            .token-card {
-                display: grid;
-                min-height: 168px;
-                align-content: space-between;
-                overflow: hidden;
-            }
-
-            .token-fill {
-                min-height: 84px;
-                border-bottom: 1px solid oklch(0% 0 0 / 0.12);
-            }
-
-            .token-info {
-                display: grid;
-                gap: 4px;
-                padding: 13px;
-            }
-
-            .token-info strong,
-            .metric strong,
-            .row-title {
-                font-size: 0.9rem;
-            }
-
-            .token-info code,
-            .row-meta,
-            .metric span {
-                color: var(--text-muted);
-                font-size: 0.78rem;
-                line-height: 1.35;
-            }
-
-            .showcase {
-                display: grid;
-                grid-template-columns: 0.88fr 1.12fr;
-                gap: 18px;
-                align-items: start;
-            }
-
-            .control-panel {
-                padding: 18px;
-            }
-
-            .control-panel h3 {
-                margin-bottom: 16px;
-                font-size: 1.05rem;
-            }
-
-            .field {
-                display: grid;
-                gap: 7px;
-                margin-bottom: 16px;
-            }
-
-            label {
-                color: var(--text-muted);
-                font-size: 0.78rem;
-                font-weight: 760;
-                text-transform: uppercase;
-            }
-
-            input,
-            select {
-                width: 100%;
-                min-height: 42px;
-                border: 1px solid var(--border);
-                border-radius: 8px;
-                background: var(--raised);
-                color: var(--text);
-                padding: 0 12px;
-            }
-
-            input[type="range"] {
-                accent-color: var(--accent);
-                padding: 0;
-            }
-
-            .segmented {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                padding: 3px;
-                border: 1px solid var(--border);
-                border-radius: 8px;
-                background: var(--raised);
-                gap: 3px;
-            }
-
-            .segmented button {
-                min-height: 36px;
-                border: 0;
-                border-radius: 6px;
-                background: transparent;
-                color: var(--text-muted);
-                cursor: pointer;
-                font-weight: 740;
-            }
-
-            .segmented button.active {
-                background: var(--accent);
-                color: var(--on-accent);
-            }
-
-            .metrics {
-                display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 12px;
-                margin-bottom: 14px;
-            }
-
-            .metric {
-                display: grid;
-                gap: 6px;
-                padding: 16px;
-            }
-
-            .metric strong,
-            .metric span {
-                display: block;
-            }
-
-            .metric b {
-                display: block;
-                margin-top: 10px;
-                color: var(--accent);
-                font-size: clamp(1.8rem, 4vw, 2.8rem);
-                line-height: 1;
-            }
-
-            .sample-list {
-                display: grid;
-                gap: 10px;
-            }
-
-            .sample-row {
-                display: grid;
-                grid-template-columns: 42px minmax(0, 1fr) auto;
-                align-items: start;
-                min-height: 72px;
-                gap: 12px;
-                padding: 12px;
-            }
-
-            .row-icon {
-                display: grid;
-                width: 42px;
-                height: 42px;
-                place-items: center;
-                border-radius: 8px;
-                background: var(--raised);
-                color: var(--accent);
-                font-weight: 900;
-            }
-
-            .row-copy {
-                display: grid;
-                gap: 4px;
-                min-width: 0;
-            }
-
-            .row-title,
-            .row-meta {
-                display: block;
-                white-space: normal;
-                overflow-wrap: anywhere;
-            }
-
-            .status {
-                align-self: center;
-                justify-self: end;
-                padding: 6px 9px;
-                border: 1px solid oklch(from var(--cool) l c h / 0.6);
-                border-radius: 999px;
-                color: var(--cool);
-                font-size: 0.75rem;
-                font-weight: 820;
-                white-space: nowrap;
-            }
-
-            .footer {
-                padding: 34px 0 48px;
-                color: var(--text-muted);
-                font-size: 0.86rem;
-            }
-
-            @media (max-width: 920px) {
-                .hero-grid,
-                .showcase {
-                    grid-template-columns: 1fr;
-                }
-
-                .palette-stage {
-                    min-height: 420px;
-                }
-
-                .token-grid {
-                    grid-template-columns: repeat(2, minmax(0, 1fr));
-                }
-            }
-
-            @media (max-width: 620px) {
-                .shell {
-                    width: min(100% - 22px, 1160px);
-                }
-
-                .nav {
-                    min-height: 64px;
-                }
-
-                .brand-subtitle,
-                .button.secondary {
-                    display: none;
-                }
-
-                .hero {
-                    min-height: auto;
-                    padding-top: 46px;
-                }
-
-                h1 {
-                    font-size: clamp(3rem, 17vw, 4.6rem);
-                }
-
-                .palette-stage {
-                    min-height: 390px;
-                }
-
-                .swatch {
-                    grid-template-columns: 48px minmax(0, 1fr);
-                }
-
-                .swatch-color {
-                    width: 48px;
-                }
-
-                .lc {
-                    grid-column: 2;
-                }
-
-                .section-head,
-                .metrics {
-                    grid-template-columns: 1fr;
-                }
-
-                .section-head {
-                    display: grid;
-                }
-
-                .token-grid {
-                    grid-template-columns: 1fr;
-                }
-
-                .sample-row {
-                    grid-template-columns: 38px minmax(0, 1fr);
-                }
-
-                .status {
-                    grid-column: 2;
-                    justify-self: start;
-                    width: fit-content;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="page">
-            <header class="topbar">
-                <nav class="shell nav" aria-label="Main navigation">
-                    <a class="brand" href="#top" aria-label="inm demo home">
-                        <span class="brand-mark" aria-hidden="true">
-                            <img src="assets/icon.svg" alt="" />
-                        </span>
-                        <span class="brand-copy">
-                            <span class="brand-title">inm</span>
-                            <span class="brand-subtitle"
-                                >OKLCH tokens with APCA contrast</span
-                            >
-                        </span>
-                    </a>
-                    <div class="nav-actions">
-                        <a class="button secondary" href="#tokens">Tokens</a>
-                        <button
-                            class="icon-button"
-                            id="themeButton"
-                            type="button"
-                            aria-label="Toggle dark mode"
-                            title="Toggle theme"
-                        >
-                            ◐
-                        </button>
-                    </div>
-                </nav>
-            </header>
-
-            <main id="top">
-                <section class="hero">
-                    <div class="shell hero-grid">
-                        <div>
-                            <p class="eyebrow">
-                                #3E343F / #A1736B / #979F9B / #C9BFB6
-                            </p>
-                            <h1>Soft contrast, exact color.</h1>
-                            <p class="hero-copy">
-                                A warm stone interface with plum structure, clay
-                                action color, and cool mist support tones. The
-                                pairings are chosen for readable APCA contrast
-                                while staying close to the four anchor colors.
-                            </p>
-                            <div class="hero-actions">
-                                <a class="button primary" href="#showcase"
-                                    >View UI</a
-                                >
-                                <a class="button" href="#tokens">See Tokens</a>
-                            </div>
-                        </div>
-
-                        <div class="palette-stage" aria-label="Palette preview">
-                            <div class="chip-orbit">
-                                <div class="tone-ring" aria-hidden="true"></div>
-                                <div class="swatch-stack">
-                                    <div class="swatch">
-                                        <span
-                                            class="swatch-color"
-                                            style="background: #3e343f"
-                                        ></span>
-                                        <span
-                                            ><strong>Plum Black</strong
-                                            ><code
-                                                >oklch(34.0% 0.023 323.2)</code
-                                            ></span
-                                        >
-                                        <span class="lc">bg dark</span>
-                                    </div>
-                                    <div class="swatch">
-                                        <span
-                                            class="swatch-color"
-                                            style="background: #a1736b"
-                                        ></span>
-                                        <span
-                                            ><strong>Clay Rose</strong
-                                            ><code
-                                                >oklch(60.0% 0.060 30.0)</code
-                                            ></span
-                                        >
-                                        <span class="lc">accent</span>
-                                    </div>
-                                    <div class="swatch">
-                                        <span
-                                            class="swatch-color"
-                                            style="background: #979f9b"
-                                        ></span>
-                                        <span
-                                            ><strong>Mist Gray</strong
-                                            ><code
-                                                >oklch(69.5% 0.011 164.7)</code
-                                            ></span
-                                        >
-                                        <span class="lc">support</span>
-                                    </div>
-                                    <div class="swatch">
-                                        <span
-                                            class="swatch-color"
-                                            style="background: #c9bfb6"
-                                        ></span>
-                                        <span
-                                            ><strong>Warm Stone</strong
-                                            ><code
-                                                >oklch(81.0% 0.017 64.6)</code
-                                            ></span
-                                        >
-                                        <span class="lc">bg light</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="tokens">
-                    <div class="shell">
-                        <div class="section-head">
-                            <h2>System Tokens</h2>
-                            <p>
-                                These are the practical roles: enough tonal
-                                steps for an app without drifting away from the
-                                original anchors.
-                            </p>
-                        </div>
-                        <div class="token-grid" aria-label="Color token grid">
-                            <article class="token-card">
-                                <div
-                                    class="token-fill"
-                                    style="background: var(--bg)"
-                                ></div>
-                                <div class="token-info">
-                                    <strong>Background</strong
-                                    ><code>var(--bg)</code>
-                                </div>
-                            </article>
-                            <article class="token-card">
-                                <div
-                                    class="token-fill"
-                                    style="background: var(--surface)"
-                                ></div>
-                                <div class="token-info">
-                                    <strong>Surface</strong
-                                    ><code>var(--surface)</code>
-                                </div>
-                            </article>
-                            <article class="token-card">
-                                <div
-                                    class="token-fill"
-                                    style="background: var(--text)"
-                                ></div>
-                                <div class="token-info">
-                                    <strong>Text</strong
-                                    ><code>APCA body-safe</code>
-                                </div>
-                            </article>
-                            <article class="token-card">
-                                <div
-                                    class="token-fill"
-                                    style="background: var(--accent)"
-                                ></div>
-                                <div class="token-info">
-                                    <strong>Accent</strong
-                                    ><code>clay adjusted</code>
-                                </div>
-                            </article>
-                            <article class="token-card">
-                                <div
-                                    class="token-fill"
-                                    style="background: var(--cool)"
-                                ></div>
-                                <div class="token-info">
-                                    <strong>Cool Support</strong
-                                    ><code>mist adjusted</code>
-                                </div>
-                            </article>
-                            <article class="token-card">
-                                <div
-                                    class="token-fill"
-                                    style="background: var(--border)"
-                                ></div>
-                                <div class="token-info">
-                                    <strong>Border</strong
-                                    ><code>low contrast</code>
-                                </div>
-                            </article>
-                            <article class="token-card">
-                                <div
-                                    class="token-fill"
-                                    style="background: var(--raised)"
-                                ></div>
-                                <div class="token-info">
-                                    <strong>Raised</strong
-                                    ><code>higher plane</code>
-                                </div>
-                            </article>
-                            <article class="token-card">
-                                <div
-                                    class="token-fill"
-                                    style="background: var(--accent-soft)"
-                                ></div>
-                                <div class="token-info">
-                                    <strong>Soft Accent</strong
-                                    ><code>anchor friendly</code>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="showcase">
-                    <div class="shell">
-                        <div class="section-head">
-                            <h2>Interface Sample</h2>
-                            <p>
-                                A compact app surface to show text weight,
-                                controls, lists, badges, focus, and contrast in
-                                both modes.
-                            </p>
-                        </div>
-                        <div class="showcase">
-                            <aside class="control-panel" aria-label="Controls">
-                                <h3>Project Settings</h3>
-                                <div class="field">
-                                    <label for="name">Palette name</label>
-                                    <input id="name" value="Stone Plum" />
-                                </div>
-                                <div class="field">
-                                    <label for="intent">Intent</label>
-                                    <select id="intent">
-                                        <option>Editorial dashboard</option>
-                                        <option>Portfolio system</option>
-                                        <option>Product UI</option>
-                                    </select>
-                                </div>
-                                <div class="field">
-                                    <label for="density">Surface density</label>
-                                    <input
-                                        id="density"
-                                        type="range"
-                                        min="1"
-                                        max="9"
-                                        value="6"
-                                    />
-                                </div>
-                                <div class="field">
-                                    <label>Mode</label>
-                                    <div class="segmented">
-                                        <button class="active" type="button">
-                                            Calm
-                                        </button>
-                                        <button type="button">Dense</button>
-                                        <button type="button">Bold</button>
-                                    </div>
-                                </div>
-                                <button class="button primary" type="button">
-                                    Apply Palette
-                                </button>
-                            </aside>
-
-                            <div>
-                                <div
-                                    class="metrics"
-                                    aria-label="APCA contrast examples"
-                                >
-                                    <div class="metric">
-                                        <strong>Body text</strong
-                                        ><span>target Lc 60+</span><b>65</b>
-                                    </div>
-                                    <div class="metric">
-                                        <strong>Muted text</strong
-                                        ><span>target Lc 45+</span><b>47</b>
-                                    </div>
-                                    <div class="metric">
-                                        <strong>Dark body</strong
-                                        ><span>target Lc -60</span><b>-82</b>
-                                    </div>
-                                </div>
-                                <div class="sample-list">
-                                    <article class="sample-row">
-                                        <span class="row-icon">A</span>
-                                        <span class="row-copy"
-                                            ><strong class="row-title"
-                                                >Accent color stays
-                                                usable</strong
-                                            ><span class="row-meta"
-                                                >Darker clay for light mode,
-                                                brighter rose for dark
-                                                mode.</span
-                                            ></span
-                                        >
-                                        <span class="status">Ready</span>
-                                    </article>
-                                    <article class="sample-row">
-                                        <span class="row-icon">O</span>
-                                        <span class="row-copy"
-                                            ><strong class="row-title"
-                                                >OKLCH keeps tone
-                                                predictable</strong
-                                            ><span class="row-meta"
-                                                >Surface steps change lightness
-                                                without losing the family
-                                                feel.</span
-                                            ></span
-                                        >
-                                        <span class="status">Stable</span>
-                                    </article>
-                                    <article class="sample-row">
-                                        <span class="row-icon">L</span>
-                                        <span class="row-copy"
-                                            ><strong class="row-title"
-                                                >Low-chroma support
-                                                colors</strong
-                                            ><span class="row-meta"
-                                                >The mist channel adds
-                                                temperature contrast without
-                                                shouting.</span
-                                            ></span
-                                        >
-                                        <span class="status">Soft</span>
-                                    </article>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </main>
-
-            <footer class="shell footer">
-                Built from the four anchors with OKLCH roles and APCA-informed
-                contrast targets.
-            </footer>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>inm — Theme Demo</title>
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Token Layer ──────────────────────────────────────── */
+    :root {
+      color-scheme: light;
+      --color-bg:          oklch(81.0% 0.017 64.6);
+      --color-surface:     oklch(86.8% 0.013 63.9);
+      --color-raised:      oklch(91.4% 0.011 63.4);
+      --color-text:        oklch(28.5% 0.020 322.5);
+      --color-muted:       oklch(47.9% 0.010 349.6);
+      --color-border:      oklch(73.6% 0.011 58.2);
+      --color-accent:      oklch(47.9% 0.065 27.6);
+      --color-accent-soft: oklch(60.0% 0.060 30.0);
+      --color-cool:        oklch(60.0% 0.013 170.0);
+      --color-on-accent:   oklch(91.4% 0.011 63.4);
+      --shadow-panel: 0 20px 50px oklch(28.5% 0.020 322.5 / 0.15);
+      --shadow-item:  0 10px 24px oklch(20% 0.02 320 / 0.12);
+
+      --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --radius: 8px;
+      --radius-sm: 6px;
+    }
+
+    :root.dark {
+      color-scheme: dark;
+      --color-bg:          oklch(34.0% 0.023 323.2);
+      --color-surface:     oklch(38.0% 0.025 323.4);
+      --color-raised:      oklch(43.1% 0.028 323.8);
+      --color-text:        oklch(91.4% 0.011 63.4);
+      --color-muted:       oklch(75.9% 0.009 36.5);
+      --color-border:      oklch(50.3% 0.020 331.9);
+      --color-accent:      oklch(75.5% 0.068 31.5);
+      --color-accent-soft: oklch(69.7% 0.070 32.7);
+      --color-cool:        oklch(76.1% 0.013 170.1);
+      --color-on-accent:   oklch(34.0% 0.023 323.2);
+      --shadow-panel: 0 20px 50px oklch(18% 0.020 323.2 / 0.38);
+      --shadow-item:  0 10px 24px oklch(12% 0.02 320 / 0.30);
+    }
+
+    /* ─── Reset & Base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+      transition: background .3s ease, color .3s ease;
+    }
+
+    /* ─── Utilities ────────────────────────────────────────── */
+    .wrapper { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+    @media (max-width: 640px) { .wrapper { padding: 0 16px; } }
+
+    /* ─── Header / Nav ─────────────────────────────────────── */
+    .site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: oklch(from var(--color-surface) l c h / 0.85);
+      backdrop-filter: blur(16px) saturate(1.4);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .site-header .wrapper {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 800; font-size: 20px; text-decoration: none; color: var(--color-text);
+    }
+    .logo img { width: 28px; height: 28px; }
+    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+    .nav-links a {
+      font-size: 14px; font-weight: 600; color: var(--color-muted);
+      text-decoration: none; padding: 6px 12px; border-radius: var(--radius-sm);
+      transition: color .15s, background .15s;
+    }
+    .nav-links a:hover { color: var(--color-text); background: var(--color-raised); }
+
+    /* Theme toggle */
+    .theme-toggle {
+      width: 42px; height: 42px; display: grid; place-items: center;
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: var(--radius); cursor: pointer;
+      color: var(--color-muted); font-size: 18px;
+      transition: border-color .15s, transform .15s;
+    }
+    .theme-toggle:hover { border-color: var(--color-accent-soft); transform: translateY(-1px); }
+    .theme-toggle .icon-sun  { display: inline; }
+    .theme-toggle .icon-moon { display: none; }
+    .dark .theme-toggle .icon-sun  { display: none; }
+    .dark .theme-toggle .icon-moon { display: inline; }
+
+    /* ─── Hero ─────────────────────────────────────────────── */
+    .hero {
+      padding: 72px 0 56px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 80px);
+      font-weight: 900; line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 .accent { color: var(--color-accent); }
+    .hero p {
+      margin-top: 16px; font-size: 18px; color: var(--color-muted);
+      max-width: 560px; margin-inline: auto; line-height: 1.6;
+    }
+    .hero-actions {
+      margin-top: 32px; display: flex; gap: 12px;
+      justify-content: center; flex-wrap: wrap;
+    }
+
+    /* ─── Buttons ──────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      height: 42px; padding: 0 20px;
+      font-size: 14px; font-weight: 650; border-radius: var(--radius);
+      border: 1px solid transparent; cursor: pointer;
+      text-decoration: none;
+      transition: transform .15s, border-color .15s, background .15s, box-shadow .15s;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:focus-visible { outline: 3px solid oklch(from var(--color-accent) l c h / 0.35); outline-offset: 2px; }
+
+    .btn-primary {
+      background: var(--color-accent); color: var(--color-on-accent); border-color: transparent;
+    }
+    .btn-primary:hover { background: var(--color-accent-soft); }
+
+    .btn-secondary {
+      background: var(--color-surface); color: var(--color-text); border-color: var(--color-border);
+    }
+    .btn-secondary:hover { border-color: var(--color-accent-soft); }
+
+    .btn-ghost {
+      background: transparent; color: var(--color-muted); border-color: transparent;
+    }
+    .btn-ghost:hover { color: var(--color-text); background: var(--color-surface); }
+
+    .btn-sm { height: 34px; padding: 0 14px; font-size: 13px; border-radius: var(--radius-sm); }
+
+    /* ─── Section Headings ─────────────────────────────────── */
+    .section { padding: 64px 0; }
+    .section + .section { border-top: 1px solid var(--color-border); }
+    .section-title {
+      font-size: 13px; font-weight: 760; text-transform: uppercase;
+      color: var(--color-cool); letter-spacing: 0.04em; margin-bottom: 8px;
+    }
+    .section-heading {
+      font-size: clamp(24px, 3.5vw, 40px); font-weight: 800; line-height: 1.05;
+    }
+    .section-desc { color: var(--color-muted); margin-top: 8px; max-width: 540px; }
+
+    /* ─── Swatch Grid ──────────────────────────────────────── */
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px; margin-top: 32px;
+    }
+    .swatch {
+      border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+    }
+    .swatch-color { height: 72px; }
+    .swatch-info { padding: 10px 12px; }
+    .swatch-name { font-size: 13px; font-weight: 700; }
+    .swatch-value { font-size: 12px; color: var(--color-muted); font-family: monospace; }
+
+    /* ─── Widget Demo Area ─────────────────────────────────── */
+    .widget-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px; margin-top: 32px;
+    }
+    .widget-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-item);
+    }
+    .widget-card h3 {
+      font-size: 17px; font-weight: 760; margin-bottom: 18px;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 12px; font-weight: 680; padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .badge-cool { background: oklch(from var(--color-cool) l c h / 0.15); color: var(--color-cool); }
+    .badge-accent { background: oklch(from var(--color-accent) l c h / 0.15); color: var(--color-accent); }
+    .badge-muted { background: oklch(from var(--color-muted) l c h / 0.10); color: var(--color-muted); }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    /* Inputs */
+    .form-group { margin-bottom: 16px; }
+    .form-label {
+      display: block; font-size: 12px; font-weight: 680;
+      text-transform: uppercase; color: var(--color-muted);
+      margin-bottom: 6px; letter-spacing: 0.03em;
+    }
+    .form-input {
+      width: 100%; height: 42px; padding: 0 12px;
+      background: var(--color-raised); color: var(--color-text);
+      border: 1px solid var(--color-border); border-radius: var(--radius);
+      font-family: var(--font-sans); font-size: 15px;
+      transition: border-color .15s;
+    }
+    .form-input::placeholder { color: var(--color-muted); opacity: 0.65; }
+    .form-input:focus { outline: none; border-color: var(--color-accent-soft); box-shadow: 0 0 0 3px oklch(from var(--color-accent) l c h / 0.15); }
+
+    .form-textarea {
+      width: 100%; min-height: 80px; padding: 10px 12px;
+      background: var(--color-raised); color: var(--color-text);
+      border: 1px solid var(--color-border); border-radius: var(--radius);
+      font-family: var(--font-sans); font-size: 15px; resize: vertical;
+      transition: border-color .15s;
+    }
+    .form-textarea:focus { outline: none; border-color: var(--color-accent-soft); box-shadow: 0 0 0 3px oklch(from var(--color-accent) l c h / 0.15); }
+
+    /* Segmented Control */
+    .segmented {
+      display: inline-flex; gap: 3px;
+      background: var(--color-raised); border: 1px solid var(--color-border);
+      border-radius: var(--radius); padding: 3px;
+    }
+    .segmented button {
+      font-family: var(--font-sans); font-size: 13px; font-weight: 620;
+      padding: 6px 16px; border: none; border-radius: var(--radius-sm);
+      cursor: pointer; background: transparent; color: var(--color-muted);
+      transition: background .15s, color .15s;
+    }
+    .segmented button:hover { color: var(--color-text); }
+    .segmented button.active {
+      background: var(--color-accent); color: var(--color-on-accent);
+    }
+
+    /* Toggle */
+    .toggle-track {
+      width: 44px; height: 24px; border-radius: 999px;
+      background: var(--color-border); position: relative;
+      cursor: pointer; transition: background .2s;
+      border: none;
+    }
+    .toggle-track.on { background: var(--color-accent); }
+    .toggle-thumb {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--color-on-accent);
+      position: absolute; top: 3px; left: 3px;
+      transition: transform .2s;
+      pointer-events: none;
+    }
+    .toggle-track.on .toggle-thumb { transform: translateX(20px); }
+
+    .toggle-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0;
+    }
+    .toggle-row + .toggle-row { border-top: 1px solid var(--color-border); }
+    .toggle-label { font-size: 14px; font-weight: 550; }
+    .toggle-desc { font-size: 13px; color: var(--color-muted); }
+
+    /* List Rows */
+    .list-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 0; gap: 12px;
+    }
+    .list-row + .list-row { border-top: 1px solid var(--color-border); }
+    .list-row-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .list-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      flex-shrink: 0; display: grid; place-items: center;
+      font-size: 14px; font-weight: 700;
+    }
+    .list-row-name { font-size: 14px; font-weight: 620; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .list-row-meta { font-size: 13px; color: var(--color-muted); }
+
+    /* Progress Bar */
+    .progress-track {
+      width: 100%; height: 8px; border-radius: 999px;
+      background: var(--color-raised);
+    }
+    .progress-fill {
+      height: 100%; border-radius: 999px;
+      background: var(--color-accent);
+      transition: width .4s ease;
+    }
+    .progress-label {
+      display: flex; justify-content: space-between;
+      font-size: 13px; font-weight: 600; margin-bottom: 6px;
+    }
+    .progress-label span:last-child { color: var(--color-muted); }
+
+    /* Stat Card */
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .stat-item {
+      text-align: center; padding: 16px 8px;
+      background: var(--color-raised); border-radius: var(--radius-sm);
+    }
+    .stat-value { font-size: 24px; font-weight: 800; color: var(--color-accent); }
+    .stat-label { font-size: 12px; font-weight: 620; color: var(--color-muted); margin-top: 2px; }
+
+    /* Toast */
+    .toast {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px; border-radius: var(--radius);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-item);
+      font-size: 14px; font-weight: 550;
+    }
+    .toast-icon {
+      width: 24px; height: 24px; border-radius: 50%;
+      display: grid; place-items: center; flex-shrink: 0;
+      font-size: 13px; font-weight: 800;
+    }
+    .toast-success .toast-icon { background: oklch(from var(--color-cool) l c h / 0.18); color: var(--color-cool); }
+    .toast-warning .toast-icon { background: oklch(from var(--color-accent) l c h / 0.18); color: var(--color-accent); }
+
+    /* ─── Typography Demo ──────────────────────────────────── */
+    .type-sample { margin-top: 24px; }
+    .type-sample > * + * { margin-top: 16px; }
+    .type-display { font-size: clamp(48px, 8vw, 80px); font-weight: 900; line-height: 0.95; }
+    .type-h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 800; line-height: 1.0; }
+    .type-h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 780; line-height: 1.05; }
+    .type-h3 { font-size: 20px; font-weight: 740; line-height: 1.2; }
+    .type-body { font-size: 16px; font-weight: 440; line-height: 1.6; color: var(--color-muted); max-width: 60ch; }
+    .type-small { font-size: 13px; font-weight: 640; color: var(--color-muted); }
+
+    /* ─── Footer ───────────────────────────────────────────── */
+    .site-footer {
+      padding: 32px 0; border-top: 1px solid var(--color-border);
+      text-align: center; font-size: 13px; color: var(--color-muted);
+    }
+    .site-footer a { color: var(--color-accent); text-decoration: none; }
+    .site-footer a:hover { text-decoration: underline; }
+
+    /* ─── Mini Animations ──────────────────────────────────── */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero h1, .hero p, .hero-actions {
+        animation: fadeUp .6s ease both;
+      }
+      .hero p { animation-delay: .08s; }
+      .hero-actions { animation-delay: .16s; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── Header ──────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="wrapper">
+    <a href="#" class="logo">
+      <img src="./assets/icon.svg" alt="inm" /> inm
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#palette">Palette</a></li>
+        <li><a href="#typography">Type</a></li>
+        <li><a href="#widgets">Widgets</a></li>
+        <li>
+          <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+            <span class="icon-sun">☀</span>
+            <span class="icon-moon">☾</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ─── Hero ────────────────────────────────────────────── -->
+<section class="hero wrapper">
+  <h1>Warm. Calm.<br><span class="accent">Intentional.</span></h1>
+  <p>A low-chroma palette built from plum, clay, mist &amp; stone — tuned in OKLCH with APCA-informed contrast for light &amp; dark modes.</p>
+  <div class="hero-actions">
+    <a href="#widgets" class="btn btn-primary">Explore Widgets</a>
+    <a href="#palette" class="btn btn-secondary">View Palette</a>
+    <a href="https://github.com/iceice666/inm" class="btn btn-ghost">GitHub ↗</a>
+  </div>
+</section>
+
+<!-- ─── Palette ─────────────────────────────────────────── -->
+<section class="section" id="palette">
+  <div class="wrapper">
+    <p class="section-title">Colors</p>
+    <h2 class="section-heading">Palette &amp; Tokens</h2>
+    <p class="section-desc">Semantic tokens adapt automatically between light and dark modes. Every swatch below reflects the current theme.</p>
+
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-bg);"></div>
+        <div class="swatch-info"><div class="swatch-name">Background</div><div class="swatch-value">--color-bg</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-surface);"></div>
+        <div class="swatch-info"><div class="swatch-name">Surface</div><div class="swatch-value">--color-surface</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-raised);"></div>
+        <div class="swatch-info"><div class="swatch-name">Raised</div><div class="swatch-value">--color-raised</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-text);"></div>
+        <div class="swatch-info"><div class="swatch-name">Text</div><div class="swatch-value">--color-text</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-muted);"></div>
+        <div class="swatch-info"><div class="swatch-name">Muted</div><div class="swatch-value">--color-muted</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-border);"></div>
+        <div class="swatch-info"><div class="swatch-name">Border</div><div class="swatch-value">--color-border</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-accent);"></div>
+        <div class="swatch-info"><div class="swatch-name">Accent</div><div class="swatch-value">--color-accent</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-accent-soft);"></div>
+        <div class="swatch-info"><div class="swatch-name">Accent Soft</div><div class="swatch-value">--color-accent-soft</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-cool);"></div>
+        <div class="swatch-info"><div class="swatch-name">Cool</div><div class="swatch-value">--color-cool</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-on-accent);"></div>
+        <div class="swatch-info"><div class="swatch-name">On Accent</div><div class="swatch-value">--color-on-accent</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Typography ──────────────────────────────────────── -->
+<section class="section" id="typography">
+  <div class="wrapper">
+    <p class="section-title">Typography</p>
+    <h2 class="section-heading">Type Scale</h2>
+    <p class="section-desc">Inter across the full weight range, from display headlines to compact meta labels.</p>
+
+    <div class="type-sample">
+      <div class="type-display">Display</div>
+      <div class="type-h1">Heading One</div>
+      <div class="type-h2">Heading Two</div>
+      <div class="type-h3">Heading Three</div>
+      <p class="type-body">Body text — designed for comfortable long-form reading. The warm stone canvas keeps the eye relaxed while plum-tinted text maintains a calm, readable rhythm across paragraphs.</p>
+      <p class="type-small">Small / Meta · 13px · Strong weight for compact labels</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Widget Demo ─────────────────────────────────────── -->
+<section class="section" id="widgets">
+  <div class="wrapper">
+    <p class="section-title">Components</p>
+    <h2 class="section-heading">Widget Playground</h2>
+    <p class="section-desc">Interactive UI elements using the inm palette. Toggle dark mode to see adaptive tokens in action.</p>
+
+    <div class="widget-grid">
+
+      <!-- Buttons & Badges -->
+      <div class="widget-card">
+        <h3>Buttons</h3>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px;">
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-ghost">Ghost</button>
+          <button class="btn btn-primary btn-sm">Small</button>
+        </div>
+        <h3>Badges</h3>
+        <div class="badge-row">
+          <span class="badge badge-accent">Active</span>
+          <span class="badge badge-cool">Stable</span>
+          <span class="badge badge-muted">Draft</span>
+          <span class="badge badge-accent">v2.4</span>
+          <span class="badge badge-cool">OKLCH</span>
+        </div>
+      </div>
+
+      <!-- Form Controls -->
+      <div class="widget-card">
+        <h3>Form Controls</h3>
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input class="form-input" type="text" placeholder="e.g. iceice666" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Bio</label>
+          <textarea class="form-textarea" placeholder="Tell us about yourself…"></textarea>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn-primary btn-sm">Save</button>
+          <button class="btn btn-ghost btn-sm">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Segmented + Toggles -->
+      <div class="widget-card">
+        <h3>Segmented Control</h3>
+        <div class="segmented" style="margin-bottom:20px;">
+          <button class="active" onclick="activateSegment(this)">Day</button>
+          <button onclick="activateSegment(this)">Week</button>
+          <button onclick="activateSegment(this)">Month</button>
+          <button onclick="activateSegment(this)">Year</button>
         </div>
 
-        <script>
-            const root = document.documentElement;
-            const themeButton = document.querySelector("#themeButton");
-            const storedTheme = localStorage.getItem("inm-theme");
-            const prefersDark = window.matchMedia(
-                "(prefers-color-scheme: dark)",
-            ).matches;
+        <h3>Toggles</h3>
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Notifications</div>
+            <div class="toggle-desc">Receive email alerts</div>
+          </div>
+          <button class="toggle-track on" onclick="this.classList.toggle('on')">
+            <div class="toggle-thumb"></div>
+          </button>
+        </div>
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Analytics</div>
+            <div class="toggle-desc">Share usage data</div>
+          </div>
+          <button class="toggle-track" onclick="this.classList.toggle('on')">
+            <div class="toggle-thumb"></div>
+          </button>
+        </div>
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Auto-save</div>
+            <div class="toggle-desc">Save every 30 seconds</div>
+          </div>
+          <button class="toggle-track on" onclick="this.classList.toggle('on')">
+            <div class="toggle-thumb"></div>
+          </button>
+        </div>
+      </div>
 
-            function setTheme(theme) {
-                root.dataset.theme = theme;
-                localStorage.setItem("inm-theme", theme);
-                themeButton.setAttribute(
-                    "aria-label",
-                    theme === "dark"
-                        ? "Switch to light mode"
-                        : "Switch to dark mode",
-                );
-            }
+      <!-- Stats + Progress -->
+      <div class="widget-card">
+        <h3>Statistics</h3>
+        <div class="stat-grid" style="margin-bottom:20px;">
+          <div class="stat-item">
+            <div class="stat-value">12k</div>
+            <div class="stat-label">Users</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">94%</div>
+            <div class="stat-label">Uptime</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">3.2s</div>
+            <div class="stat-label">Avg Load</div>
+          </div>
+        </div>
 
-            setTheme(storedTheme || (prefersDark ? "dark" : "light"));
+        <h3>Progress</h3>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div>
+            <div class="progress-label"><span>Design Tokens</span><span>100%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:100%;"></div></div>
+          </div>
+          <div>
+            <div class="progress-label"><span>Component Library</span><span>72%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:72%;"></div></div>
+          </div>
+          <div>
+            <div class="progress-label"><span>Documentation</span><span>45%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:45%; background:var(--color-cool);"></div></div>
+          </div>
+        </div>
+      </div>
 
-            themeButton.addEventListener("click", () => {
-                setTheme(root.dataset.theme === "dark" ? "light" : "dark");
-            });
+      <!-- List Rows -->
+      <div class="widget-card">
+        <h3>Team Members</h3>
+        <div class="list-row">
+          <div class="list-row-left">
+            <div class="list-avatar" style="background:var(--color-accent); color:var(--color-on-accent);">A</div>
+            <div>
+              <div class="list-row-name">Alice Chen</div>
+              <div class="list-row-meta">Lead Designer</div>
+            </div>
+          </div>
+          <span class="badge badge-accent">Admin</span>
+        </div>
+        <div class="list-row">
+          <div class="list-row-left">
+            <div class="list-avatar" style="background:var(--color-cool); color:var(--color-on-accent);">B</div>
+            <div>
+              <div class="list-row-name">Bob Martinez</div>
+              <div class="list-row-meta">Frontend Engineer</div>
+            </div>
+          </div>
+          <span class="badge badge-cool">Member</span>
+        </div>
+        <div class="list-row">
+          <div class="list-row-left">
+            <div class="list-avatar" style="background:var(--color-accent-soft); color:var(--color-on-accent);">C</div>
+            <div>
+              <div class="list-row-name">Cleo Nakamura</div>
+              <div class="list-row-meta">Product Manager</div>
+            </div>
+          </div>
+          <span class="badge badge-accent">Admin</span>
+        </div>
+        <div class="list-row">
+          <div class="list-row-left">
+            <div class="list-avatar" style="background:var(--color-muted); color:var(--color-on-accent);">D</div>
+            <div>
+              <div class="list-row-name">David Okonkwo</div>
+              <div class="list-row-meta">Backend Engineer</div>
+            </div>
+          </div>
+          <span class="badge badge-muted">Viewer</span>
+        </div>
+      </div>
 
-            document.querySelectorAll(".segmented button").forEach((button) => {
-                button.addEventListener("click", () => {
-                    button.parentElement
-                        .querySelectorAll("button")
-                        .forEach((item) => item.classList.remove("active"));
-                    button.classList.add("active");
-                });
-            });
-        </script>
-    </body>
+      <!-- Toasts + Misc -->
+      <div class="widget-card">
+        <h3>Toasts</h3>
+        <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;">
+          <div class="toast toast-success">
+            <div class="toast-icon">✓</div>
+            <span>Changes saved successfully.</span>
+          </div>
+          <div class="toast toast-warning">
+            <div class="toast-icon">!</div>
+            <span>API rate limit approaching.</span>
+          </div>
+        </div>
+
+        <h3>Elevation</h3>
+        <div style="display:flex; gap:16px; margin-top:8px;">
+          <div style="width:80px; height:80px; border-radius:var(--radius); background:var(--color-surface); border:1px solid var(--color-border); display:grid; place-items:center; font-size:12px; font-weight:600; color:var(--color-muted);">Flat</div>
+          <div style="width:80px; height:80px; border-radius:var(--radius); background:var(--color-surface); box-shadow:var(--shadow-item); display:grid; place-items:center; font-size:12px; font-weight:600; color:var(--color-muted);">Item</div>
+          <div style="width:80px; height:80px; border-radius:var(--radius); background:var(--color-surface); box-shadow:var(--shadow-panel); display:grid; place-items:center; font-size:12px; font-weight:600; color:var(--color-muted);">Panel</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ──────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="wrapper">
+    <p><strong>inm</strong> · A warm, calm palette for thoughtful interfaces · <a href="https://github.com/iceice666/inm">Source on GitHub</a></p>
+  </div>
+</footer>
+
+<!-- ─── Scripts ─────────────────────────────────────────── -->
+<script>
+  // Theme toggle
+  function toggleTheme() {
+    document.documentElement.classList.toggle('dark');
+    const isDark = document.documentElement.classList.contains('dark');
+    localStorage.setItem('inm-theme', isDark ? 'dark' : 'light');
+  }
+
+  // Restore saved theme
+  (function () {
+    const saved = localStorage.getItem('inm-theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  })();
+
+  // Segmented control
+  function activateSegment(btn) {
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
 </html>
