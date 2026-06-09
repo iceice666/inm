@@ -14,6 +14,8 @@ function HeaderV2({ theme, onToggle }) {
           <a className="nav-link" href="#modes">Modes</a>
           <a className="nav-link" href="#principles">Principles</a>
           <a className="nav-link" href="#install">Install</a>
+          <a className="nav-link" href="#kit">UI Kit</a>
+          <a className="nav-link" href="#slides">Slides</a>
         </div>
         <div className="nav-tail">
           <a className="button secondary" href="#install" style={{ minHeight: "42px" }}>Get the tokens</a>
