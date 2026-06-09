@@ -4,7 +4,29 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ui</title>
+    <title>inm — low-chroma OKLCH color system</title>
+    <meta name="description" content="inm is a low-chroma color system for editorial tools, portfolios, dashboards, and creative product UI. Four anchors, tuned in OKLCH with APCA-informed contrast." />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://inm.justaslime.dev/" />
+    <meta property="og:title" content="inm — low-chroma OKLCH color system" />
+    <meta property="og:description" content="inm is a low-chroma color system for editorial tools, portfolios, dashboards, and creative product UI. Four anchors, tuned in OKLCH with APCA-informed contrast." />
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="inm — low-chroma OKLCH color system" />
+    <meta name="twitter:description" content="inm is a low-chroma color system for editorial tools, portfolios, dashboards, and creative product UI. Four anchors, tuned in OKLCH with APCA-informed contrast." />
+    <!-- Theme color: warm stone (light) / plum black (dark) -->
+    <meta name="theme-color" content="#C9BFB6" />
+    <meta name="theme-color" content="#3E343F" media="(prefers-color-scheme: dark)" />
+    <!-- Pre-paint dark-mode: prevents FOUC, respects OS preference, persists via localStorage -->
+    <script>
+      (function () {
+        var saved = localStorage.getItem("inm-theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var isDark = saved ? saved === "dark" : prefersDark;
+        document.documentElement.classList.toggle("dark", isDark);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

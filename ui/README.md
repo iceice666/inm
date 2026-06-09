@@ -1,73 +1,42 @@
-# React + TypeScript + Vite
+# inm — showcase site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The canonical live landing page for the [inm](https://inm.justaslime.dev) color system — deployed at **inm.justaslime.dev** via Cloudflare Pages.
 
-Currently, two official plugins are available:
+Built with Vite 8 · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui (Radix UI primitives) · lucide-react.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Getting started
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev       # local dev server → http://localhost:5173
+npm run build     # tsc -b && vite build → dist/
+npm run preview   # serve the built dist/ locally
+npm run lint      # eslint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Deploy
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Cloudflare Pages configuration:
+- **Root directory:** `ui`
+- **Build command:** `npm run build`
+- **Build output directory:** `dist`
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+`wrangler.toml` in this directory mirrors that config (`name = "inm"`, `pages_build_output_dir = "./dist"`).
+
+## Structure
+
 ```
+src/
+  App.tsx                     ← root: dark mode state, section order
+  index.css                   ← inm token bridge (shadcn CSS vars + @theme inline)
+  site.css                    ← section layout & component styles
+  components/
+    site/                     ← page sections (hero, anchors, tokens, modes, app-preview, …)
+    ui/                       ← shadcn primitives (button, badge, card, tabs, …)
+```
+
+Dark mode honors the OS preference on first visit and persists to `localStorage` via the `inm-theme` key. A pre-paint inline script in `index.html` prevents any flash of unstyled content.
+
+## Relation to the repo root
+
+The repo root holds the **token product** (the actual deliverable): `assets/tailwind-theme.css`, `assets/tailwind.config.js`, `colors_and_type.css`, `DESIGN.md`, `preview/`, `slides/`, and `fonts/`. This `ui/` directory is the showcase site only — a separate concern.

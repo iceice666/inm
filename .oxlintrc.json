@@ -1,5 +1,5 @@
 {
-  "ignorePatterns": ["ui_kits/**", "slides/**", "preview/**"],
+  "ignorePatterns": ["slides/**", "preview/**"],
   "plugins": [
     "react",
     "import"
@@ -20,10 +20,7 @@
               "aria-app/**",
               "assets/**",
               "mobile/**",
-              "slides/**",
-              "ui_kits/app/**",
-              "ui_kits/showcase-v2/**",
-              "ui_kits/showcase/**"
+              "slides/**"
             ],
             "message": "Import design-system components from 'index.js', not component internals."
           }
