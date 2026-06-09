@@ -1,0 +1,26 @@
+<!doctype html>
+<!-- @dsCard group="Slides" name="Slide — Full-bleed image" subtitle="Drop-in image with warm protection gradient + overlay text" viewport="1280x720" -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="slides.css" />
+<style>
+  html, body { margin: 0; background: #1c171d; }
+  .card-frame { width: 1280px; height: 720px; overflow: hidden; position: relative; }
+</style>
+</head>
+<body>
+  <div class="card-frame">
+    <section class="slide bleed" data-label="Full-bleed image">
+      <image-slot id="bleed-1" class="bleed-img" shape="rect" placeholder="Drop a full-bleed image"></image-slot>
+      <div class="bleed-overlay"></div>
+      <div class="bleed-text">
+        <p class="eyebrow">Calm by design</p>
+        <h2>Quiet interfaces, warm at the edges.</h2>
+        <p class="cap">Pair the palette with low-chroma, warm imagery — never cool, saturated, or high-glare.</p>
+      </div>
+    </section>
+  </div>
+  <script src="image-slot.js"></script>
+</body>
+</html>

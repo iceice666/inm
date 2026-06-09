@@ -1,0 +1,23 @@
+<!-- @dsCard group="Spacing" -->
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; background: var(--bg); font-family: var(--font-sans); padding: 24px; color: var(--text); }
+  .row { display: flex; gap: 18px; align-items: flex-end; }
+  .item { display: grid; gap: 8px; justify-items: center; }
+  .box { width: 84px; height: 64px; background: var(--surface); border: 1px solid var(--border); }
+  .v { font-size: 12px; font-weight: 740; color: var(--text); }
+  .d { font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="item"><div class="box" style="border-radius:8px"></div><span class="v">Controls / cards</span><span class="d">8px</span></div>
+    <div class="item"><div class="box" style="border-radius:6px"></div><span class="v">Inner elements</span><span class="d">6–7px</span></div>
+    <div class="item"><div class="box" style="width:120px;height:32px;border-radius:999px"></div><span class="v">Status pills</span><span class="d">999px</span></div>
+  </div>
+</body>
+</html>

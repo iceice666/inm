@@ -1,0 +1,31 @@
+<!-- @dsCard group="Components" -->
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; background: var(--bg); font-family: var(--font-sans); padding: 24px; color: var(--text); }
+  .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
+  .field { display: grid; gap: 7px; }
+  .label { font-size: 12px; font-weight: 760; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+  .input { min-height: 42px; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--raised); padding: 10px 12px; font-size: 14px; font-weight: 500; color: var(--text); }
+  .input.ph { color: var(--muted); }
+  .seg { display: inline-flex; gap: 3px; padding: 3px; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--raised); }
+  .seg button { min-height: 34px; border: 0; border-radius: var(--radius-inner); padding: 6px 14px; font-size: 13px; font-weight: 740; background: transparent; color: var(--muted); }
+  .seg button.active { background: var(--accent); color: var(--on-accent); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="field"><span class="label">Workspace name</span><div class="input">Editorial workspace</div></div>
+    <div class="field"><span class="label">Search</span><div class="input ph">Type a command…</div></div>
+    <div class="field"><span class="label">Mode</span>
+      <div class="seg"><button class="active">Light</button><button>Dark</button><button>Auto</button></div>
+    </div>
+    <div class="field"><span class="label">Scope</span>
+      <div class="seg"><button>All</button><button class="active">Active</button><button>Archived</button></div>
+    </div>
+  </div>
+</body>
+</html>

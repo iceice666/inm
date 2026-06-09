@@ -1,0 +1,25 @@
+<!-- @dsCard group="Type" -->
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; background: var(--bg); font-family: var(--font-sans); padding: 24px; color: var(--text); }
+  .stack { display: grid; gap: 16px; }
+  .body { font-size: 17px; font-weight: 440; line-height: 1.6; color: var(--text); max-width: 560px; }
+  .meta { font-size: 13px; font-weight: 700; line-height: 1.35; color: var(--muted); }
+  .label { font-size: 12px; font-weight: 760; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+  .mono { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--text); background: var(--raised); border: 1px solid var(--border); border-radius: var(--radius-inner); padding: 4px 8px; display: inline-block; }
+  .tag { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+  <div class="stack">
+    <div><div class="tag">Body · 16–18 / 440 / 1.6</div><p class="body" style="margin:4px 0 0">inm is a low-chroma color system for editorial tools, portfolios, dashboards, and creative product UI.</p></div>
+    <div><div class="tag">Meta · 12–14 / 700</div><div class="meta" style="margin-top:4px">Muted surfaces, clear text · APCA Lc about 47</div></div>
+    <div><div class="tag">Label · 12 / 760 / uppercase</div><div class="label" style="margin-top:4px">OKLCH palette</div></div>
+    <div><div class="tag">Mono · SF Mono / Consolas / Menlo</div><br><span class="mono" style="margin-top:4px">--color-accent: oklch(47.9% 0.065 27.6)</span></div>
+  </div>
+</body>
+</html>

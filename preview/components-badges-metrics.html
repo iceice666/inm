@@ -1,0 +1,34 @@
+<!-- @dsCard group="Components" -->
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; background: var(--bg); font-family: var(--font-sans); padding: 24px; color: var(--text); }
+  .stack { display: grid; gap: 18px; }
+  .badges { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .badge { display: inline-flex; align-items: center; gap: 7px; min-height: 28px; border-radius: 999px; border: 1px solid var(--border); padding: 4px 11px; font-size: 12px; font-weight: 740; color: var(--muted); background: color-mix(in oklch, var(--surface) 82%, transparent); }
+  .badge .d { width: 9px; height: 9px; border-radius: 999px; }
+  .metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+  .metric { border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--surface); padding: 12px; }
+  .metric span { color: var(--muted); font-size: 12px; font-weight: 740; }
+  .metric strong { display: block; margin-top: 8px; font-size: 26px; line-height: 1; }
+</style>
+</head>
+<body>
+  <div class="stack">
+    <div class="badges">
+      <span class="badge"><span class="d" style="background:var(--accent)"></span>Active</span>
+      <span class="badge"><span class="d" style="background:var(--cool)"></span>Synced</span>
+      <span class="badge"><span class="d" style="background:var(--accent-soft)"></span>Review</span>
+      <span class="badge"><span class="d" style="background:var(--muted)"></span>Archived</span>
+    </div>
+    <div class="metrics">
+      <div class="metric"><span>Readability</span><strong>65</strong></div>
+      <div class="metric"><span>Accent</span><strong>47</strong></div>
+      <div class="metric"><span>Chroma</span><strong>Low</strong></div>
+    </div>
+  </div>
+</body>
+</html>

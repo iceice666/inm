@@ -1,0 +1,14 @@
+/* ============================================================
+   inm — design system entry point
+   The canonical global stylesheet. Consumers link THIS file.
+   It pulls in the colour, type, spacing, radius and elevation
+   foundations; self-hosts the Inter brand typeface; and is the
+   single source the design-system compiler reads tokens from.
+
+   App- and surface-specific stylesheets (aria-app/, mobile/,
+   slides/) are intentionally NOT imported here — they define
+   their own locally-scoped token sets and are linked directly
+   by the screens that use them.
+   ============================================================ */
+
+@import "colors_and_type.css";

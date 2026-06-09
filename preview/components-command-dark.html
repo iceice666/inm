@@ -1,0 +1,22 @@
+<!-- @dsCard group="Components" -->
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; background: var(--bg); font-family: var(--font-sans); padding: 24px; color: var(--text); }
+  .cmd { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; min-height: 54px; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--raised); padding: 10px 14px; }
+  .cmd span { color: var(--muted); font-size: 13px; font-weight: 720; }
+  .cmd strong { display: inline-flex; min-height: 32px; align-items: center; border-radius: var(--radius-control); background: var(--accent); color: var(--on-accent); padding: 6px 12px; font-size: 13px; }
+  .cap { font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 700; margin-top: 14px; }
+  .toggle { display: inline-grid; width: 42px; height: 42px; place-items: center; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--surface); margin-top:14px; }
+  .toggle svg { width: 19px; height: 19px; fill: none; stroke: var(--text); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+</head>
+<body>
+  <div class="cmd"><span>Dark tokens override at the root</span><strong>Apply palette</strong></div>
+  <span class="toggle"><svg viewBox="0 0 24 24"><path d="M20.99 12.43A8.5 8.5 0 1 1 11.57 3a6.5 6.5 0 0 0 9.42 9.43Z"/></svg></span>
+  <div class="cap">Dark mode · plum canvas · same semantic roles as light</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!-- @dsCard group="Components" -->
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; background: var(--bg); font-family: var(--font-sans); padding: 24px; color: var(--text); }
+  .list { border: 1px solid var(--border); border-radius: var(--radius-control); overflow: hidden; }
+  .row { display: grid; grid-template-columns: 12px minmax(0,1fr) auto; align-items: center; gap: 12px; min-height: 54px; padding: 10px 14px; background: var(--surface); }
+  .row + .row { border-top: 1px solid var(--border); }
+  .dot { width: 12px; height: 12px; border-radius: 999px; background: var(--cool); }
+  .row:nth-child(2) .dot { background: var(--accent); }
+  .title { font-weight: 760; font-size: 14px; }
+  .meta { color: var(--muted); font-size: 13px; font-weight: 700; }
+  .action { min-height: 30px; border-radius: var(--radius-inner); padding: 5px 9px; background: var(--raised); color: var(--muted); font-size: 13px; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="list">
+    <div class="row"><span class="dot"></span><div><div class="title">Editorial workspace</div><div class="meta">Muted surfaces, clear text</div></div><span class="action">Active</span></div>
+    <div class="row"><span class="dot"></span><div><div class="title">Dashboard controls</div><div class="meta">Clay for intent, mist for state</div></div><span class="action">Review</span></div>
+    <div class="row"><span class="dot"></span><div><div class="title">Portfolio index</div><div class="meta">Warm canvas, compact rhythm</div></div><span class="action">Ready</span></div>
+  </div>
+</body>
+</html>

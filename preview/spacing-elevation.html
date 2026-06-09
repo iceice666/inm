@@ -1,0 +1,25 @@
+<!-- @dsCard group="Spacing" -->
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; background: var(--bg); font-family: var(--font-sans); padding: 30px 24px 38px; color: var(--text); }
+  .row { display: flex; gap: 36px; }
+  .item { display: grid; gap: 14px; justify-items: center; }
+  .box { width: 130px; height: 78px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-control); }
+  .panel { box-shadow: var(--shadow-panel); }
+  .itemsh { box-shadow: var(--shadow-item); }
+  .v { font-size: 12px; font-weight: 740; color: var(--text); }
+  .d { font-family: var(--font-mono); font-size: 10px; color: var(--muted); font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="item"><div class="box panel"></div><span class="v">shadow-panel</span><span class="d">0 20px 50px / 0.15</span></div>
+    <div class="item"><div class="box itemsh"></div><span class="v">shadow-item</span><span class="d">0 10px 24px / 0.12</span></div>
+    <div class="item"><div class="box"></div><span class="v">border only</span><span class="d">prefer for hierarchy</span></div>
+  </div>
+</body>
+</html>

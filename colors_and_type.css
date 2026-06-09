@@ -1,0 +1,153 @@
+/* ============================================================
+   inm — colors & type foundations
+   A warm, low-chroma OKLCH interface system built from four anchors.
+   Source: github.com/iceice666/inm (DESIGN.md, tailwind-theme.css)
+   ============================================================ */
+
+/* Inter is the brand typeface — self-hosted from the uploaded variable font. */
+@font-face {
+    font-family: "Inter";
+    src: url("fonts/Inter-VariableFont_opsz_wght.ttf") format("truetype");
+    font-weight: 100 900;
+    font-stretch: 75% 125%;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    color-scheme: light;
+
+    /* ---- Anchor palette (the four originals, kept visible) ---- */
+    --plum-900: oklch(34% 0.023 323.2);   /* #3E343F  plum black  */
+    --clay-500: oklch(60% 0.06 30);       /* #A1736B  clay rose   */
+    --mist-500: oklch(69.5% 0.011 164.7); /* #979F9B  mist gray   */
+    --stone-300: oklch(81% 0.017 64.6);   /* #C9BFB6  warm stone  */
+
+    /* ---- Semantic tokens — LIGHT MODE (warm stone canvas) ---- */
+    --bg: oklch(81% 0.017 64.6);          /* #C9BFB6  page canvas        */
+    --surface: oklch(86.8% 0.013 63.9);   /* #DAD2CB  panels, cards      */
+    --raised: oklch(91.4% 0.011 63.4);    /* #E8E1DB  inputs, 2nd btns   */
+    --text: oklch(28.5% 0.02 322.5);      /* #2F2730  primary text       */
+    --muted: oklch(47.9% 0.01 349.6);     /* #625B5E  secondary text     */
+    --border: oklch(73.6% 0.011 58.2);    /* #AFA8A3  dividers, outlines */
+    --accent: oklch(47.9% 0.065 27.6);    /* #7E4F49  buttons, links     */
+    --accent-soft: oklch(60% 0.06 30);    /* #A1736B  hover, decorative  */
+    --cool: oklch(60% 0.013 170);         /* #79837F  support / status   */
+    --on-accent: oklch(91.4% 0.011 63.4); /* #E8E1DB  text on accent     */
+
+    /* ---- Elevation ---- */
+    --shadow-panel: 0 20px 50px oklch(28.5% 0.02 322.5 / 0.15);
+    --shadow-item: 0 10px 24px oklch(20% 0.02 320 / 0.12);
+
+    /* ---- Radius ---- */
+    --radius-control: 8px;  /* buttons, cards, inputs */
+    --radius-inner: 6px;    /* small inner elements   */
+    --radius-pill: 999px;   /* compact status badges only */
+
+    /* ---- Spacing scale (base unit 4px) ---- */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 10px;
+    --space-4: 12px;
+    --space-5: 16px;
+    --space-6: 18px;
+    --space-7: 24px;
+    --space-8: 32px;
+    --space-9: 44px;
+    --space-10: 54px;
+    --space-11: 64px;
+    --space-12: 72px;
+
+    /* ---- Layout ---- */
+    --content-max: 1160px;
+    --gutter-mobile: 16px;
+    --gutter-desktop: 32px;
+
+    /* ---- Type ---- */
+    --font-sans: Inter, ui-sans-serif, system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* ---- Semantic tokens — DARK MODE (plum black canvas) ---- */
+:root[data-theme="dark"],
+.dark {
+    color-scheme: dark;
+    --bg: oklch(34% 0.023 323.2);         /* #3E343F */
+    --surface: oklch(38% 0.025 323.4);    /* #493E4A */
+    --raised: oklch(43.1% 0.028 323.8);   /* #584B59 */
+    --text: oklch(91.4% 0.011 63.4);      /* #E8E1DB */
+    --muted: oklch(75.9% 0.009 36.5);     /* #B6AFAD */
+    --border: oklch(50.3% 0.02 331.9);    /* #6B6069 */
+    --accent: oklch(75.5% 0.068 31.5);    /* #D7A095 */
+    --accent-soft: oklch(69.7% 0.07 32.7);/* #C58E82 */
+    --cool: oklch(76.1% 0.013 170.1);     /* #AAB4B0 */
+    --on-accent: oklch(34% 0.023 323.2);  /* #3E343F */
+    --shadow-panel: 0 20px 50px oklch(18% 0.02 323.2 / 0.38);
+}
+
+/* ============================================================
+   Type ramp — sizes from DESIGN.md
+   Display 64–118 / H1 48–72 / H2 28–48 / H3 17–22 / Body 16–18 / Meta 12–14
+   Keep letter-spacing 0. Uppercase only for short strong labels.
+   ============================================================ */
+
+.t-display {
+    font-family: var(--font-sans);
+    font-size: clamp(64px, 9vw, 118px);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: 0;
+}
+
+.t-h1 {
+    font-family: var(--font-sans);
+    font-size: clamp(48px, 6vw, 72px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+.t-h2 {
+    font-family: var(--font-sans);
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: 0;
+}
+
+.t-h3 {
+    font-family: var(--font-sans);
+    font-size: clamp(17px, 1.4vw, 22px);
+    font-weight: 760;
+    line-height: 1.2;
+}
+
+.t-body {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-weight: 440;
+    line-height: 1.6;
+}
+
+.t-meta {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.t-label {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 760;
+    line-height: 1.35;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.t-mono {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+}

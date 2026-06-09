@@ -1,0 +1,243 @@
+<!doctype html>
+<!-- @dsCard group="Slides" name="Deck — full kit" subtitle="Navigable 7-slide deck (←/→, thumbnails, print-to-PDF)" viewport="1280x720" -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>inm — slide deck kit</title>
+  <link rel="stylesheet" href="slides.css" />
+  <style>
+    html, body { margin: 0; background: #1c171d; }
+    deck-stage:not(:defined) { visibility: hidden; }
+  </style>
+</head>
+<body>
+  <deck-stage width="1280" height="720">
+
+    <!-- SLIDE: title -->
+    <section class="slide light title-slide" data-label="Title">
+      <div class="title-blocks" aria-hidden="true">
+        <i class="tb-stone"></i><i class="tb-plum"></i><i class="tb-clay"></i>
+      </div>
+      <div class="lockup"><img src="../assets/icon.svg" alt="" />inm</div>
+      <div class="spacer"></div>
+      <p class="eyebrow">OKLCH palette for quiet interfaces</p>
+      <h1 class="s-display" style="margin-top:18px;max-width:840px;">Warm stone,<br />soft clay,<br />deep plum.</h1>
+      <p class="s-lead" style="margin-top:26px;">A low-chroma color system for editorial tools, dashboards, and calm creative product UI.</p>
+      <div class="spacer"></div>
+      <div class="s-foot"><span>Design system overview</span><span class="pg">inm · 2026</span></div>
+    </section>
+
+    <!-- SLIDE: agenda -->
+    <section class="slide light" data-label="Agenda">
+      <p class="eyebrow">What we'll cover</p>
+      <h2 class="s-h2" style="margin-top:16px;">Agenda</h2>
+      <div class="agenda-list">
+        <div class="agenda-item is-active"><span class="an">01</span><span class="at">Foundations</span><span class="am">Anchors, tokens, modes</span></div>
+        <div class="agenda-item"><span class="an">02</span><span class="at">In product</span><span class="am">Dense, scannable UI</span></div>
+        <div class="agenda-item"><span class="an">03</span><span class="at">Contrast</span><span class="am">APCA, both modes</span></div>
+        <div class="agenda-item is-dim"><span class="an">04</span><span class="at">Handoff</span><span class="am">Tailwind v4 &amp; v3</span></div>
+      </div>
+      <div class="s-foot" style="margin-top:auto;"><span>inm — agenda</span><span class="pg">02</span></div>
+    </section>
+
+    <!-- SLIDE: section -->
+    <section class="slide dark section-slide" data-label="Section">
+      <div class="section-num">01 — Foundations</div>
+      <h2 class="s-display">Four anchors, tuned into UI tokens.</h2>
+      <div class="section-rule"></div>
+    </section>
+
+    <!-- SLIDE: content -->
+    <section class="slide light" data-label="Principles">
+      <p class="eyebrow">How the palette works</p>
+      <h2 class="s-h2" style="margin-top:16px;">Quiet by default, clear on intent.</h2>
+      <div class="two-col">
+        <p class="s-lead">Hierarchy comes from tone and border, not from color noise or heavy shadow. One action color does the signalling; everything else stays calm.</p>
+        <div class="col-points">
+          <div class="point"><span class="n">1</span><div><h4>Warm canvas</h4><p>Stone in light, plum in dark — never pure black or white.</p></div></div>
+          <div class="point"><span class="n">2</span><div><h4>Clay is the signal</h4><p>The single accent for actions, links, and active state.</p></div></div>
+          <div class="point"><span class="n">3</span><div><h4>Mist for state</h4><p>A cool support tone for quiet statuses and metadata.</p></div></div>
+        </div>
+      </div>
+      <div class="s-foot"><span>inm — foundations</span><span class="pg">04</span></div>
+    </section>
+
+    <!-- SLIDE: feature grid -->
+    <section class="slide light" data-label="Feature grid">
+      <p class="eyebrow">What you get</p>
+      <h2 class="s-h2" style="margin:16px 0 28px;">A system, not a swatch file.</h2>
+      <div class="feat-grid">
+        <div class="feat"><span class="glyph gl-stack"><i class="g-accent"></i><i class="g-stone"></i></span><h4>Four anchors</h4><p>Plum, clay, mist, and stone tuned into a full token scale.</p></div>
+        <div class="feat"><span class="glyph gl-split"><i class="g-stone"></i><i class="g-accent"></i></span><h4>Light &amp; dark</h4><p>One semantic map drives both modes with identical behavior.</p></div>
+        <div class="feat"><span class="glyph gl-bars"><i class="g-cool"></i><i class="g-accent"></i><i class="g-cool"></i></span><h4>APCA-tuned</h4><p>Contrast measured per surface, not guessed from hex math.</p></div>
+        <div class="feat"><span class="glyph gl-frame"><i></i><i class="g-accent"></i></span><h4>Quiet elevation</h4><p>Hierarchy from border and tone — shadows used sparingly.</p></div>
+        <div class="feat"><span class="glyph gl-rows"><i class="g-stone"></i><i class="g-accent"></i><i class="g-stone"></i></span><h4>Dense-ready</h4><p>Built for tables, dashboards, and editorial tools.</p></div>
+        <div class="feat"><span class="glyph gl-tri"><i class="g-accent"></i><i class="g-cool"></i><i class="g-stone"></i></span><h4>Portable handoff</h4><p>Exports cleanly to Tailwind v4 and v3 configs.</p></div>
+      </div>
+      <div class="s-foot"><span>inm — features</span><span class="pg">05</span></div>
+    </section>
+
+    <!-- SLIDE: comparison -->
+    <section class="slide light" data-label="Light vs dark">
+      <p class="eyebrow">Same roles, two moods</p>
+      <h2 class="s-h2" style="margin:16px 0 28px;">Light and dark share the same behavior.</h2>
+      <div class="cmp">
+        <div class="cmp-panel light">
+          <div class="cmp-bar"><span>Light mode</span><div class="cmp-dots"><span></span><span></span><span></span></div></div>
+          <div class="cmp-body">
+            <div class="cmp-row"><span class="cd"></span><span class="ct">Editorial workspace</span><span class="ca">Active</span></div>
+            <div class="cmp-row"><span class="cd"></span><span class="ct">Dashboard controls</span><span class="ca">Review</span></div>
+            <div class="cmp-row"><span class="cd"></span><span class="ct">Portfolio index</span><span class="ca">Ready</span></div>
+            <span class="cmp-btn">Apply palette</span>
+          </div>
+        </div>
+        <div class="cmp-panel dark">
+          <div class="cmp-bar"><span>Dark mode</span><div class="cmp-dots"><span></span><span></span><span></span></div></div>
+          <div class="cmp-body">
+            <div class="cmp-row"><span class="cd"></span><span class="ct">Creative console</span><span class="ca">Live</span></div>
+            <div class="cmp-row"><span class="cd"></span><span class="ct">Review queue</span><span class="ca">Open</span></div>
+            <div class="cmp-row"><span class="cd"></span><span class="ct">Status stream</span><span class="ca">Synced</span></div>
+            <span class="cmp-btn">Apply palette</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE: code -->
+    <section class="slide light" data-label="Code">
+      <p class="eyebrow">Drop-in tokens</p>
+      <h2 class="s-h2" style="margin:16px 0 24px;">No build step. Just variables.</h2>
+      <div class="code-win">
+        <div class="code-bar"><div class="dots"><span></span><span></span><span></span></div><span class="fname">inm.css</span></div>
+        <div class="code-body">
+          <div class="ln">1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7</div>
+          <code><span class="tok-com">/* light scope — warm stone canvas */</span>
+<span class="tok-punc">:root</span> {
+  <span class="tok-key">--bg</span><span class="tok-punc">:</span>     <span class="tok-fn">oklch</span>(<span class="tok-num">81%</span> <span class="tok-num">.017</span> <span class="tok-num">64.6</span>)<span class="tok-punc">;</span>
+  <span class="tok-key">--text</span><span class="tok-punc">:</span>   <span class="tok-fn">oklch</span>(<span class="tok-num">28%</span> <span class="tok-num">.020</span> <span class="tok-num">322</span>)<span class="tok-punc">;</span>
+  <span class="tok-key">--accent</span><span class="tok-punc">:</span> <span class="tok-fn">oklch</span>(<span class="tok-num">48%</span> <span class="tok-num">.065</span> <span class="tok-num">28</span>)<span class="tok-punc">;</span>
+  <span class="tok-key">--border</span><span class="tok-punc">:</span> <span class="tok-fn">oklch</span>(<span class="tok-num">74%</span> <span class="tok-num">.011</span> <span class="tok-num">58</span>)<span class="tok-punc">;</span>
+}</code>
+        </div>
+      </div>
+      <div class="s-foot" style="margin-top:auto;"><span>inm — implementation</span><span class="pg">07</span></div>
+    </section>
+
+    <!-- SLIDE: metrics -->
+    <section class="slide light" data-label="Metrics">
+      <p class="eyebrow">Readable by the numbers</p>
+      <h2 class="s-h2" style="margin-top:16px;">APCA-informed contrast, both modes.</h2>
+      <div class="metric-grid">
+        <div class="m-tile"><span class="mk"><span class="dot" style="background:var(--s-accent)"></span>Body text</span><span class="mv">65</span><span class="md">APCA Lc · light</span></div>
+        <div class="m-tile"><span class="mk"><span class="dot" style="background:var(--s-accent-soft)"></span>Accent</span><span class="mv">47</span><span class="md">Lc on canvas</span></div>
+        <div class="m-tile"><span class="mk"><span class="dot" style="background:var(--s-cool)"></span>Body, dark</span><span class="mv">-82</span><span class="md">APCA Lc · dark</span></div>
+        <div class="m-tile"><span class="mk"><span class="dot" style="background:var(--s-muted)"></span>Chroma</span><span class="mv">Low</span><span class="md">0.01–0.07 OKLCH</span></div>
+      </div>
+      <div class="s-foot"><span>inm — contrast</span><span class="pg">08</span></div>
+    </section>
+
+    <!-- SLIDE: data table -->
+    <section class="slide dark" data-label="Data table">
+      <p class="eyebrow">Role by role</p>
+      <h2 class="s-h2" style="margin:16px 0 24px;">Semantic tokens at a glance.</h2>
+      <div class="data-table">
+        <div class="dt-row dt-head"><span>Token</span><span>Use</span><span>APCA Lc</span><span>Status</span></div>
+        <div class="dt-body">
+          <div class="dt-row"><span class="c-name">text.body</span><span class="c-sub">Primary reading text</span><span class="c-num">-82</span><span class="dt-tag is-accent"><span class="d"></span>Ship</span></div>
+          <div class="dt-row"><span class="c-name">text.muted</span><span class="c-sub">Metadata, captions</span><span class="c-num">-58</span><span class="dt-tag is-accent"><span class="d"></span>Ship</span></div>
+          <div class="dt-row"><span class="c-name">accent.clay</span><span class="c-sub">Actions, links, active</span><span class="c-num">-61</span><span class="dt-tag is-accent"><span class="d"></span>Ship</span></div>
+          <div class="dt-row"><span class="c-name">border.hair</span><span class="c-sub">Surface divisions</span><span class="c-num">-14</span><span class="dt-tag"><span class="d"></span>Review</span></div>
+          <div class="dt-row"><span class="c-name">cool.mist</span><span class="c-sub">Quiet status tone</span><span class="c-num">-44</span><span class="dt-tag"><span class="d"></span>Review</span></div>
+        </div>
+      </div>
+      <div class="s-foot" style="margin-top:auto;"><span>inm — token table</span><span class="pg">09</span></div>
+    </section>
+
+    <!-- SLIDE: timeline -->
+    <section class="slide light" data-label="Timeline">
+      <p class="eyebrow">How it rolls out</p>
+      <h2 class="s-h2" style="margin:16px 0 4px;">From tokens to shipped product.</h2>
+      <div class="timeline">
+        <div class="tl-step"><div class="tl-node"><span class="tl-dot"></span></div><span class="tl-when">Week 1</span><span class="tl-title">Adopt tokens</span><span class="tl-desc">Drop in the OKLCH variables; wire light and dark roots.</span></div>
+        <div class="tl-step"><div class="tl-node"><span class="tl-dot"></span></div><span class="tl-when">Week 2</span><span class="tl-title">Build components</span><span class="tl-desc">Buttons, inputs, rows, badges on the shared scale.</span></div>
+        <div class="tl-step is-future"><div class="tl-node"><span class="tl-dot"></span></div><span class="tl-when">Week 3</span><span class="tl-title">Tune contrast</span><span class="tl-desc">Check APCA across surfaces; adjust muted and accent.</span></div>
+        <div class="tl-step is-future"><div class="tl-node"><span class="tl-dot"></span></div><span class="tl-when">Week 4</span><span class="tl-title">Ship &amp; hand off</span><span class="tl-desc">Export Tailwind config; document in DESIGN.md.</span></div>
+      </div>
+      <div class="s-foot"><span>inm — rollout</span><span class="pg">10</span></div>
+    </section>
+
+    <!-- SLIDE: process (vertical steps) -->
+    <section class="slide light" data-label="Process">
+      <p class="eyebrow">How adoption works</p>
+      <h2 class="s-h2" style="margin:16px 0 28px;">Four steps to a shipped palette.</h2>
+      <div class="vsteps">
+        <div class="vstep"><span class="vn">1</span><div class="vc"><div class="vt">Drop in the tokens</div><div class="vd">Add the OKLCH variables and wire the light and dark roots — no build step required.</div></div></div>
+        <div class="vstep"><span class="vn">2</span><div class="vc"><div class="vt">Build on the scale</div><div class="vd">Compose buttons, inputs, rows, and badges from the shared semantic tokens.</div></div></div>
+        <div class="vstep is-future"><span class="vn">3</span><div class="vc"><div class="vt">Tune the contrast</div><div class="vd">Check APCA across every surface; nudge muted and accent until both modes read clean.</div></div></div>
+        <div class="vstep is-future"><span class="vn">4</span><div class="vc"><div class="vt">Hand it off</div><div class="vd">Export the Tailwind config and document the system in a portable DESIGN.md.</div></div></div>
+      </div>
+      <div class="s-foot"><span>inm — process</span><span class="pg">11</span></div>
+    </section>
+
+    <!-- SLIDE: team -->
+    <section class="slide light" data-label="Team">
+      <p class="eyebrow">Who's behind it</p>
+      <h2 class="s-h2" style="margin:16px 0 28px;">The maintainers.</h2>
+      <div class="team-grid">
+        <div class="member"><image-slot id="team-1" class="ph" shape="rounded" radius="12" placeholder="Drop a photo"></image-slot><span class="nm">Ida Mraz</span><span class="rl">Maintainer</span><span class="bio">Owns the palette spec and contrast targets.</span></div>
+        <div class="member"><image-slot id="team-2" class="ph" shape="rounded" radius="12" placeholder="Drop a photo"></image-slot><span class="nm">Rune Kalla</span><span class="rl">Systems design</span><span class="bio">Builds the token pipeline and Tailwind output.</span></div>
+        <div class="member"><image-slot id="team-3" class="ph" shape="rounded" radius="12" placeholder="Drop a photo"></image-slot><span class="nm">Sena Oro</span><span class="rl">Product UI</span><span class="bio">Tests the system in dense dashboards and tools.</span></div>
+        <div class="member"><image-slot id="team-4" class="ph" shape="rounded" radius="12" placeholder="Drop a photo"></image-slot><span class="nm">Vel Antu</span><span class="rl">Docs</span><span class="bio">Keeps DESIGN.md portable and handoff-ready.</span></div>
+      </div>
+      <div class="s-foot"><span>inm — team</span><span class="pg">12</span></div>
+    </section>
+
+    <!-- SLIDE: image + text split -->
+    <section class="slide light split-slide" data-label="Image + text">
+      <div class="split">
+        <div class="split-media"><image-slot id="split-1" shape="rect" placeholder="Drop an image"></image-slot></div>
+        <div class="split-copy">
+          <p class="eyebrow">Calm at the edges</p>
+          <h2 class="s-h2">Built for real product surfaces.</h2>
+          <div class="split-list">
+            <div class="sli"><span class="b"></span><span>Editorial workspaces and long-form tools</span></div>
+            <div class="sli"><span class="b"></span><span>Dense dashboards that stay scannable</span></div>
+            <div class="sli"><span class="b"></span><span>Creative consoles in light and dark</span></div>
+          </div>
+          <div class="s-foot split-foot"><span>inm — in product</span><span class="pg">13</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE: fullbleed -->
+    <section class="slide bleed" data-label="Full-bleed image">
+      <image-slot id="bleed-1" class="bleed-img" shape="rect" placeholder="Drop a full-bleed image"></image-slot>
+      <div class="bleed-overlay"></div>
+      <div class="bleed-text">
+        <p class="eyebrow">Calm by design</p>
+        <h2>Quiet interfaces, warm at the edges.</h2>
+        <p class="cap">Pair the palette with low-chroma, warm imagery — never cool, saturated, or high-glare.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE: quote -->
+    <section class="slide light quote-slide" data-label="Statement">
+      <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+      <p class="quote-text">Use elevation sparingly. Prefer border and tonal changes for most hierarchy.</p>
+      <div class="quote-by">— inm design principles</div>
+    </section>
+
+    <!-- SLIDE: closing -->
+    <section class="slide dark closing-slide" data-label="Closing">
+      <div class="lockup"><img src="../assets/icon.svg" alt="" />inm</div>
+      <h2 class="s-display">Calm, scannable, warm.</h2>
+      <p class="s-lead">Semantic OKLCH tokens, light and dark modes, and a portable handoff for Tailwind.</p>
+      <span class="closing-cta">github.com/iceice666/inm</span>
+    </section>
+
+  </deck-stage>
+  <script src="image-slot.js"></script>
+  <script src="deck-stage.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<!-- @dsCard group="Slides" name="Slide — Team grid" subtitle="Four member cards with drop-in photo slots" viewport="1280x720" -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="slides.css" />
+<style>
+  html, body { margin: 0; background: #1c171d; }
+  .card-frame { width: 1280px; height: 720px; overflow: hidden; position: relative; }
+</style>
+</head>
+<body>
+  <div class="card-frame">
+    <section class="slide light" data-label="Team">
+      <p class="eyebrow">Who's behind it</p>
+      <h2 class="s-h2" style="margin:16px 0 28px;">The maintainers.</h2>
+      <div class="team-grid">
+        <div class="member"><image-slot id="team-1" class="ph" shape="rounded" radius="12" placeholder="Drop a photo"></image-slot><span class="nm">Ida Mraz</span><span class="rl">Maintainer</span><span class="bio">Owns the palette spec and contrast targets.</span></div>
+        <div class="member"><image-slot id="team-2" class="ph" shape="rounded" radius="12" placeholder="Drop a photo"></image-slot><span class="nm">Rune Kalla</span><span class="rl">Systems design</span><span class="bio">Builds the token pipeline and Tailwind output.</span></div>
+        <div class="member"><image-slot id="team-3" class="ph" shape="rounded" radius="12" placeholder="Drop a photo"></image-slot><span class="nm">Sena Oro</span><span class="rl">Product UI</span><span class="bio">Tests the system in dense dashboards and tools.</span></div>
+        <div class="member"><image-slot id="team-4" class="ph" shape="rounded" radius="12" placeholder="Drop a photo"></image-slot><span class="nm">Vel Antu</span><span class="rl">Docs</span><span class="bio">Keeps DESIGN.md portable and handoff-ready.</span></div>
+      </div>
+      <div class="s-foot"><span>inm — team</span><span class="pg">08</span></div>
+    </section>
+  </div>
+  <script src="image-slot.js"></script>
+</body>
+</html>

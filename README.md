@@ -19,6 +19,14 @@ The system uses OKLCH for perceptual color tuning and APCA-informed contrast tar
 - [DESIGN.md](DESIGN.md): portable design-system documentation for AI-assisted UI work.
 - [tailwind-theme.css](assets/tailwind-theme.css): Tailwind CSS v4 `@theme` tokens.
 - [tailwind.config.js](assets/tailwind.config.js): Tailwind CSS v3-compatible theme extension.
+- [colors_and_type.css](colors_and_type.css) / [styles.css](styles.css): framework-free CSS-variable tokens, `.t-*` type ramp, and Inter `@font-face`. The non-Tailwind counterpart of the theme files; link `styles.css` to pull in everything.
+- [fonts/](fonts/): self-hosted Inter variable font, referenced by `colors_and_type.css` and the slide deck.
+- [preview/](preview/): static reference cards, one per token group (colors, type, spacing, components). Open any `preview/*.html` in a browser.
+- [slides/](slides/): framework-free slide deck kit — `deck-stage` web component (keyboard nav, thumbnail rail, print-to-PDF), 17 card templates, and `AGENTS.md` authoring guide.
+- [ui_kits/](ui_kits/): runnable HTML/Babel UI prototypes (app console dashboard, showcase landing pages). Fetch React from unpkg at load time — requires network to render.
+- [.oxlintrc.json](.oxlintrc.json): advisory token-discipline lint ruleset (bans raw hex/px, enforces Inter-only font). Run with `npx oxlint`.
+
+The new directories (`preview/`, `slides/`, `ui_kits/`, `fonts/`) are kept in the repo for local and AI-assisted use but excluded from the Cloudflare Pages deploy via [.assetsignore](.assetsignore) and are not served on the live site.
 
 ## Palette Intent
 

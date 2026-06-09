@@ -1,0 +1,28 @@
+<!-- @dsCard group="Colors" -->
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; background: var(--bg); font-family: var(--font-sans); padding: 22px; }
+  .rows { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 28px; }
+  .row { display: flex; align-items: center; gap: 12px; min-height: 34px; }
+  .chip { width: 34px; height: 34px; border-radius: var(--radius-inner); border: 1px solid color-mix(in oklch, var(--text) 18%, transparent); flex: 0 0 auto; }
+  .tn { font-size: 13px; font-weight: 740; color: var(--text); }
+  .th { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--muted); margin-left: auto; }
+</style>
+</head>
+<body>
+  <div class="rows">
+    <div class="row"><span class="chip" style="background:var(--bg)"></span><span class="tn">bg</span><span class="th">#C9BFB6</span></div>
+    <div class="row"><span class="chip" style="background:var(--text)"></span><span class="tn">text</span><span class="th">#2F2730</span></div>
+    <div class="row"><span class="chip" style="background:var(--surface)"></span><span class="tn">surface</span><span class="th">#DAD2CB</span></div>
+    <div class="row"><span class="chip" style="background:var(--muted)"></span><span class="tn">muted</span><span class="th">#625B5E</span></div>
+    <div class="row"><span class="chip" style="background:var(--raised)"></span><span class="tn">raised</span><span class="th">#E8E1DB</span></div>
+    <div class="row"><span class="chip" style="background:var(--border)"></span><span class="tn">border</span><span class="th">#AFA8A3</span></div>
+    <div class="row"><span class="chip" style="background:var(--accent)"></span><span class="tn">accent</span><span class="th">#7E4F49</span></div>
+    <div class="row"><span class="chip" style="background:var(--cool)"></span><span class="tn">cool</span><span class="th">#79837F</span></div>
+  </div>
+</body>
+</html>

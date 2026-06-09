@@ -1,0 +1,30 @@
+<!-- @dsCard group="Components" -->
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; background: var(--bg); font-family: var(--font-sans); padding: 26px 24px; color: var(--text); }
+  .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; border: 1px solid transparent; border-radius: var(--radius-control); padding: 9px 16px; font-size: 14px; font-weight: 780; }
+  .primary { background: var(--accent); color: var(--on-accent); }
+  .secondary { background: var(--surface); color: var(--text); border-color: var(--border); }
+  .hover { background: var(--surface); color: var(--text); border-color: var(--accent-soft); transform: translateY(-1px); }
+  .icon { display: inline-grid; width: 42px; height: 42px; place-items: center; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--surface); }
+  .icon svg { width: 19px; height: 19px; fill: none; stroke: var(--text); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .focus { outline: 3px solid color-mix(in oklch, var(--accent) 34%, transparent); outline-offset: 2px; }
+  .cap { font-size: 11px; font-weight: 700; color: var(--muted); margin-top: 10px; font-family: var(--font-mono); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <button class="btn primary">Apply palette</button>
+    <button class="btn secondary">Secondary</button>
+    <button class="btn secondary hover">Hover</button>
+    <button class="btn primary focus">Focus</button>
+    <span class="icon"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+  </div>
+  <div class="cap">42px min height · 8px radius · hover lifts 1px + accent-soft border · 3px translucent focus ring</div>
+</body>
+</html>
