@@ -1,2 +1,3 @@
 /slide/assets/* /slide/assets/:splat 200
+/slide/favicon.svg /slide/favicon.svg 200
 /slide/* /slide/ 200
