@@ -43,4 +43,4 @@ function Badge({ className, variant, dot, children, ...props }: BadgeProps) {
   )
 }
 
-export { Badge, badgeVariants }
+export { Badge }
