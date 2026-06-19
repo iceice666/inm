@@ -11,6 +11,8 @@ npm run dev
 
 Use `npm run build` to export the static deck into `dist/`. The deck is built and published as part of the repo-root `npm run build`, served under `/slide` at <https://inm.justaslime.dev/slide/s/inm-design-system>.
 
+> open-slide hardcodes its own favicon and `<title>open-slide</title>` into the built `dist/index.html` and exposes no config hook to change them. The repo-root build runs [`scripts/patch-slide-dist.mjs`](../scripts/patch-slide-dist.mjs) after `open-slide build` to swap in the inm favicon and title. Build the deck on its own with `npm run build` and you'll get the stock open-slide branding until that patch runs.
+
 ## Scripts
 
 | Command | Description |
