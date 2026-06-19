@@ -85,44 +85,45 @@ function MetricsThumb() {
   )
 }
 
-function ComparisonThumb() {
-  function Panel({ dark }: { dark: boolean }) {
-    const bg    = dark ? SL.plum   : SL.surf
-    const surf  = dark ? SL.dkSurf : SL.raised
-    const text  = dark ? SL.dkText : SL.text
-    const muted = dark ? SL.dkMuted: SL.muted
-    const bord  = dark ? SL.dkBord : SL.border
-    const acc   = dark ? SL.dkAcc  : SL.accent
-    return (
-      <div style={{ flex: 1, background: bg, border: `1px solid ${bord}`, borderRadius: 6, overflow: "hidden", display: "flex", flexDirection: "column" }}>
-        <div style={{ padding: "6% 8%", borderBottom: `1px solid ${bord}`, display: "flex", alignItems: "center", gap: 5 }}>
-          <div style={{ display: "flex", gap: 4 }}>
-            {[muted, dark ? SL.dkAcc : SL.cool, acc].map((c, i) => (
-              <div key={i} style={{ width: 7, height: 7, borderRadius: 999, background: c }} />
-            ))}
-          </div>
-          <div style={{ height: 4, borderRadius: 2, background: muted, flex: 1, opacity: 0.4, marginLeft: "4%" }} />
-        </div>
-        <div style={{ padding: "6% 8%", display: "grid", gap: "5%" }}>
-          {[1, 2, 3].map((i) => (
-            <div key={i} style={{ background: surf, border: `1px solid ${bord}`, borderRadius: 4, padding: "6% 8%", display: "grid", gridTemplateColumns: "8px 1fr auto", alignItems: "center", gap: "6%" }}>
-              <div style={{ width: 8, height: 8, borderRadius: 999, background: i === 1 ? acc : dark ? SL.dkAcc : SL.cool }} />
-              <div style={{ height: 4, borderRadius: 2, background: text, opacity: 0.7 }} />
-              <div style={{ height: 4, borderRadius: 2, background: muted, width: 24, opacity: 0.5 }} />
-            </div>
+function ComparisonPanel({ dark }: { dark: boolean }) {
+  const bg    = dark ? SL.plum   : SL.surf
+  const surf  = dark ? SL.dkSurf : SL.raised
+  const text  = dark ? SL.dkText : SL.text
+  const muted = dark ? SL.dkMuted: SL.muted
+  const bord  = dark ? SL.dkBord : SL.border
+  const acc   = dark ? SL.dkAcc  : SL.accent
+  return (
+    <div style={{ flex: 1, background: bg, border: `1px solid ${bord}`, borderRadius: 6, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+      <div style={{ padding: "6% 8%", borderBottom: `1px solid ${bord}`, display: "flex", alignItems: "center", gap: 5 }}>
+        <div style={{ display: "flex", gap: 4 }}>
+          {[muted, dark ? SL.dkAcc : SL.cool, acc].map((c, i) => (
+            <div key={i} style={{ width: 7, height: 7, borderRadius: 999, background: c }} />
           ))}
         </div>
+        <div style={{ height: 4, borderRadius: 2, background: muted, flex: 1, opacity: 0.4, marginLeft: "4%" }} />
       </div>
-    )
-  }
+      <div style={{ padding: "6% 8%", display: "grid", gap: "5%" }}>
+        {[1, 2, 3].map((i) => (
+          <div key={i} style={{ background: surf, border: `1px solid ${bord}`, borderRadius: 4, padding: "6% 8%", display: "grid", gridTemplateColumns: "8px 1fr auto", alignItems: "center", gap: "6%" }}>
+            <div style={{ width: 8, height: 8, borderRadius: 999, background: i === 1 ? acc : dark ? SL.dkAcc : SL.cool }} />
+            <div style={{ height: 4, borderRadius: 2, background: text, opacity: 0.7 }} />
+            <div style={{ height: 4, borderRadius: 2, background: muted, width: 24, opacity: 0.5 }} />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function ComparisonThumb() {
   return (
     <SlideFrame>
       <div style={{ padding: "8% 10%" }}>
         <Bar w="32%" bg={SL.cool} mb="4%" />
         <TextLine w="55%" mb="6%" />
         <div style={{ display: "flex", gap: "4%" }}>
-          <Panel dark={false} />
-          <Panel dark={true} />
+          <ComparisonPanel dark={false} />
+          <ComparisonPanel dark={true} />
         </div>
       </div>
     </SlideFrame>
@@ -212,12 +213,12 @@ function TwoColThumb() {
 }
 
 const SLIDES = [
-  { name: "Title",      desc: "Logo lockup, floating anchor blocks",        Thumb: TitleThumb },
-  { name: "Metrics",    desc: "Four stat tiles with APCA figures",           Thumb: MetricsThumb },
-  { name: "Comparison", desc: "Light vs dark framed panels side by side",    Thumb: ComparisonThumb },
-  { name: "Two-column", desc: "Lead copy alongside numbered point cards",    Thumb: TwoColThumb },
-  { name: "Agenda",     desc: "Numbered agenda with active-row highlight",   Thumb: AgendaThumb },
-  { name: "Section",    desc: "Section divider with number and rule",        Thumb: SectionThumb },
+  { name: "Cover",      desc: "Conference title with anchor blocks",       Thumb: TitleThumb },
+  { name: "Thesis",     desc: "Why palettes must survive product UI",      Thumb: TwoColThumb },
+  { name: "Anchors",    desc: "Plum, clay, mist, and stone roles",          Thumb: AgendaThumb },
+  { name: "Modes",      desc: "Light and dark share one component map",     Thumb: ComparisonThumb },
+  { name: "Contrast",   desc: "APCA targets across both canvases",          Thumb: MetricsThumb },
+  { name: "Handoff",    desc: "Tokens shipped through open-slide",          Thumb: SectionThumb },
   { name: "Closing",    desc: "Plum canvas, CTA, logo lockup",              Thumb: ClosingThumb },
 ]
 
@@ -228,11 +229,11 @@ export function SlidesShowcase() {
         <div className="section-head">
           <div>
             <span className="index">07 / Slides</span>
-            <h2 id="slides-title">Presentations, on-brand.</h2>
+            <h2 id="slides-title">Conference-ready deck, on-brand.</h2>
           </div>
           <p>
-            Seventeen card templates built on the same foundations &mdash; warm stone canvas,
-            semantic tokens, and Inter only. Keyboard-navigable via the <code>deck-stage</code> component.
+            A 13-page open-slide talk built as React pages on a fixed 1920×1080 canvas &mdash;
+            warm stone, plum dark mode, semantic tokens, APCA contrast, and speaker notes.
           </p>
         </div>
 
@@ -250,17 +251,17 @@ export function SlidesShowcase() {
 
         <div className="slide-handoff">
           <div className="slide-instructions">
-            <h3>Using the deck template</h3>
+            <h3>View the live open-slide deck</h3>
             <ol>
-              <li>Download <code>inm-deck.pptx</code> and open in PowerPoint or Keynote.</li>
-              <li>Replace placeholder copy — keep all colors, typefaces, and spacing unchanged.</li>
-              <li>Duplicate any layout slide; delete the ones you don't need.</li>
-              <li>Export as PDF or present directly. No additional fonts required — Inter is bundled.</li>
+              <li>Open <a href="https://inm-slide.justaslime.dev/s/inm-design-system" target="_blank" rel="noopener noreferrer">inm-slide.justaslime.dev</a> for the hosted presentation.</li>
+              <li>Use arrow keys or present mode for conference playback.</li>
+              <li>Edit <code>deck/slides/inm-design-system/index.tsx</code> to adjust copy or layout.</li>
+              <li>Run <code>cd deck && npm run deploy</code> to publish slide updates.</li>
             </ol>
           </div>
           <Button asChild>
-            <a href="/inm-deck.pptx" download="inm-deck.pptx">
-              Download inm-deck.pptx
+            <a href="https://inm-slide.justaslime.dev/s/inm-design-system" target="_blank" rel="noopener noreferrer">
+              Open live deck
             </a>
           </Button>
         </div>

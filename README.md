@@ -4,7 +4,7 @@
 
 `inm` is a warm, low-chroma color palette built from four anchor colors:
 
-**[Live Demo](https://inm.justaslime.dev)**
+**[Live Demo](https://inm.justaslime.dev)** · **[Live Slides](https://inm-slide.justaslime.dev/s/inm-design-system)**
 
 - <img src="./assets/hex-3E343F.svg" alt="#3E343F" height="22" align="absmiddle" /> plum black
 - <img src="./assets/hex-A1736B.svg" alt="#A1736B" height="22" align="absmiddle" /> clay rose
@@ -22,10 +22,10 @@ This repo ships two separate things:
 - [tailwind-theme.css](assets/tailwind-theme.css): Tailwind CSS v4 `@theme` tokens.
 - [tailwind.config.js](assets/tailwind.config.js): Tailwind CSS v3-compatible theme extension.
 - [colors_and_type.css](colors_and_type.css) / [styles.css](styles.css): framework-free CSS-variable tokens, `.t-*` type ramp, and Inter `@font-face`. The non-Tailwind counterpart of the theme files; link `styles.css` to pull in everything.
-- [fonts/](fonts/): self-hosted Inter variable font, referenced by `colors_and_type.css` and the slide deck.
+- [fonts/](fonts/): self-hosted Inter variable font, referenced by `colors_and_type.css` and the open-slide deck.
 - [preview/](preview/): static reference cards, one per token group (colors, type, spacing, components). Open any `preview/*.html` in a browser.
-- [slides/](slides/): framework-free slide deck kit — `deck-stage` web component (keyboard nav, thumbnail rail, print-to-PDF), 17 card templates, and `AGENTS.md` authoring guide.
-- [.oxlintrc.json](.oxlintrc.json): advisory token-discipline lint ruleset (bans raw hex/px, enforces Inter-only font). Run with `npx oxlint`.
+- [deck/](deck/): open-slide workspace with the conference-ready `inm design system` deck authored as React pages on a 1920×1080 canvas and deployed at <https://inm-slide.justaslime.dev/s/inm-design-system>.
+- [.oxlintrc.json](.oxlintrc.json): advisory import-discipline lint ruleset. Run with `npx oxlint`.
 
 **Showcase site** — the live site at inm.justaslime.dev, in [`ui/`](ui/):
 - Vite 8 · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui

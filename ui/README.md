@@ -39,4 +39,4 @@ Dark mode honors the OS preference on first visit and persists to `localStorage`
 
 ## Relation to the repo root
 
-The repo root holds the **token product** (the actual deliverable): `assets/tailwind-theme.css`, `assets/tailwind.config.js`, `colors_and_type.css`, `DESIGN.md`, `preview/`, `slides/`, and `fonts/`. This `ui/` directory is the showcase site only — a separate concern.
+The repo root holds the **token product** (the actual deliverable): `assets/tailwind-theme.css`, `assets/tailwind.config.js`, `colors_and_type.css`, `DESIGN.md`, `preview/`, `deck/`, and `fonts/`. This `ui/` directory is the showcase site only — a separate concern.

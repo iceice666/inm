@@ -17,9 +17,9 @@ No build step needed. The token files are plain CSS and JS:
 - Edit `assets/tailwind-theme.css` (Tailwind v4) or `assets/tailwind.config.js` (v3).
 - Edit `colors_and_type.css` / `styles.css` for the framework-free versions.
 - Open any `preview/*.html` directly in a browser to see reference cards.
-- Open `slides/index.html` to browse the slide deck. Use `←`/`→` to navigate; Print → Save as PDF to export.
+- Run the conference deck from `deck/` with `npm install` (first time only), `npm run dev`, and `npm run build` before publishing deck changes.
 
-Run `npx oxlint` from the repo root to lint for token-discipline violations (raw hex, raw px, non-Inter fonts).
+Run `npx oxlint` from the repo root to lint for import-discipline violations.
 
 ### Showcase site
 
@@ -50,4 +50,10 @@ The showcase site deploys to Cloudflare Pages on push. Build config (set in the 
 - **Build command:** `npm run build`
 - **Build output directory:** `dist`
 
-Token product files (root `assets/`, `fonts/`, `preview/`, `slides/`, etc.) are repo-only and not served by the live site.
+The slide deck deploys separately to Cloudflare Pages at <https://inm-slide.justaslime.dev/s/inm-design-system>:
+- **Root directory:** `deck`
+- **Build command:** `npm run build`
+- **Build output directory:** `dist`
+- Manual deploy: `cd deck && npm run deploy`
+
+Token product files (root `assets/`, `fonts/`, `preview/`, `deck/`, etc.) are repo-only except for the built deck served from `deck/dist`.
