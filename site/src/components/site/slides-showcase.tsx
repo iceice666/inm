@@ -253,14 +253,14 @@ export function SlidesShowcase() {
           <div className="slide-instructions">
             <h3>View the live open-slide deck</h3>
             <ol>
-              <li>Open <a href="https://inm-slide.justaslime.dev/s/inm-design-system" target="_blank" rel="noopener noreferrer">inm-slide.justaslime.dev</a> for the hosted presentation.</li>
+              <li>Open <a href="https://inm.justaslime.dev/slide/s/inm-design-system" target="_blank" rel="noopener noreferrer">inm.justaslime.dev/slide</a> for the hosted presentation.</li>
               <li>Use arrow keys or present mode for conference playback.</li>
               <li>Edit <code>deck/slides/inm-design-system/index.tsx</code> to adjust copy or layout.</li>
-              <li>Run <code>cd deck && npm run deploy</code> to publish slide updates.</li>
+              <li>Run <code>npm run build</code> at the repo root (or push to deploy) to publish slide updates.</li>
             </ol>
           </div>
           <Button asChild>
-            <a href="https://inm-slide.justaslime.dev/s/inm-design-system" target="_blank" rel="noopener noreferrer">
+            <a href="https://inm.justaslime.dev/slide/s/inm-design-system" target="_blank" rel="noopener noreferrer">
               Open live deck
             </a>
           </Button>

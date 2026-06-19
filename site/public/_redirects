@@ -1,0 +1,2 @@
+/slide/assets/* /slide/assets/:splat 200
+/slide/* /slide/ 200

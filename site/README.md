@@ -16,12 +16,14 @@ npm run lint      # eslint
 
 ## Deploy
 
-Cloudflare Pages configuration:
-- **Root directory:** `ui`
-- **Build command:** `npm run build`
-- **Build output directory:** `dist`
+Deployment is driven from the repo root, not this directory. The repo-root `npm run build` compiles this site into `site/dist`, builds the open-slide deck, and copies it into `site/dist/slide`. The repo-root `wrangler.toml` declares the Cloudflare Pages project (`name = "inm"`, `pages_build_output_dir = "site/dist"`).
 
-`wrangler.toml` in this directory mirrors that config (`name = "inm"`, `pages_build_output_dir = "./dist"`).
+Cloudflare Pages configuration (set in the dashboard):
+- **Root directory:** `/` (repo root)
+- **Build command:** `npm run build`
+- **Build output directory:** `site/dist`
+
+The deck is served under `/slide` (e.g. <https://inm.justaslime.dev/slide/s/inm-design-system>) via the root `_redirects` rule.
 
 ## Structure
 
@@ -39,4 +41,4 @@ Dark mode honors the OS preference on first visit and persists to `localStorage`
 
 ## Relation to the repo root
 
-The repo root holds the **token product** (the actual deliverable): `assets/tailwind-theme.css`, `assets/tailwind.config.js`, `colors_and_type.css`, `DESIGN.md`, `preview/`, `deck/`, and `fonts/`. This `ui/` directory is the showcase site only — a separate concern.
+The repo root holds the **token product** (the actual deliverable): `assets/tailwind-theme.css`, `assets/tailwind.config.js`, `colors_and_type.css`, `DESIGN.md`, `preview/`, `deck/`, and `fonts/`. This `site/` directory is the showcase site only — a separate concern.

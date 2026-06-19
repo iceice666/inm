@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Use `npm run build` to export the static deck into `dist/`. The production deck is published at <https://inm-slide.justaslime.dev/s/inm-design-system>.
+Use `npm run build` to export the static deck into `dist/`. The deck is built and published as part of the repo-root `npm run build`, served under `/slide` at <https://inm.justaslime.dev/slide/s/inm-design-system>.
 
 ## Scripts
 
@@ -18,7 +18,6 @@ Use `npm run build` to export the static deck into `dist/`. The production deck 
 | `npm run dev` | Start the dev server with hot reload. |
 | `npm run build` | Build a static bundle you can deploy. |
 | `npm run preview` | Preview the built bundle locally. |
-| `npm run deploy` | Build and deploy `dist/` to Cloudflare Pages project `inm-slide`. |
 
 ## Authoring a slide
 
@@ -56,10 +55,11 @@ Optional `open-slide.config.ts` at the workspace root:
 import type { OpenSlideConfig } from '@open-slide/core';
 
 const openSlideConfig: OpenSlideConfig = {
+  base: '/slide/',
   port: 5174,
 };
 
 export default openSlideConfig;
 ```
 
-Supported fields: `slidesDir`, `port`.
+Supported fields: `base`, `slidesDir`, `port`. This deck is hosted under `/slide`, so `base` is set to `'/slide/'` (leading and trailing slashes are required).

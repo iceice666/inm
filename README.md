@@ -4,7 +4,7 @@
 
 `inm` is a warm, low-chroma color palette built from four anchor colors:
 
-**[Live Demo](https://inm.justaslime.dev)** · **[Live Slides](https://inm-slide.justaslime.dev/s/inm-design-system)**
+**[Live Demo](https://inm.justaslime.dev)** · **[Live Slides](https://inm.justaslime.dev/slide/s/inm-design-system)**
 
 - <img src="./assets/hex-3E343F.svg" alt="#3E343F" height="22" align="absmiddle" /> plum black
 - <img src="./assets/hex-A1736B.svg" alt="#A1736B" height="22" align="absmiddle" /> clay rose
@@ -24,13 +24,13 @@ This repo ships two separate things:
 - [colors_and_type.css](colors_and_type.css) / [styles.css](styles.css): framework-free CSS-variable tokens, `.t-*` type ramp, and Inter `@font-face`. The non-Tailwind counterpart of the theme files; link `styles.css` to pull in everything.
 - [fonts/](fonts/): self-hosted Inter variable font, referenced by `colors_and_type.css` and the open-slide deck.
 - [preview/](preview/): static reference cards, one per token group (colors, type, spacing, components). Open any `preview/*.html` in a browser.
-- [deck/](deck/): open-slide workspace with the conference-ready `inm design system` deck authored as React pages on a 1920×1080 canvas and deployed at <https://inm-slide.justaslime.dev/s/inm-design-system>.
+- [deck/](deck/): open-slide workspace with the conference-ready `inm design system` deck authored as React pages on a 1920×1080 canvas and deployed at <https://inm.justaslime.dev/slide/s/inm-design-system>.
 - [.oxlintrc.json](.oxlintrc.json): advisory import-discipline lint ruleset. Run with `npx oxlint`.
 
-**Showcase site** — the live site at inm.justaslime.dev, in [`ui/`](ui/):
+**Showcase site** — the live site at inm.justaslime.dev, in [`site/`](site/):
 - Vite 8 · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui
-- `cd ui && npm install && npm run dev` to run locally.
-- See [`ui/README.md`](ui/README.md) for the full dev guide.
+- `cd site && npm install && npm run dev` to run locally.
+- See [`site/README.md`](site/README.md) for the full dev guide.
 
 ## Palette Intent
 

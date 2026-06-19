@@ -7,7 +7,6 @@
     "dev": "open-slide dev",
     "build": "open-slide build",
     "preview": "open-slide preview",
-    "deploy": "npm run build && npx wrangler pages deploy dist --project-name inm-slide",
     "sync:skills": "open-slide sync:skills"
   },
   "dependencies": {

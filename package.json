@@ -1,0 +1,7 @@
+{
+  "name": "inm-site",
+  "private": true,
+  "scripts": {
+    "build": "cd site && npm ci && npm run build && cd ../deck && npm ci && npm run build && cd .. && rm -rf site/dist/slide && cp -r deck/dist site/dist/slide"
+  }
+}
