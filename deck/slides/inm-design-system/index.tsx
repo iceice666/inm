@@ -219,18 +219,18 @@ const ProductMock = ({ t }: { t: Theme }) => {
     ['Status stream', 'Synced', t.cool],
   ];
   return (
-    <div style={{ width: 680, padding: 20, background: t.surface, border: `1px solid ${t.border}`, borderRadius: 12, boxShadow: t.shadow }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 10px 22px' }}>
+    <div style={{ width: 680, padding: 16, background: t.surface, border: `1px solid ${t.border}`, borderRadius: 12, boxShadow: t.shadow }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 10px 14px' }}>
         <div style={{ display: 'flex', gap: 8 }}><span style={{ width: 12, height: 12, borderRadius: 999, background: t.accent }} /><span style={{ width: 12, height: 12, borderRadius: 999, background: t.cool }} /><span style={{ width: 12, height: 12, borderRadius: 999, background: t.border }} /></div>
         <div style={{ fontFamily: mono, color: t.muted, fontSize: 16 }}>{t.mode} mode</div>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: 16 }}>
-        <div style={{ padding: 18, background: t.raised, border: `1px solid ${t.border}`, borderRadius: 8 }}>
-          {['Inbox', 'Review', 'Tokens', 'Settings'].map((item, i) => <div key={item} style={{ padding: '12px 10px', marginBottom: 6, borderRadius: 7, color: i === 2 ? t.onAccent : t.muted, background: i === 2 ? t.accent : 'transparent', fontSize: 18, fontWeight: 750 }}>{item}</div>)}
+        <div style={{ padding: 14, background: t.raised, border: `1px solid ${t.border}`, borderRadius: 8 }}>
+          {['Inbox', 'Review', 'Tokens', 'Settings'].map((item, i) => <div key={item} style={{ padding: '9px 10px', marginBottom: 5, borderRadius: 7, color: i === 2 ? t.onAccent : t.muted, background: i === 2 ? t.accent : 'transparent', fontSize: 18, fontWeight: 750 }}>{item}</div>)}
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          {rows.map(([name, status, color]) => <div key={name} style={{ display: 'grid', gridTemplateColumns: '18px 1fr auto', gap: 14, alignItems: 'center', padding: '17px 18px', background: t.raised, border: `1px solid ${t.border}`, borderRadius: 8 }}><span style={{ width: 12, height: 12, borderRadius: 999, background: color }} /><span style={{ fontSize: 18, color: t.text, fontWeight: 720 }}>{name}</span><span style={{ padding: '5px 10px', borderRadius: 999, background: t.surface, border: `1px solid ${t.border}`, color: t.muted, fontSize: 14, fontWeight: 800 }}>{status}</span></div>)}
-          <button style={{ marginTop: 8, minHeight: 48, border: 0, borderRadius: 8, background: t.accent, color: t.onAccent, fontSize: 18, fontWeight: 820 }}>Apply palette</button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {rows.map(([name, status, color]) => <div key={name} style={{ display: 'grid', gridTemplateColumns: '18px 1fr auto', gap: 14, alignItems: 'center', padding: '12px 18px', background: t.raised, border: `1px solid ${t.border}`, borderRadius: 8 }}><span style={{ width: 12, height: 12, borderRadius: 999, background: color }} /><span style={{ fontSize: 18, color: t.text, fontWeight: 720 }}>{name}</span><span style={{ padding: '5px 10px', borderRadius: 999, background: t.surface, border: `1px solid ${t.border}`, color: t.muted, fontSize: 14, fontWeight: 800 }}>{status}</span></div>)}
+          <button style={{ marginTop: 6, minHeight: 44, border: 0, borderRadius: 8, background: t.accent, color: t.onAccent, fontSize: 18, fontWeight: 820 }}>Apply palette</button>
         </div>
       </div>
     </div>
@@ -275,7 +275,8 @@ const Contrast: Page = () => {
 
 const SameRoles: Page = () => {
   const t = light;
-  return <div style={base(t)}><Styles /><Eyebrow t={t}>System behavior</Eyebrow><div style={{ height: 24 }} /><H2 size={82}>Two moods. One component contract.</H2><div style={{ height: 54 }} /><div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 44, alignItems: 'start' }}><ProductMock t={light} /><ProductMock t={dark} /></div><div style={{ marginTop: 48, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 22 }}><Row t={t} n="bg" title="Canvas" body="Stone in light, plum in dark." active /><Row t={t} n="ui" title="Surfaces" body="Panels step up through tone, not heavy shadow." /><Row t={t} n="act" title="Action" body="Clay remains the one active signal." /></div><Footer t={t} section="light and dark" /></div>;
+  return <div style={base(t)}><Styles /><Eyebrow t={t}>System behavior</Eyebrow><div style={{ height: 24 }} /><H2 size={82}>Two moods. One component contract.</H2><div style={{ height: 40 }} /><div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 44, alignItems: 'start' }}><ProductMock t={light} /><ProductMock t={dark} /></div><div style={{ marginTop: 28, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 22 }}>
+    <Row t={t} n="bg" title="Canvas" body="Stone in light, plum in dark." active /><Row t={t} n="ui" title="Surfaces" body="Panels step up through tone, not heavy shadow." /><Row t={t} n="act" title="Action" body="Clay remains the one active signal." /></div><Footer t={t} section="light and dark" /></div>;
 };
 
 const Typography: Page = () => {
